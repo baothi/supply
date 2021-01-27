@@ -1,0 +1,8 @@
+Creating Product
+product = ShopifyAPI::Product.new(product_params)
+product.save
+
+adding variant
+varinat = ShopifyAPI::Variant.new(variant_params)
+v.prefix_options[:product_id] = product.id
+v.save

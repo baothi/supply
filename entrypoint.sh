@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
+fi
+
+#echo "Waiting for Postgres to start..."
+#while ! nc -z db 5432; do sleep 0.1; done
+#echo "Postgres is up"
+
+#echo "Waiting for Redis to start..."
+#while ! nc -z redis 6379; do sleep 0.1; done
+#echo "Redis is up - execuring command"
+
+# Then exec the container's main process (what's set as CMD in the Dockerfile).
+exec bundle exec "$@"

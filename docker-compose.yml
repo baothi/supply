@@ -50,6 +50,7 @@ services:
     #   - 27017:27017
     restart: always
   sidekiq:
+    image: supply_web_new_sidekiq
     container_name: sidekiq
     env_file:
       - .env
@@ -114,6 +115,6 @@ volumes:
   # elasticsearch:
 
 # sudo chmod -R 777 admin
-# docker-compose run --rm app bundle install
+# docker-compose run --rm web bundle install
 # sudo chmod -R 777 tmp/db/pg_stat_tmp/
 # sudo chmod -R 777 tmp/db/pg_logical/replorigin_checkpoint

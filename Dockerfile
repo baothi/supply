@@ -1,5 +1,5 @@
 # Pick the ruby version for your rails app
-FROM ruby:3.0.0
+FROM ruby:2.7.2
 
 # Installing some needed things here
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev tzdata libicu-dev

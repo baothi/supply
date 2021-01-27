@@ -1,0 +1,8 @@
+web: bundle exec puma -C config/puma.rb
+worker: bundle exec sidekiq -C config/sidekiq.yml
+# Commenting for better local performance.
+# order_export_worker: jemalloc.sh bundle exec sidekiq -q order_export,5
+# order_import_worker: jemalloc.sh bundle exec sidekiq -q order_import,5
+# product_import_worker: jemalloc.sh bundle exec sidekiq -q product_import,5
+# product_export_worker: jemalloc.sh bundle exec sidekiq -q product_export,5
+# shopify_cache_worker: jemalloc.sh bundle exec sidekiq -q shopify_cache,5

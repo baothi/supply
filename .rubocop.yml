@@ -1,0 +1,401 @@
+# require: rubocop-rspec
+AllCops:
+  RSpec/FactoryBot:
+    Patterns:
+    - spec/**/*.rb
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - app/assets/javascripts/global/**/*
+    - bin/*
+    - Rakefile
+    - config.ru
+    - config/initializers/devise.rb
+    - config/initializers/active_admin.rb
+    - spec/spec_helper.rb
+    - app/services/shopify_api_retry.rb
+    - app/models/concerns/settings/*
+    - gcp-deploy.rb
+  TargetRubyVersion: 2.3
+
+AccessorMethodName:
+  Enabled: false
+
+ActionFilter:
+  Enabled: false
+
+Alias:
+  Enabled: false
+
+AndOr:
+  Enabled: false
+
+IndentationWidth:
+  Width: 2
+  Enabled: true
+
+AlignArray:
+  Enabled: true
+
+AlignHash:
+  Enabled: true
+
+AlignParameters:
+  Enabled: true
+
+ArrayJoin:
+  Enabled: true
+
+AsciiComments:
+  Enabled: false
+
+AsciiIdentifiers:
+  Enabled: false
+
+Attr:
+  Enabled: false
+
+SingleLineBlockParams:
+  Enabled: false
+
+BlockLength:
+  Enabled: false
+
+BlockNesting:
+  Enabled: false
+
+BlockDelimiters:
+  Enabled: true
+
+CaseEquality:
+  Enabled: false
+
+CharacterLiteral:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+ClassLength:
+  Enabled: false
+
+ClassVars:
+  Enabled: false
+
+ColonMethodCall:
+  Enabled: false
+
+CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    find: detect
+    find_all: select
+    inject: reduce
+
+CommentAnnotation:
+  Enabled: false
+
+CyclomaticComplexity:
+  Enabled: false
+
+Delegate:
+  Enabled: false
+
+PreferredHashMethods:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+
+DoubleNegation:
+  Enabled: false
+
+EachWithObject:
+  Enabled: false
+
+EmptyLiteral:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+EvenOdd:
+  Enabled: false
+
+ExtraSpacing:
+  Enabled: false
+
+FileName:
+  Enabled: false
+
+FindBy:
+  Enabled: false
+
+FindEach:
+  Enabled: false
+
+FlipFlop:
+  Enabled: false
+
+FormatString:
+  Enabled: false
+
+FrozenStringLiteralComment:
+  Enabled: false
+
+GlobalVars:
+  Enabled: false
+
+GuardClause:
+  StyleGuide: 'Description:no-nested-conditionals'
+  Enabled: true
+
+HashSyntax:
+  Enabled: true
+
+IfUnlessModifier:
+  Enabled: false
+
+IfWithSemicolon:
+  Enabled: false
+
+IndentArray:
+  Enabled: false
+
+IndentHash:
+  Enabled: false
+
+InlineComment:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: true
+
+LineLength:
+  Max: 100
+  Enabled: true
+
+Lambda:
+  Enabled: false
+
+LambdaCall:
+  Enabled: false
+
+LineEndConcatenation:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+# Avoid complex methods.
+Metrics/CyclomaticComplexity:
+  Enabled: true
+  Max: 7
+
+MultilineIfThen:
+  Enabled: true
+
+MultilineTernaryOperator:
+  Enabled: true
+
+ModuleFunction:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+NegatedWhile:
+  Enabled: false
+
+Next:
+  Enabled: false
+
+NilComparison:
+  Enabled: true
+
+NumericLiterals:
+  Enabled: false
+
+NegatedIf:
+  Enabled: true
+
+NestedTernaryOperator:
+  Enabled: true
+
+BinaryOperatorParameterName:
+  Enabled: false
+
+ParameterLists:
+  Enabled: false
+
+ParenthesesAroundCondition:
+  Enabled: true
+
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  ()
+    '%i': ()
+    '%I': ()
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': ()
+    '%W': ()
+    '%x': ()
+
+PerlBackrefs:
+  Enabled: false
+
+PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
+Proc:
+  Enabled: false
+
+RaiseArgs:
+  Enabled: false
+
+RedundantSelf:
+  Enabled: false
+
+RedundantBegin:
+  Enabled: false
+
+RegexpLiteral:
+  Enabled: false
+
+SelfAssignment:
+  Enabled: false
+
+SingleLineMethods:
+  Enabled: false
+
+SignalException:
+  Enabled: false
+
+SpecialGlobalVars:
+  Enabled: false
+
+SpaceAfterColon:
+  Enabled: true
+
+SpaceAfterComma:
+  Enabled: true
+
+StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+TrivialAccessors:
+  Enabled: false
+
+UnlessElse:
+  Enabled: false
+
+UnneededInterpolation:
+  Enabled: false
+
+VariableInterpolation:
+  Enabled: false
+
+VariableInterpolation:
+  Enabled: false
+
+WhileUntilModifier:
+  Enabled: false
+
+WordArray:
+  Enabled: false
+
+WhenThen:
+  Enabled: false
+
+WhileUntilDo:
+  Enabled: true
+
+# Lint
+
+AmbiguousOperator:
+  Enabled: false
+
+AmbiguousRegexpLiteral:
+  Enabled: false
+
+AssignmentInCondition:
+  Enabled: false
+
+ConditionPosition:
+  Enabled: false
+
+DeprecatedClassMethods:
+  Enabled: false
+
+ElseLayout:
+  Enabled: false
+
+HandleExceptions:
+  Enabled: false
+
+Lint/LiteralAsCondition:
+  Enabled: false
+
+LiteralInInterpolation:
+  Enabled: false
+
+Loop:
+  Enabled: false
+
+ParenthesesAsGroupedExpression:
+  Enabled: false
+
+RequireParentheses:
+  Enabled: false
+
+Void:
+  Enabled: false
+
+# Metrics
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/ModuleLength:
+  Max: 250
+
+Security/Open:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: true
+
+Style/MultipleComparison:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false

@@ -1,0 +1,273 @@
+{
+  "name": "Supply App",
+  "stack": "heroku-16",
+  "scripts": {
+    "postdeploy": "rails db:schema:load && rails db:seed && rails heroku:setup",
+    "pr-predestroy": "rails heroku:pr_predestroy"
+  },
+  "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    },
+    "ALGOLIASEARCH_API_KEY": {
+      "required": true
+    },
+    "ALGOLIASEARCH_API_KEY_SEARCH": {
+      "required": true
+    },
+    "ALGOLIASEARCH_APPLICATION_ID": {
+      "required": true
+    },
+    "APPSTORE_URL": {
+      "required": true
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_BUCKET": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "BUNDLE_ENTERPRISE__CONTRIBSYS__COM": {
+      "required": true
+    },
+    "CLOUDFRONT_URL": {
+      "required": false
+    },
+    "CW_FTP_PASSWORD": {
+      "required": false
+    },
+    "CW_FTP_SERVER": {
+      "required": false
+    },
+    "CW_FTP_USER_NAME": {
+      "required": false
+    },
+    "DISABLE_ORDER_REMITTANCE": {
+      "required": true
+    },
+    "DISABLE_SUPPLIER_AUTHENTICATION": {
+      "required": true
+    },
+    "DOWNLOAD_SHOPIFY_IMAGES": {
+      "required": true
+    },
+    "DROPSHIPPER_ENV": {
+      "required": true
+    },
+    "DSCO_FTP_HOST": {
+      "required": true
+    },
+    "DSCO_FTP_PASSWORD": {
+      "required": true
+    },
+    "DSCO_FTP_USER": {
+      "required": true
+    },
+    "DSCO_TEST_FLAG": {
+      "required": true
+    },
+    "ENABLE_ADD_TO_SHOPIFY": {
+      "required": true
+    },
+    "GHOST_WORKER_POOL": {
+      "required": true
+    },
+    "INTERNAL_RETAILER_ID": {
+      "required": false
+    },
+    "LANG": {
+      "required": true
+    },
+    "MANDRILL_APIKEY": {
+      "required": false
+    },
+    "MANDRILL_HOST": {
+      "required": false
+    },
+    "MANDRILL_USERNAME": {
+      "required": false
+    },
+    "MAX_PRODUCTS_TO_IMPORT": {
+      "required": true
+    },
+    "MAX_TEST_PRODUCT": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": false
+    },
+    "MXED_HELP_LINK": {
+      "required": false
+    },
+    "NEW_RELIC_LICENSE_KEY": {
+      "required": false
+    },
+    "NEW_RELIC_LOG": {
+      "required": false
+    },
+    "OPERATIONS_EMAIL": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "REDIS_OBJECTS_POOL_SIZE": {
+      "required": false
+    },
+    "REDIS_OBJECTS_TIMEOUT": {
+      "required": false
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "RETAILER_EMAIL": {
+      "required": true
+    },
+    "SEGMENT_KEY": {
+      "required": false
+    },
+    "SHOPIFY_ACCESS_TOKEN_ENCRYPTION_KEY": {
+      "required": true
+    },
+    "SHOPIFY_APP_API_KEY": {
+      "required": true
+    },
+    "SHOPIFY_APP_SECRET_KEY": {
+      "required": true
+    },
+    "SHOPIFY_PRODUCTION_RETAILER_CALLBACK_URL": {
+      "required": true
+    },
+    "SHOPIFY_PRODUCTION_SUPPLIER_CALLBACK_URL": {
+      "required": true
+    },
+    "SHOPIFY_RETAILER_CALLBACK_URL": {
+      "required": true
+    },
+    "SHOPIFY_SUPPLIER_CALLBACK_URL": {
+      "required": true
+    },
+    "SIDEKIQ_CONCURRENCY": {
+      "required": true
+    },
+    "SITE_URL": {
+      "required": true
+    },
+    "SOLE_SOCIETY_INTERNAL_SUPPLIER_ID": {
+      "required": false
+    },
+    "STRIPE_API_KEY": {
+      "required": true
+    },
+    "STRIPE_PUBLIC_KEY": {
+      "required": true
+    },
+    "SUPPLIER_EMAIL": {
+      "required": true
+    },
+    "SUPPLIER_SIGNUP_REF": {
+      "required": true
+    },
+    "SUPPLY_HELP_LINK": {
+      "required": true
+    },
+    "TAX_IDENTIFIER_ENCRYPTION_KEY": {
+      "required": true
+    },
+    "WEBHOOK_URL": {
+      "required": true
+    },
+    "FINANCE_REPORT_CRONTAB": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_ACCESS_TOKEN_RETAILER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_ACCESS_TOKEN_SUPPLIER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_SHOP_URL_SUPPLIER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_SHOP_URL_RETAILER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_NAME_SUPPLIER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_NAME_RETAILER": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_RETAILER_LOCATION_ID": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_SHOP_EMAIL": {
+      "required": true
+    },
+    "PR_SHOPIFY_STORE_USER_PASSWORD": {
+      "required": true
+    },
+    "HINGETO_SUPPLY_FULFILLMENT_SERVICE_NAME": {
+      "required": true
+    },
+    "SHOPIFY_RETAILER_FULFILLMENT_SERVICE_CALLBACK_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "order_export_worker": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "order_import_worker": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "product_import_worker": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "product_export_worker": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "addons": [
+    "algoliasearch:free",
+    "heroku-postgresql:hobby-dev",
+    "heroku-redis:hobby-dev",
+    "rollbar:free",
+    "scheduler:standard",
+    "mongolab:sandbox",
+    "newrelic:wayne",
+    "timber-logging:free"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
