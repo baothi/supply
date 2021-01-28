@@ -1,0 +1,35 @@
+<%= form_tag(action ||= '', :method => "get", id: "search-form") do %>
+    <div class="row with-margin-top">
+      <div class="col-md-10">
+        <div class="form-group">
+          <div class="input-group">
+            <!--<div class="input-group-addon search-drop-down-group">-->
+              <!--<%#= select_tag :search_field, options_for_select(Spree::Product::SEARCH_ATTRS, params[:search_field]) %>-->
+            <!--</div>-->
+
+            <%= text_field_tag :search_value, params[:search_value], class: "form-control" %>
+
+            <%= render partial: 'retailer/products/shared/search_bar_filters' %>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 search-btn col-sm-12">
+        <%= button_tag(type: "submit", class: "btn btn-default btn-outline", :name => nil) do %>
+            <i class="icon wb-search" aria-hidden="true"></i>Search
+        <% end %>
+      </div>
+    </div>
+
+<% end %>
+
+<!--<div>-->
+  <!--<div class="sort-by">-->
+    <!--<div class="form-group">-->
+      <!--<select class="form-control" onchange="location = this.value;" placeholder="Sort By">-->
+        <!--<option disabled selected>Sort By:</option>-->
+        <!--<option value="<%= url_for(permited_url_params.merge(sort: 'recent')) %>" <%= 'selected' if params[:sort] == 'recent' %>>By Recent</option>-->
+      <!--</select>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->

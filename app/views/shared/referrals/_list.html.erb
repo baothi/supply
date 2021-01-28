@@ -1,0 +1,46 @@
+<!--<div class="page-header">-->
+<!--<h1 class="page-title font-size-26 font-weight-100"><strong>Referrals</strong></h1>-->
+<!--</div>-->
+
+<% if @referrals.any? %>
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="referral-list">
+      <li class="referral-list-item">
+        <p><strong>Name / URL</strong></p>
+        <div class="referral-list-item-form">
+          <p><strong>Existing Relationship?</strong></p>
+        </div>
+      </li>
+      <% @referrals.each do |referral| %>
+          <li class="referral-list-item">
+            <p><%= referral.name %> (<%= referral.url || '' %>)</p>
+            <div class="referral-list-item-form">
+              <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-right">
+                <% if referral.has_relationship %>
+                    <input type="checkbox" id="inputCheckbox" checked name=<%= "has_relationship" %> disabled>
+                <% else %>
+                    <input type="checkbox" id="inputCheckbox" name=<%= "has_relationship" %> disabled>
+                <% end %>
+                <label for="inputCheckbox"></label>
+              </div>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% else %>
+    <div class="row">
+      <div class="col-sm-12">
+        You have not yet added any partners. Please click the big plus button to begin!
+      </div>
+    </div>
+<% end %>
+
+<%= link_to add_referrals_path_for_role(member), id: 'add_referral_link' do %>
+    <button id="add_referral_button" class="site-action site-floataction btn-raised btn btn-success btn-floating" style="background-color:#e3bd70; border-color:#e3bd70;" type="submit">
+      <i class="icon wb-plus" aria-hidden="true"></i>
+    </button>
+<% end %>
+

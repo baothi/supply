@@ -1,0 +1,30 @@
+<%
+menu = [
+    {
+      section: Hingeto::Section::PRODUCT_COMPLIANCE,
+      title: 'Products',
+      link: supplier_orders_path,
+      secret: false
+    },
+    {
+        section: Hingeto::Section::VARIANT_COMPLIANCE,
+        title: 'Variants',
+        link: supplier_orders_reported_path,
+        secret: true
+    }
+]
+%>
+
+<ul class="site-menu-sub">
+  <% menu.each do |menu| %>
+      <%= inner_menu_html(
+              inner_menu: yield(:inner_menu),
+              link: menu[:link],
+              section: menu[:section],
+              title: menu[:title],
+              secret: menu[:secret],
+              true_user: true_spree_user
+          )
+      %>
+<% end %>
+</ul>

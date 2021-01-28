@@ -1,0 +1,54 @@
+
+
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <!--<th><span class="checkbox-custom checkbox-primary"><input class="selectable-all" type="checkbox"> <label></label></span></th>-->
+      <th>Job ID</th>
+      <th>Initiated By</th>
+      <th>Action</th>
+      <th>Progress</th>
+      <th>Num of Errors</th>
+      <th>Status</th>
+      <th>Completed Date</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <% (@jobs).each do |job| %>
+        <tr>
+          <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+          <td>
+            <%= link_to supplier_jobs_details_path(id: job.internal_identifier) do %>
+              <%= job.internal_identifier.last(8) %>
+            <% end %>
+          </td>
+          <td><%= job.initiated_by.titleize %></td>
+          <td><%= job.job_type.titleize %></td>
+          <td>
+            <% progress = job.progress %>
+            <div class="progress progress-lg">
+            <div class="progress-bar" style="width: <%= progress %>%;" role="progressbar"><%= progress %>%</div>
+          </div>
+
+          </td>
+          <td><span><%= job.num_of_errors %></span></td>
+          <td><%= job_status(job.status) %></td>
+          <td><%= job.time_completed %></td>
+        </tr>
+    <% end %>
+
+    <!--<tr>-->
+    <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+    <!--<td>-->
+    <!--<a href="javascript:void(0)">In Progress</a><i aria-hidden="true" class="icon wb-help-circle m-l-10 orange-600" data-container="body" data-original-title="help" data-toggle="tooltip" title=""></i>-->
+    <!--</td>-->
+    <!--<td>Lorem ipsum dolor sit amet</td>-->
+    <!--<td><i aria-hidden="true" class="icon wb-chat"><span class="m-l-5">18</span></i></td>-->
+    <!--<td><span>3 days ago</span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+</div>

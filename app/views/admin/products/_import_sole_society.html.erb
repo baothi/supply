@@ -1,0 +1,18 @@
+<%= semantic_form_for Spree::LongRunningJob.new, :url => process_sole_society_products_admin_spree_products_path do |f| %>
+  <%= f.inputs  "Upload Products", :id => "import_sole_products" do %>
+    <%= f.input :file, :as => :file, :required => true %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label => "Begin Import" %>
+  <% end %>
+<% end %>
+
+<%= semantic_form_for Spree::LongRunningJob.new, :url => process_sole_society_images_admin_spree_products_path do |f| %>
+  <%= f.inputs  "Upload Images", :id => "import_sole_images" do %>
+    <%= f.input :file, :as => :file, :required => true %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label => "Begin Import" %>
+  <% end %>
+<% end %>
+

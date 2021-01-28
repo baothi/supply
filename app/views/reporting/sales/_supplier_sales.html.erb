@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <th>Supplier</th>
+      <th>Channel</th>
+      <th>Subtotal (Retail)</th>
+      <th>Subtotal (Retailer Commission)</th>
+      <th>Subtotal (Vendor Commission)</th>
+      <th>Total Shipping</th>
+      <th>Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% (1..10).each do |i| %>
+        <%
+          total = Faker::Number.between(50, 120)
+          discount_price = (Faker::Number.between(0, 100) / 100.to_f)*total
+          quantity = Faker::Number.between(1, 10)
+          vendor_commission = Faker::Number.between(1, 10)
+          balance = Faker::Number.between(1, 10)
+          shipping = Faker::Number.between(1, 10)
+
+        %>
+        <tr>
+          <td><span><%= "Supplier #{i}" %> 2016</span></td>
+          <td>Hot Topic - Dropship</td>
+          <td><span><%= number_to_currency total %></span></td>
+          <td><span><%= number_to_currency discount_price %></span></td>
+          <td><span><%= number_to_currency discount_price %></span></td>
+          <td><span><%= number_to_currency shipping %></span></td>
+          <td><span><%= number_to_currency shipping %></span></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

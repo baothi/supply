@@ -1,0 +1,23 @@
+$(".ajax-alert").html('<%= j render partial: "shared/alerts" %>');
+$(".alert-success, alert-danger").fadeTo(3000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
+});
+
+$(".product-display#<%= @selector %> .fav-action").html(
+    '<%= j render partial: "retailer/products/shared/favorite_links",
+    locals: {product: @favorite.product} %>'
+ )
+
+$("#product-display-<%= @selector %> .fav-action").html(
+    '<%= j render partial: "retailer/products/shared/favorite_links",
+    locals: {product: @favorite.product} %>'
+)
+
+$(".fav-action-details").html(
+      '<%= j render partial: "retailer/products/shared/favorite_links_details",
+      locals: {product: @favorite.product} %>'
+)
+
+if (isMobileDevice()) { 
+  $(".product-button").addClass("btn-sm white-space")
+}

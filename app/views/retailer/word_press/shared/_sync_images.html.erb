@@ -1,0 +1,7 @@
+<% if @product.live?(current_retailer.id)  %>
+  <div>
+    <button type="button" class="btn btn-default listings_action-btn" style="width:100%" data-target="#syncronizeImages" data-toggle="modal">Synchronize Images</button>
+    <small align="center" style="margin: 0 auto;">Replace product images in your store with updated images.</small>
+</div>
+<br>
+<% end %>

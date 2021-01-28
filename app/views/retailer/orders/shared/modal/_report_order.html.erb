@@ -1,0 +1,30 @@
+<div class="modal fade in" id="report-order-modal" aria-hidden="false" aria-labelledby="report-order-modalLabel" role="dialog" tabindex="-1">
+  <div class="modal-dialog order-report-form">
+    <div class='modal-content'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="exampleFormModalLabel">Order <%= order.retailer_shopify_order_number %></h4>
+      </div>
+      <%= form_for Spree::OrderIssueReport.new(order: order), url: retailer_save_order_issue_report_path, html: { multipart: true } do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.hidden_field :order_id %>
+            <label>Issue description*</label>
+            <%= f.text_area :description, rows: '8', class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.file_field :image1, class: 'form-control', id: '' %>
+          </div>
+          <div class="form-group">
+            <%= f.file_field :image2, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Report Issue", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

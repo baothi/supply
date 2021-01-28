@@ -1,0 +1,7 @@
+<%
+  results = @spree_retailer.licensed_suppliers_list
+
+  access = results[0]
+  no_access = results[1]
+%>
+At this time, this retailer has access to the following licensed suppliers: <%= access.map(&:name).join(",") %> but does not have access to <%= no_access.map(&:name).join(",") %>

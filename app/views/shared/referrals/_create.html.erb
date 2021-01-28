@@ -1,0 +1,46 @@
+<% opposite_team = team == 'supplier' ? 'Retailers' : 'Brands' %>
+<div class="row">
+  <div class="card card-inverse bg-success">
+    <div class="card-block">
+      <h4 class="card-title">Thank you for signing up as a <%= team %>!</h4>
+      <p class="card-text">Start building your marketplace by inviting <%= opposite_team %> you work with (or would like to work with)</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="panel panel-bordered panel-blue">
+      <div class="panel-heading">
+        <h3 class="panel-title">Invite your current or ideal partners</h3>
+      </div>
+      <div class="panel-body">
+
+        <div class="referral-panel">
+
+          <%= render partial: "shared/referrals/form",
+                     locals: {
+                         team: team,
+                         member: member,
+                     }
+          %>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+
+    <div class="card card-block card-inverse bg-dark text-center">
+      <blockquote class="blockquote cover-quote card-blockquote">
+        <p>The more real partners you invite, the better chances you have of being next up.</p>
+      </blockquote>
+    </div>
+
+  </div>
+</div>
+
+<%= render partial: "shared/referrals/footer", locals: { team: team, member: member } %>
+

@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <th><span class="checkbox-primary"><input class="selectable-all product-select-all" type="checkbox"> <label></label></span></th>
+      <th>Title</th>
+      <th>Main Image</th>
+      <th>MSRP</th>
+      <th>Inventory</th>
+      <th>Status</th>
+      <th>Issues</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% products.each do |product| %>
+      <% product.eligible_for_approval? %>
+        <tr height="100">
+          <td><span class="checkbox-primary"><%= check_box_tag "check", product.internal_identifier, false, class: "product-select" %><label></label></span></td>
+          <td><%= link_to product.name.upcase , supplier_product_details_path(product.internal_identifier) %></td>
+          <td><%= image_tag (product.listing_image || 'noimage/product.png'),  class:'media-object', alt:'...', style: 'width:50px;' %></td>
+          <td><%= number_to_currency(product.msrp_price) %></td>
+          <td><%= product.count_on_hand %></td>
+          <td><%= product.submission_state&.titleize %></td>
+          <td><%= product.eligibility_reasoning %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

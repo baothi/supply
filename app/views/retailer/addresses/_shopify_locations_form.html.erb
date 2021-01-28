@@ -1,0 +1,35 @@
+
+<div class="modal-content">
+  <%= form_tag(set_default_shopify_location_retailer_addresses_path, method: :post) do %>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title">Choose Your Shopify Store Default Location</h4>
+    </div>
+    <div class="modal-body">
+      <p>
+        <% locations&.each do |location| %>
+          <div class="radio-custom radio-primary">
+
+            <%= radio_button_tag :location, location.id, location.id.to_s == current_retailer.default_location_shopify_identifier, required: "required" %>
+            <label for="<%= location.id %>"><%= location.name %></label>
+
+            <i class="icon wb-map" aria-hidden="true"></i>
+            <div class="mt-1 ml-2">
+              <p>
+                <%= location.address1 %>, <%= location.address2 %><br/>
+                <%= location.city %>, <%= location.province %>, <%= location.zip %><br/>
+                <%= location.country_name %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <%= submit_tag 'Set Location', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

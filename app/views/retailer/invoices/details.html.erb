@@ -1,0 +1,190 @@
+<% content_for :title, "Invoice Details" %>
+<% content_for :main_menu, Hingeto::Section::INVOICES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Invoice #D983333</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+
+
+
+        <div class="panel-body container-fluid">
+          <div class="row" style="padding-bottom:20px;">
+            <div class="col-xs-12">
+              <div class="text-xs-right">
+                <!--<button type="submit" class="btn btn-animate btn-animate-side btn-primary btn-danger">-->
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-default btn-outline" onclick="javascript:window.print();">
+                  <span><i class="icon fa-print" aria-hidden="true"></i>Print</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-xs-12">
+              <!--<h4>-->
+                <!--<img class="m-r-10" src="../../assets//images/logo-blue.png" alt="...">Remark</h4>-->
+              <!---->
+              <address>
+                Bill To: Hot Topic
+                <br>
+                795 Folsom Ave, Suite 600
+                <br> San Francisco, CA, 94107
+              </address>
+            </div>
+            <div class="col-xs-12 col-lg-3 offset-lg-6 text-xs-right">
+              <span>Purchase Order: #HNG-333-33333</span>
+              <br>
+              <span>Order Date: January 20, 2017</span>
+              <br>
+              <span class="tag tag-success">Sent</span>
+            </div>
+          </div>
+          <div class="page-invoice-table table-responsive">
+            <table class="table table-hover text-xs-right">
+              <thead>
+              <tr>
+                <th class="text-xs-right">Quantity</th>
+                <th class="text-xs-right">Description</th>
+                <th class="text-xs-right">Retail Price</th>
+                <th class="text-xs-right">Discounted Price</th>
+                <th class="text-xs-right">Shipping</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% (1..3).each do |i| %>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  Beastmode Bomber Jackets<br>
+                  Small
+                </td>
+                <td>
+                  $37.44
+                </td>
+                <td>
+                  $37.00
+                </td>
+                <td>
+                  $7.00
+                </td>
+              </tr>
+              <% end %>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  PacSun - Late Shipment Penalty
+                </td>
+                <td>
+                  $-10.00
+                </td>
+                <td>
+                  $-10.00
+                </td>
+                <td>
+                  $0.00
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-xs-right clearfix">
+            <div class="pull-xs-right">
+              <p>Sub - Total amount:
+                <span>$4800</span>
+              </p>
+              <p>Discounts:
+                <span>$35</span>
+              </p>
+              <p>Tax:
+                <span>$35</span>
+              </p>
+              <p>Penalty:
+                <span>-$10</span>
+              </p>
+              <p>Shipping:
+                <span>$35</span>
+              </p>
+              <p class="page-invoice-amount">Grand Total:
+                <span>$4835</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addTracking" aria-hidden="true" aria-labelledby="addTracking"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Add Tracking</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <form method="get" action="/orders/add_tracking" role="form" style="margin:0px 0px 0px 0px;">
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <select name="card[month]" id="card_month" class="form-control required" aria-required="true">
+                  <option value="2">FedEx</option>
+                  <option value="3">DHL</option>
+                  <option value="4">UPS</option>
+                  <option value="5">USPS</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label class="sr-only" for="inputName">Tracking Number</label>
+                <input type="text" class="form-control" id="website" name="website" placeholder="Enter Tracking Number">
+              </div>
+            </div>
+          </div>
+          <!--<button type="submit" class="btn btn-primary btn-block" data-target="#successfulPayment" data-toggle="modal" data-dismiss="modal">Make $50 Payment</button>-->
+          <button type="submit" class="btn btn-primary btn-block">Add Tracking</button>
+          <br>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<%= render "shared/platform/footer" %>
+</body>

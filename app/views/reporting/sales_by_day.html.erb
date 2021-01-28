@@ -1,0 +1,104 @@
+<% content_for :title, "Report - Sales By Day" %>
+<% content_for :main_menu, Hingeto::Section::REPORTING %>
+<% content_for :inner_menu, Hingeto::Section::SALES_BY_DAY %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "reporting/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Sales by Period</h1>
+    </div>
+
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <%= render "shared/periods/daily_period" %>
+
+      <div class="panel">
+        <div class="panel-body">
+
+          <h4>Chart</h4>
+          <div class="example text-xs-center">
+            <canvas id="salesByDayPeriod" height="100" width="450"></canvas>
+          </div>
+
+          <h4>Table</h4>
+          <%= render partial: "reporting/sales/daily_sales" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<% content_for :custom_footer_javascript do %>
+
+<script>
+  (function() {
+    var barChartData = {
+      labels: ["2/1/2017", "2/2/2017", "2/3/2017", "2/4/2017", "2/5/2017", "2/6/2017", "2/7/2017"],
+      datasets: [{
+        label: "Sales ($)",
+        backgroundColor: "rgba(204, 213, 219, .2)",
+        borderColor: Config.colors("blue-grey", 300),
+        hoverBackgroundColor: "rgba(204, 213, 219, .3)",
+        borderWidth: 2,
+        data: [65, 45, 75, 50, 60, 45, 55]
+      }]
+    };
+
+    var myBar = new Chart(document.getElementById("salesByDayPeriod").getContext("2d"), {
+      type: 'bar',
+      data: barChartData,
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+            display: true
+          }],
+          yAxes: [{
+            display: true
+          }]
+        }
+      }
+    });
+  })();
+</script>
+
+<% end %>
+
+
+<%= render "shared/platform/footer" %>
+</body>

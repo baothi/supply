@@ -1,0 +1,240 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::ADDRESSES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+
+
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+
+
+    <div class="page-content">
+
+
+      <%= render :partial=>"shared/spaced_alerts" %>
+
+      <div class="panel">
+
+        <div class="panel-heading">
+          <h4 class="panel-title">Default Information</h4>
+        </div>
+        <div class="panel-body">
+          <%= form_for(current_retailer, url: '') do |f| %>
+
+              <p>This information is obtained from Shopify and is unedittable. </p>
+
+
+              <div class="row">
+
+               <!--  <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Name</label>
+                  <%#= f.text_field :name, class:"form-control", autocomplete: "off", disabled: true,
+                                   :placeholder => "Enter your legal entity's street address" %>
+                </div> -->
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Store URL</label>
+                  <%= f.text_field :shopify_url, class:"form-control", autocomplete: "off", disabled: true,
+                                   :placeholder => "Enter your default entity's street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Street Address</label>
+                  <%= f.text_field :address1, class:"form-control", autocomplete: "off", disabled: true,
+                                   :placeholder => "Enter your default entity's street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">City</label>
+                  <%= f.text_field :city, class:"form-control", autocomplete: "off",disabled: true,
+                                   :placeholder => "Enter your default entity's city" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">State</label>
+                  <%= f.text_field :state, class:"form-control", autocomplete: "off",disabled: true,
+                                   :placeholder => "Enter your default entity's city" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicPostalCode">Postal Code</label>
+                  <%= f.text_field :zipcode, class:"form-control", autocomplete: "off",disabled: true,
+                                   :placeholder => "Enter your default entity's postal code" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Country</label>
+                  <%= f.text_field :country, class:"form-control", autocomplete: "off",disabled: true,
+                                   :placeholder => "", :readonly=>true %>
+                </div>
+
+
+              </div>
+
+          <% end %>
+
+           <div class="form-group">
+            <%= link_to update_shopify_address_retailer_addresses_path do %>
+              <button type="submit" class="btn btn-primary form-button">Update From Shopify</button>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Legal Entity Address</h3>
+        </div>
+        <div class="panel-body">
+          <p>Please enter your company's legal entity's address.</p>
+
+          <%= form_for(current_retailer, url: update_address_retailer_addresses_path('legal_entity_address'), html: { id: 'edit_retailer_legal_entity_address' }) do |s| %>
+
+            <% current_retailer.legal_entity_address || current_retailer.build_legal_entity_address %>
+            <%= s.fields_for :legal_entity_address do |f| %>
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstNam">Business Name</label>
+                  <%= f.text_field :business_name, class:"form-control", required: true,
+                                   :placeholder => "Enter your business name" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Street Address</label>
+                  <%= f.text_field :address1, class:"form-control", required: true,
+                                   :placeholder => "Enter your legal entity's street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Address 2</label>
+                  <%= f.text_field :address2, class:"form-control",
+                                   :placeholder => "Continue your legal entity's street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">City</label>
+                  <%= f.text_field :city, class:"form-control", required: true,
+                                   :placeholder => "Enter legal entity's city" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">State</label>
+                  <%= f.text_field :name_of_state, class:"form-control", required: true,
+                                   :placeholder => "Enter your legal entity's state" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicPostalCode">Postal Code</label>
+                  <%= f.text_field :zipcode, class:"form-control", required: true,
+                                   :placeholder => "Enter your legal entity's postal code" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Country</label>
+                  <%= f.select :country_id, Spree::Country.all.collect { |p| [ p.name, p.id ] }, {include_blank: true}, { :class => 'form-control' } %>
+
+
+
+                </div>
+
+
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary form-button">Update Legal Entity Address</button>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Shipping Address</h3>
+        </div>
+        <div class="panel-body">
+          <p>Please enter the address you'd like to appear on packing slips.</p>
+
+          <%= form_for(current_retailer, url: update_address_retailer_addresses_path('shipping_address'), html: { id: 'edit_retailer_shipping_address' }) do |s| %>
+
+            <% current_retailer.shipping_address || current_retailer.build_shipping_address %>
+            <%= s.fields_for :shipping_address do |f| %>
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstNam">Business Name</label>
+                  <%= f.text_field :business_name, class:"form-control", required: true,
+                                   :placeholder => "Enter your business name for the packing slip" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Street Address</label>
+                  <%= f.text_field :address1, class:"form-control", required: true,
+                                   :placeholder => "Enter your shipping street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Address 2</label>
+                  <%= f.text_field :address2, class:"form-control",
+                                   :placeholder => "Continue your shipping street address" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">City</label>
+                  <%= f.text_field :city, class:"form-control", required: true, :placeholder => "Enter shipping city" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">State</label>
+                  <%= f.text_field :name_of_state, class:"form-control",
+                                   :placeholder => "Enter your shipping state" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicPostalCode">Postal Code</label>
+                  <%= f.text_field :zipcode, class:"form-control", required: true,
+                                   :placeholder => "Enter your shipping postal code" %>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Country</label>
+                  <%= f.select :country_id, Spree::Country.all.collect { |p| [ p.name, p.id ] }, {include_blank: true}, { :class => 'form-control' } %>
+
+                </div>
+
+
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary form-button">Update Shipping Address</button>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+<!-- Location Selection Modal -->
+<div class="modal fade" id="locationSelectionModal" aria-labelledby="locationSelectionModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-simple modal-center locations-select-container">
+
+  </div>
+</div>
+<!-- End Modal -->
+
+
+</body>

@@ -1,0 +1,4 @@
+$("#current-pay-with-card").text("<%= @selected_card.last_four_fancy %>")
+$('#payment-form-source-id').val('<%= @selected_card.internal_identifier %>');
+$('#payWith').modal('show');
+$('##paymentInformation').modal('show');

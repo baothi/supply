@@ -1,0 +1,13 @@
+<% if @job.status == 'completed' %>
+<h1>Completed</h1>
+<ul>
+  <% @order_numbers.each do |num| %>
+    <li><%= num %></li>
+  <% end %>
+</ul>
+<% elsif @job.status == 'error' %>
+<h1>Error:</h1>
+<p><%= @job.error_log %></p>
+<% else %>
+<h1>In Progress</h1>
+<% end %>

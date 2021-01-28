@@ -1,0 +1,6 @@
+<% if current_spree_user.present? && !current_spree_user.confirmed? %>
+    <div class="alert alert-danger alert-dismissible dark col-sm-12 3">
+      To continue, please verify your email address.  <%= link_to('Click here to resend email confirmation',
+                                                   resend_email_confirmation_instructions_path, method: :post) %>
+    </div>
+<% end %>

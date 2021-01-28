@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="Expand your assortment without inventory risk">
+  <meta name="author" content="">
+  <title>TeamUp | Endless Product Assortment</title>
+
+  <%= favicon_link_tag asset_path('teamup-square-24px.png') %>
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Stylesheets -->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- Fonts -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+
+
+  <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> <!-- Stripe should come before application's JS -->
+  <%= yield(:custom_header_stylesheet)%>
+
+  <%= csrf_meta_tag %>
+
+  <%= yield :stripe_tags %>
+
+  <%= yield(:custom_header_css)%>
+
+  <%= render 'layouts/shared/segment' %>
+
+</head>
+
+<%= yield %>
+
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= render 'layouts/shared/breakpoint' %>
+
+<script>
+  (function(document, window, $) {
+    'use strict';
+    var Site = window.Site;
+    $(document).ready(function() {
+      Site.run();
+    });
+  })(document, window, jQuery);
+</script>
+
+<script>
+  Config.set('assets', '/assets');
+</script>
+
+<%= yield(:custom_footer_javascript)%>
+</html>

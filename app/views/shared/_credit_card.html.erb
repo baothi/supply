@@ -1,0 +1,28 @@
+ <div class="new-card">
+  <div class="row">
+    <%= form_tag(path, method: "post", id: "stripe-form", remote: remote) do %>
+      <label>
+        <span>Name</span>
+        <input name="cardholder-name" class="field" placeholder="Jane Doe" required="required" />
+      </label>
+      <label>
+        <span>ZIP code</span>
+        <input name="address-zip" class="field" placeholder="94110" />
+      </label>
+      <label>
+        <span>Card</span>
+        <div id="card-element" class="field"></div>
+      </label>
+      <%= hidden_field_tag :token, "", class:"token"  %>
+      <button type="submit" class="btn btn-block btn-primary" id="continue-payment-method" >CONTINUE</button>
+
+      <div class="outcome">
+        <div class="error stripe-error" role="alert"></div>
+        <div class="success stripe-success">
+
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Main</h5>
+          <div class="list-group">
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::OVERVIEW) %>" href="/integrations/"><i class="icon wb-home" aria-hidden="true"></i>Overview</a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SHOPIFY) %>" href="/integrations/shopify"><i class="icon fa-gear" aria-hidden="true"></i>Shopify</a>
+            <!--<a class="list-group-item <%#= check_if_active_css(yield(:inner_menu), Hingeto::Section::MAGENTO) %>" href="/integrations/magento"><i class="icon fa-archive" aria-hidden="true"></i>Magento</a>-->
+            <!--<a class="list-group-item <%#= check_if_active_css(yield(:inner_menu), Hingeto::Section::WOOCOMMERCE) %>" href="/integrations/woocommerce"><i class="icon fa-archive" aria-hidden="true"></i>WooCommerce</a>-->
+            <!--<a class="list-group-item <%#= check_if_active_css(yield(:inner_menu), Hingeto::Section::BIGCOMMERCE) %>" href="/integrations/bigcommerce"><i class="icon fa-archive" aria-hidden="true"></i>BigCommerce</a>-->
+            <!--<a class="list-group-item <%#= check_if_active_css(yield(:inner_menu), Hingeto::Section::VOLUSION) %>" href="/integrations/volusion"><i class="icon fa-archive" aria-hidden="true"></i>Volusion</a>-->
+          </div>
+        </section>
+        <!--<section class="page-aside-section">-->
+          <!--<h5 class="page-aside-title">Filter</h5>-->
+          <!--<div class="list-group">-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-image" aria-hidden="true"></i>Images</a>-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-volume-high" aria-hidden="true"></i>Audio</a>-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-camera" aria-hidden="true"></i>Video</a>-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-file" aria-hidden="true"></i>Notes</a>-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-link-intact" aria-hidden="true"></i>Links</a>-->
+            <!--<a class="list-group-item" href="javascript:void(0)"><i class="icon wb-order" aria-hidden="true"></i>Files</a>-->
+          <!--</div>-->
+        <!--</section>-->
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

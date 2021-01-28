@@ -1,0 +1,18 @@
+<% user_confirmed = current_spree_user.confirmed? %>
+<% unconfirmed_tag = user_confirmed ? '' : '(Unconfirmed)' %>
+<div class="referral-footer">
+  <div class="referral-banner">
+    <div>
+      <h2><%= 300 + member.id %> <%= team.pluralize.capitalize %> are ahead of you</h2>
+      <p>This reservation is held for <%= current_spree_user.email %> <%= unconfirmed_tag %></p>
+      <% unless user_confirmed %>
+        <%= link_to('Resend email confirmation',
+                    spree_user_confirmation_path(spree_user: { email: current_spree_user.email }), method: :post) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="referral-partner-logos">
+    <%= image_tag 'partner-logos/group.png', class: 'brand-img img-responsive brand-logos' %>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="row pay-with-row">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <label id="current-pay-with-card" style="font-size: 18px;"><%= @selected_card.last_four_fancy if @selected_card %></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span class="credit-label">Credit Card</span>
+      </div>
+    </div>
+  </div>
+   <div class="col-md-4">
+    <i class="card-logo <%= card_logo(@selected_card.brand) if @selected_card %>" aria-hidden="true"></i>
+  </div>
+</div>

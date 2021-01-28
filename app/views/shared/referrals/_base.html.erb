@@ -1,0 +1,35 @@
+<% content_for :title, "Referrals" %>
+
+<body class="animsition ecommerce_dashboard">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/referrals/nav_bar" %>
+<%= render "shared/referrals/side_menu" %>
+
+<!-- Page -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="page-title font-size-26 font-weight-100"><strong>Referrals</strong></h1>
+  </div>
+
+  <div class="page-content container-fluid">
+    <div class="row">
+       <div class="col-12">
+         <%= render :partial=>"shared/alerts" %>
+       </div>
+
+      <% unless current_spree_user.confirmed? %>
+      <div class="alert alert-danger alert-dismissible dark col-sm-12 3">
+        Your email is not yet verified.  <%= link_to('Click here to resend email confirmation',
+                    spree_user_confirmation_path(spree_user: { email: current_spree_user.email }), method: :post) %>
+      </div>
+      <% end %>
+
+     </div>
+
+    <%= yield %>
+
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

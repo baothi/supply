@@ -1,0 +1,11 @@
+Hello,
+
+The following order was partially refunded. You can expect this to be reflected at your bank in 5-10 business days at most.
+
+Typically, it shows up in no more than 3 business days.
+
+Order Number | Grand Total | Order Items
+
+<%= @order.retailer_shopify_name %> | <%= @line_item.line_item_cost_with_shipping %> | <%= @line_item.variant.name %>
+
+<%= retailer_orders_url %>

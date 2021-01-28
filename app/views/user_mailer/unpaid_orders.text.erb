@@ -1,0 +1,15 @@
+
+Hello,
+
+This is a friendly reminder that you have <%= @orders.size %> unpaid order(s) on TeamUp.
+Please login and pay for these order(s) so we can process and ship them. You may also archived them if you would like not to receive future reminders about these orders.
+
+
+Order # | Total (w/ shipping) | Completed At | Customer
+
+<% @orders.each do |order| %>
+<%= order.number %> | <%= order.total_cost_price_with_shipping %> | <%= order.completed_at.strftime('%F') if order.completed_at.present? %> | <%= order.user.present? ? order.user.full_name : order.customer_email %>
+<% end %>
+
+VIEW UNPAID ORDERS:
+<%= retailer_orders_url(status: 'unpaid') %>

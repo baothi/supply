@@ -1,0 +1,86 @@
+<% content_for :title, "Bulk Invoice Upload" %>
+<% content_for :main_menu, Hingeto::Section::BULK_UPLOAD %>
+<% content_for :inner_menu, Hingeto::Section::BULK_INVOICE_UPLOAD %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "bulk_upload/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Upload Invoice</h1>
+    </div>
+
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+        <div class="panel-body">
+
+          <h4>Template</h4>
+          <p>For a template of our preferred product format, please download <a href="javascript:void(0);">here</a></p>
+
+          <h4>Create/Update Product</h4>
+          <p>You may upload an XLS file. Please do not upload an XLSX or CSV file.</p>
+          <p>Important - Please note that invoices are generated on the 1st of the month automatically.
+            This tool is provided as a convenience in situations where an invoice is required to be sent to the
+            retailer (typically with pre-approved authorization)
+          </p>
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "settings", :action => "index"}) do |f| %>
+
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""
+                  />
+                </div>
+
+              </div>
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Upload Invoice</button>
+              </div>
+          <% end %>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+<%= render "shared/platform/footer" %>
+</body>

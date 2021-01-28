@@ -1,0 +1,62 @@
+<div class="panel">
+  <div class="panel-body">
+
+    <% if flash[:errors] %>
+      <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <i class="icon fa-gear" aria-hidden="true"></i>
+        <% flash[:errors].each do |error| %>
+          <%= error.join(" ") %></br>
+        <% end %>
+      </div>
+    <% end %>
+
+    <h4>Install TeamUp Shopify App</h4>
+    <p>Connect to your shopify store by installing the TeamUp Shopify app to your store. This will allow you to seamlessly add products from our catalog to your store & for us to download orders</p>
+
+    <div class="form-group">
+      <% if @shopify_credential.access_token.blank? %>
+        <%= link_to "Install TeamUp App",  "#", class: "btn btn-primary",  data: {toggle: "modal", target: '#add-store-url'} %>
+      <% else %>
+        <h5>TeamUp app is installed </h5>
+      <% end %>
+    </div>
+
+    <div id="add-store-url" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <h5 class="modal-title" style="text-align:center;">Enter Your Shopify Store Url To Instal TeamUp App</h5>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body">
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "shopify", :action => "install"},  :html => {class: "form-inline"}, method: :get ) do |f| %>
+              <%= hidden_field_tag :existing_team_integration, true %>
+              <div class="row with-large-top-bottom-margin">
+                <div class="form-group col-md-12">
+                  <span style="display: inline">https:// </span><%= text_field_tag :shop, '', class:"form-control full-inline", autocomplete: "off", :placeholder => "Enter Your Store Name" %><span> .myshopify.com</span>
+                </div>
+              </div>
+              <div class="row with-large-top-bottom-margin">
+                <div class="form-group col-md-12" style="margin-top: 2.1em;">
+                  <%= submit_tag "Install App", class: "btn btn-primary install-app-btn" %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<% content_for :title, "Accounting" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::ACCOUNTING %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Payment Details</h3>
+        </div>
+        <div class="panel-body">
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "settings", :action => "index"}) do |f| %>
+
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Federal Tax ID</label>
+                  <%#= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "Store Name", :readonly => true %>
+                  <%= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "Please enter your Federal Tax Identifier or Social Security Number" %>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Name of Payee </label>
+                  <%= f.text_field :slug, class:"form-control", autocomplete: "off", :placeholder => "Enter full government name of Payee." %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Bank Name</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Enter Bank Name eg. Bank of America" %>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Account Type</label>
+                    <select class="form-control">
+                      <option value="Checking">Checking</option>
+                      <option value="Savings">Savings</option>
+                      <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Bank Routing Number</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Enter your bank's routing number" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Bank Account Number</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Enter your bank account number" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Bank Account Number Confirmation</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Please re-enter your bank account number" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Payment Contact Email</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Please enter email address of your finance contact" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Deal Type</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Commission / Cost-Based", :readonly => true %>
+                </div>
+
+
+              </div>
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update Payment Information</button>
+              </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

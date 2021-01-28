@@ -1,0 +1,93 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::SETTINGS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <div class="page-main">
+    <div class="page-content">
+      <div class="row">
+      <%= render :partial=>"shared/alerts" %>
+    </div>
+      <br>
+
+      <% if current_spree_user.confirmed? %>
+
+      <div class="row">
+        <div class="card card-inverse bg-warning">
+          <div class="card-block">
+            <h4 class="card-title">Select a pricing plan</h4>
+            <p class="card-text">You are moments away from obtaining the superpower to sell any product in the world. Please select a plan below to continue.</p>
+          </div>
+        </div>
+      </div>
+      <div class="example-example" style="margin-top:0px;">
+        <div class="example">
+          <div class="pricing-table">
+            <div class="pricing-column-three">
+              <div class="pricing-header">
+                <div class="pricing-price">
+                  <span class="pricing-currency">$</span>
+                  <span class="pricing-amount">199</span>
+                  <span class="pricing-period">/ mo</span>
+                </div>
+                <div class="pricing-title">Core</div>
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <strong>Daily</strong> Inventory Updates</li>
+                <li>
+                  <strong>Daily</strong> Order updates</li>
+                <li>
+                  <strong>General</strong> Catalog</li>
+                <li>
+                  Add up to <strong>200</strong> Products monthly</li>
+
+                <li>
+                  Up to <strong>500 </strong> Monthly Orders</li>
+
+                <li>
+                  Up to <strong>2 </strong> Team Members</li>
+
+                <li>
+                  <strong>General </strong> Support (Email)</li>
+
+                <li>
+                  &nbsp;
+                </li>
+
+              </ul>
+              <div class="pricing-footer">
+                <%= link_to 'Begin Today', pricing_plan_path(role: 'retailer', plan_id: 'retailer-core'),
+                            class: "btn btn-block btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <br>
+
+      <h3>Other great stores leveraging Teamup</h3>
+      <div class="referral-partner-logos">
+        <%= image_tag 'partner-logos/group.png', class: 'brand-img img-responsive brand-logos' %>
+      </div>
+      <br>
+      <br>
+
+      <% end %>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+</body>

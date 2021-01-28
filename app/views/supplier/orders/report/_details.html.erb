@@ -1,0 +1,76 @@
+<% if issue_report.present? %>
+  <div class="panel">
+    <div class="panel-heading">
+      <!--<h3 class="panel-title">&nbsp;</h3>-->
+      <h4 class="panel-title ">
+        Order Report Details
+      </h4>
+    </div>
+
+    <div class="panel-body">
+       <div class="row">
+        <div class="col-md-6 col-xs-6">
+          <% if issue_report.resolved? %>
+            <% if issue_report.declined? %>
+              <span class="tag tag-danger">Issue Reported | Declined</span>
+            <% else %>
+              <span class="tag tag-success">Issue Reported | Credited</span>
+            <% end %>
+          <% else %>
+            <span class="tag tag-warning">Issue Reported | Pending Decision</span>
+          <% end %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6 col-xs-6">
+          <h5>Description</h5>
+          <%= text_area_tag 'Description',
+                           issue_report.description,
+                           class: "form-control", style: "height: 15em", disabled: true %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6 col-xs-6">
+          <h5>Retailer</h5>
+          <%= text_field_tag 'retailer_shopify_number',
+                             issue_report.retailer.name,
+                             class: "form-control", disabled: true %>
+        </div>
+
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6 col-xs-6">
+          <h5>Amount Credited</h5>
+          <%= text_field_tag 'retailer_shopify_identifier',
+                             issue_report.amount_credited,
+                             class: "form-control", disabled: true %>
+        </div>
+         <div class="col-md-6 col-xs-6">
+          <h5>Decline Reason</h5>
+          <%= text_field_tag 'retailer_shopify_identifier',
+                             issue_report.decline_reason,
+                             class: "form-control", disabled: true %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-12 col-xs-6">
+          <h5>Images</h5>
+        </div>
+        <% if issue_report.image1.present? %>
+          <div class="col-md-6 col-xs-6">
+            <%= image_tag(issue_report.image1, class: "img-fluid") %>
+          </div>
+        <% end %>
+         <% if issue_report.image2.present? %>
+          <div class="col-md-6 col-xs-6">
+           <%= image_tag(issue_report.image2, class: "img-fluid") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

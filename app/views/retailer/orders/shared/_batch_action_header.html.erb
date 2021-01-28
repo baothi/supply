@@ -1,0 +1,14 @@
+<th class="orders-batch-action-header" colspan="7">
+<span class="selected-orders-text"></span>
+  <div class="form-group" style="width: 14%; display: inline-block">
+    <%= select_tag :batch_action, options_for_select(Spree::Order.batch_actions(controller.action_name)), {:prompt => "--Batch Action--", class:"form-control batch-action-select", required: 'required'} %>
+  </div>
+  <%= submit_tag 'Go', class: 'btn btn-outline btn-default btn-sm batch-action-submit' %>
+ <!--  <div class="export-all-message"> -->
+
+   <!--  <span class="select-all-page-span"> </span> -->
+<!--     <#% if @orders.count > 10 %> -->
+     <!--  <span class="select-all-orders">Click Here to Select All </span> -->
+   <!--  <%# end %> -->
+<!--   </div> -->
+</th>

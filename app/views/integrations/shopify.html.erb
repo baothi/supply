@@ -1,0 +1,108 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::INTEGRATIONS %>
+<% content_for :inner_menu, Hingeto::Section::SHOPIFY %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "integrations/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Shopify Settings</h1>
+    </div>
+
+    <%= render :partial=>"shared/alerts" %>
+
+
+    <div class="page-content">
+
+      <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+          <!--<span aria-hidden="true">×</span>-->
+        <!--</button>-->
+        <i class="icon fa-gear" aria-hidden="true"></i> You are currently connected to Shopify.
+        <p class="m-t-15">
+          <button class="btn btn-danger btn-inverse" type="button">Sync Products</button>&nbsp;&nbsp;
+          <button class="btn btn-danger btn-inverse" type="button">Sync Orders</button>&nbsp;&nbsp;
+          <button class="btn btn-danger btn-inverse" type="button">Disconnect from Shopify</button>&nbsp;&nbsp;
+          <!--<button class="btn btn-link blue-grey-500" type="button">Or this</button>-->
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-body">
+
+
+
+          <h4>Settings</h4>
+          <p>Connect to your shopify store by following these <a data-target="#shopifyInstructions" data-toggle="modal" href="javascript:void(0)">instructions</a>. This will allow you to sync your product catalog with us as well as send you, orders directly.</p>
+
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "settings", :action => "index"}) do |f| %>
+
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">API Key</label>
+                  <%#= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "Store Name", :readonly => true %>
+                  <%= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "e.g 3adff10aaf325e6a53c557baa3a06764" %>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">API Password </label>
+                  <%= f.text_field :slug, class:"form-control", autocomplete: "off", :placeholder => "e.g. 219c0fe04fab337c0481c088b9b17e02" %>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Shared Secret</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "e.g. 525d1faea43551273cc4159c838905de" %>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Shopify Store URL</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "e.g. http://test:test@my-store.myshopify.com/admin" %>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update Shopify Settings</button>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+<%= render "shared/platform/footer" %>
+</body>

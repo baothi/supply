@@ -1,0 +1,238 @@
+<% content_for :title, "Dashboard " %>
+<% content_for :main_menu, Hingeto::Section::HOME %>
+
+<body class="animsition ecommerce_dashboard">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<!-- Page -->
+<div class="page">
+  <div class="page-header">
+    <!--<h1 class="page-title font-size-26 font-weight-100">Ecommerce Overview</h1>-->
+  </div>
+
+  <div class="page-content container-fluid">
+    <%= render "shared/credit_card_check" %>
+
+    <%= render "shared/time_period" %>
+
+    <div class="row" data-plugin="matchHeight" data-by-row="true">
+
+      <!-- First Row -->
+      <div class="col-xl-3 col-md-6 col-xs-12 info-panel">
+        <div class="card card-shadow">
+          <div class="card-block bg-white p-20">
+            <button type="button" class="btn btn-floating btn-sm btn-warning">
+              <i class="icon wb-order"></i>
+            </button>
+            <span class="m-l-15 font-weight-400">ORDERS</span>
+            <div class="content-text text-xs-center m-b-0">
+              <i class="text-danger icon wb-triangle-up font-size-20">
+              </i>
+              <span class="font-size-40 font-weight-100">399</span>
+              <p class="blue-grey-400 font-weight-100 m-0">+45% From previous month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 col-xs-12 info-panel">
+        <div class="card card-shadow">
+          <div class="card-block bg-white p-20">
+            <button type="button" class="btn btn-floating btn-sm btn-danger">
+              <i class="icon fa-dollar"></i>
+            </button>
+            <span class="m-l-15 font-weight-400">REVENUE</span>
+            <div class="content-text text-xs-center m-b-0">
+              <i class="text-success icon wb-triangle-down font-size-20">
+              </i>
+              <span class="font-size-40 font-weight-100">$18,628</span>
+              <p class="blue-grey-400 font-weight-100 m-0">+45% From previous month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 col-xs-12 info-panel">
+        <div class="card card-shadow">
+          <div class="card-block bg-white p-20">
+            <button type="button" class="btn btn-floating btn-sm btn-success">
+              <i class="icon wb-tag"></i>
+            </button>
+            <span class="m-l-15 font-weight-400">PRODUCTS</span>
+            <div class="content-text text-xs-center m-b-0">
+              <i class="text-danger icon wb-triangle-up font-size-20">
+              </i>
+              <span class="font-size-40 font-weight-100">500</span>
+              <p class="blue-grey-400 font-weight-100 m-0">+25% From previous month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 col-xs-12 info-panel">
+        <div class="card card-shadow">
+          <div class="card-block bg-white p-20">
+            <button type="button" class="btn btn-floating btn-sm btn-primary">
+              <i class="icon wb-user"></i>
+            </button>
+            <span class="m-l-15 font-weight-400">CUSTOMERS</span>
+            <div class="content-text text-xs-center m-b-0">
+              <i class="text-danger icon wb-triangle-up font-size-20">
+              </i>
+              <span class="font-size-40 font-weight-100">4,367</span>
+              <p class="blue-grey-400 font-weight-100 m-0">+25% From previous month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End First Row -->
+
+      <div class="col-xl-12 col-md-12 col-xs-12 info-panel">
+        <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <i class="icon wb-tag" aria-hidden="true"></i> 12 products have errors that need your attention.
+          <p class="m-t-15">
+            <button class="btn btn-danger btn-inverse" type="button">View Products</button>
+            <!--<button class="btn btn-link blue-grey-500" type="button">Or this</button>-->
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xl-12 col-md-12 col-xs-12 info-panel">
+        <div class="alert dark alert-icon alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <i class="icon wb-order" aria-hidden="true"></i> 31 Orders need to be shipped!
+          <p class="m-t-15">
+            <button class="btn btn-danger btn-inverse" type="button">View Orders</button>
+            <!--<button class="btn btn-link blue-grey-500" type="button">Or this</button>-->
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xs-12 info-panel">
+        <div class="card card-shadow">
+          <div class="card-block bg-white p-20">
+            <h4>Suggested Next Steps</h4>
+            <div class="row">
+
+              <div class="form-group col-sm-12">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="checkbox-custom checkbox-default">
+                      <input type="checkbox" id="inputAgree" name="inputAgree" autocomplete="off" disabled>
+                      <label for="inputCheckboxAgree">Sign Contract</label>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3 col-xs-6">
+                    <div class="checkbox-custom checkbox-default pull-left" style="display:inline;">
+                      <input type="checkbox" id="inputAgree" name="inputAgree" autocomplete="off">
+                      <label for="inputCheckboxAgree">Create Shopify Store</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <button type="button" class="btn btn-outline btn-default">Create Store</button>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3  col-xs-6">
+                    <div class="checkbox-custom checkbox-default pull-left" style="display:inline;">
+                      <input type="checkbox" id="inputAgree4" name="inputAgree4" autocomplete="off">
+                      <label for="inputCheckboxAgree">Connect Shopify Store</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <button type="button" class="btn btn-outline btn-default">Connect Store</button>
+                  </div>
+                </div>
+                <hr>
+                <%# puts "#{Spree::ProductListing.count}".blue %>
+                <% added_product = Spree::ProductListing.count > 0 ? true : false %>
+                <% if !added_product %>
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="checkbox-custom checkbox-default pull-left" style="display:inline;">
+
+                      <input type="checkbox" id="inputAgree" name="inputAgree" autocomplete="off" disabled>
+                      <label for="inputCheckboxAgree">Add your first product</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <button type="button" class="btn btn-outline btn-default">Add Products</button>
+                  </div>
+                </div>
+                  <% end %>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="checkbox-custom checkbox-default pull-left" style="display:inline;">
+                      <input type="checkbox" id="inputAgree" name="inputAgree" autocomplete="off">
+                      <label for="inputCheckboxAgree">Earn your first sale</label>
+                    </div>
+                  </div>
+
+                </div>
+                <hr>
+              </div>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <%#= render "dashboard/shared/chart" %>
+
+    </div>
+  </div>
+</div>
+<% if params[:modal] == 'show' %>
+<div class="modal fade in" id="buildProducts" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" style="text-align: center">Build Your Business with MXED</h4>
+      </div>
+      <div class="modal-body">
+        <div class="bordered" style="min-height: 20em;">
+        </div>
+        <div class="bordered" style="min-height: 2em;">
+          <div class="row">
+            <div class="col-md-1 col-lg-1 col-sm-1">
+              <i class="icon wb-play" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-9 col-lg-9 col-sm-9">
+              <div class="progress progress-xs" style="margin-top: 0.7em;"">
+                <div class="progress-bar progress-bar-success" style="width: 30%;" role="progressbar">
+                  <span class="sr-only">30% Complete</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-2 ">
+              <i class="icon wb-volume-high" aria-hidden="true"></i>
+              <i class="icon wb-fullscreen" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: center">
+        <button type="button" class="btn btn-primary">Find Your First Products</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<!-- End Page -->
+<%= render "shared/platform/footer" %>
+
+<!--<script src="../../assets/examples/js/dashboard/ecommerce.js"></script>-->
+</body>

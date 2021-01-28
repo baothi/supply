@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ASNs>
+  <ASN>
+    <Shipment>
+      <SenderID>129499991263</SenderID>
+      <SenderName>129499991263</SenderName>
+      <TransactionSetPurposeCode>00</TransactionSetPurposeCode>
+      <ASNNumber>776297P1</ASNNumber>
+      <ASNDate>07/28/2017</ASNDate>
+      <ASNTime>13:57</ASNTime>
+      <ASNStructureCode>0001</ASNStructureCode>
+      <ShippedDate>07/28/2017</ShippedDate>
+      <EstimatedDeliveryDate>08/02/2017</EstimatedDeliveryDate>
+      <ShipmentPackagingCode>CTN</ShipmentPackagingCode>
+      <ShipmentQuantity>1</ShipmentQuantity>
+      <ShipmentWeightQualifier>G</ShipmentWeightQualifier>
+      <ShipmentWeight>0.25</ShipmentWeight>
+      <ShipmentWeightUOM>LB</ShipmentWeightUOM>
+      <SCACCode>USPS</SCACCode>
+      <CarrierName>US POSTAL SERVICE</CarrierName>
+      <ShipToName>BOB JONES</ShipToName>
+      <ShipToCodeType>92</ShipToCodeType>
+      <ShipToCode>98765</ShipToCode>
+      <ShipToAddress1>1234 MAIN ST</ShipToAddress1>
+      <ShipToCity>HOUSTON</ShipToCity>
+      <ShipToState>TX</ShipToState>
+      <ShipToZipCode>77035</ShipToZipCode>
+      <ShipFromName>VOLCOM LLC</ShipFromName>
+      <ShipFromAddress1>1740 MONROVIA AVE.</ShipFromAddress1>
+      <ShipFromCity>COSTA MESA</ShipFromCity>
+      <ShipFromState>CA</ShipFromState>
+      <ShipFromZipCode>92627</ShipFromZipCode>
+      <InternalVendorNumber>54321</InternalVendorNumber>
+      <CustomerOrderNumber>900087</CustomerOrderNumber>
+      <Order>
+        <PONumber>D00004569987</PONumber>
+        <PODate>07/20/2017</PODate>
+        <Package>
+          <CartonIDQualifier>CP</CartonIDQualifier>
+          <CartonID>9405510200881471361182</CartonID>
+          <Item>
+            <POLineNumber>001</POLineNumber>
+            <UPCQualifier>UP</UPCQualifier>
+            <UPCCode>889623575283</UPCCode>
+            <VendorItemQualifier>VN</VendorItemQualifier>
+            <VendorItemCode>A0111700</VendorItemCode>
+            <BuyerItemQualifier>SK</BuyerItemQualifier>
+            <BuyerItemCode>HT-11111111-111111</BuyerItemCode>
+            <ShippedQuantity>2</ShippedQuantity>
+            <ShippedUnitOfMeasure>EA</ShippedUnitOfMeasure>
+            <OrderedQuantity>5</OrderedQuantity>
+            <OrderedUnitOfMeasure>EA</OrderedUnitOfMeasure>
+          </Item>
+        </Package>
+        <Package>
+          <CartonIDQualifier>CP</CartonIDQualifier>
+          <CartonID>9405510200881471361182</CartonID>
+          <Item>
+            <POLineNumber>001</POLineNumber>
+            <UPCQualifier>UP</UPCQualifier>
+            <UPCCode>889623575284</UPCCode>
+            <VendorItemQualifier>VN</VendorItemQualifier>
+            <VendorItemCode>A0111700</VendorItemCode>
+            <BuyerItemQualifier>SK</BuyerItemQualifier>
+            <BuyerItemCode>HT-11111111-111111</BuyerItemCode>
+            <ShippedQuantity>3</ShippedQuantity>
+            <ShippedUnitOfMeasure>EA</ShippedUnitOfMeasure>
+            <OrderedQuantity>5</OrderedQuantity>
+            <OrderedUnitOfMeasure>EA</OrderedUnitOfMeasure>
+          </Item>
+        </Package>
+      </Order>
+    </Shipment>
+  </ASN>
+</ASNs>

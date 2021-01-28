@@ -1,0 +1,35 @@
+<div class="table-responsive">
+  <table class="table table-hover orders-table" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+      <tr>
+        <th class="orders-header">Supplier Order #</th>
+        <th class="orders-header">Retailer Order #</th>
+        <th class="orders-header">Order Date</th>
+        <th class="orders-header">Retailer</th>
+        <th class="orders-header">Fulfillment Status</th>
+        <th class="orders-header">Days to Ship</th>
+        <th class="orders-header">Total</th>
+        <th class="orders-header"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @orders.empty? %>
+        <td colspan="8">No Orders Found</td>
+      <% else %>
+        <% @orders.each do |order| %>
+            <tr class="order-select-tr">
+              <td><%= link_to supplier_order_details_path(id: order.internal_identifier) do %><%= order.supplier_order_number || order.number %><% end %></td>
+              <td><%= order.retailer_shopify_name || order.number %></td>
+              <td><span><%= order.sent_to_supplier_at&.strftime('%m/%d/%Y %H:%M') %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+              <td><%= order.retailer.name  %></td>
+              <td>
+                <span class="tag <%= shipping_status_tag_class(order.shipment_state) %>"><%= translate_to_shopify_shipping_status(order.shipment_state)  %></span>
+              </td>
+              <td><%= days_to_ship(order.days_to_ship.to_i) %></td>
+              <td><%= number_to_currency order.grand_total %></td>
+            </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

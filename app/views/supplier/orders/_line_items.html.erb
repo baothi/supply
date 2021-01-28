@@ -1,0 +1,129 @@
+<table class="table table-hover text-xs-right">
+  <thead>
+  <tr>
+    <th class="text-xs-center">#</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th class="text-xs-right">Quantity</th>
+    <th class="text-xs-right">Price</th>
+    <th class="text-xs-right">Shipping</th>
+    <th class="text-xs-right">Total</th>
+    <% if @order.safe_to_modify?&& admin_user?  %><th class="text-xs-right"></th><% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% @order.line_items.each_with_index do |line_item, i| %>
+    <tr>
+      <td class="text-xs-center">
+        <%= i + 1 %>
+      </td>
+      <td class="text-xs-left">
+        <% image = line_item.variant.listing_image %>
+        <% if image %>
+        <%= image_tag line_item.variant.listing_image,  class:'media-object', alt:'...' %>
+        <% end %>
+      </td>
+      <td class="text-xs-left <%= 'strike-through' if line_item.cancelled? %>">
+      <% option_values = line_item.variant.option_values.map(&:name) %>
+      <% variant =  line_item.variant  %>
+      <%= variant.name %><br>
+        SKU: <%= variant.platform_supplier_sku %><br>
+        Internal ID: <%= variant.internal_identifier %><br>
+        Option 1: <%= option_values[0] %><br>
+        Option 2: <%= option_values[1] %><br>
+        Option 3: <%= option_values[2] %><br>
+        <% if line_item.refunded_total_at.present? %>
+          <span class="tag tag-success">Refunded</span>&nbsp;
+        <% end %>
+        <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+        <% if variant.discontinued? %>
+        <span class="tag tag-warning">Discontinued on: <%= variant.discontinue_on %></span><br>
+        <span class="tag tag-warning">Has Counterpart: <%= variant.return_non_discontinued_counterpart.present? %></span>
+        <% end %>
+
+        <% if !variant.has_cost? %>
+          <span class="tag tag-red">Missing cost</span>
+        <% end %>
+        <a href='#' data-target="#line-item-<%=line_item.internal_identifier %>" data-toggle="modal">View Debug Info</a>
+      <% end %>
+      </td>
+      <td style="text-align: left;">
+        <% if inventory_unit = line_item.inventory_units[0] %>
+          <% shipment = inventory_unit.shipment %>
+          <span class="tag <%= shipping_status_tag_class(line_item.shipment_state) %>"><%= translate_to_shopify_shipping_status(shipment.state)  %></span>
+        <% end %>
+      </td>
+      <td class="<%= 'strike-through' if line_item.cancelled? %>">
+        <%= line_item.quantity %>
+      </td>
+      <td class="<%= 'strike-through' if line_item.cancelled? %>">
+        <%= number_to_currency line_item.cost_from_master %>
+      </td>
+      <td class="<%= 'strike-through' if line_item.cancelled? %>">
+        <%= number_to_currency (line_item.line_item_shipping_cost) %>
+      </td>
+      <td class="<%= 'strike-through' if line_item.cancelled? %>">
+        <%= number_to_currency (line_item.line_item_cost) %>
+      </td>
+      <td>
+        <!--<button type="button" id="remove-<%#= line_item.internal_identifier %>" class="btn btn-floating btn-danger btn-xs" data-sku="<%#= variant.platform_supplier_sku %>" data-id="<%#= line_item.internal_identifier %>" data-target="#removeLineitem" data-toggle="modal"><i class="icon wb-trash" aria-hidden="true"></i></button>-->
+        <% if !line_item.fully_refunded? && @order.paid? %>
+        <button type="button" id="refund-<%= line_item.internal_identifier %>" class="btn btn-floating btn-success btn-xs" data-sku="<%= variant.platform_supplier_sku %>" data-id="<%= line_item.internal_identifier %>" data-target="#refundLineItem" data-toggle="modal" data-baselink="/supplier/orders/refund-line-item"><i class="icon fa-gift" aria-hidden="true"></i></button>
+        <% end %>
+        <% unless line_item.shipped? || line_item.cancelled?  %>
+        <button type="button" id="cancel-<%= line_item.internal_identifier %>" class="btn btn-floating btn-danger btn-xs" data-sku="<%= variant.platform_supplier_sku %>" data-id="<%= line_item.internal_identifier %>" data-target="#cancelLineItem" data-toggle="modal" data-baselink="/supplier/orders/cancel-line-item"><i class="icon fa-exclamation-triangle" aria-hidden="true"></i></button>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade modal-success" id="refundLineItem" aria-hidden="true" aria-labelledby="refundLineItem" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-top">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="exampleModalTitle">Refund line item for variant sku: <span class="confirm-line-item-sku"></span></h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to refund this item for this order? This action CANNOT be reversed</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= link_to '#', id: 'refund-line-item-link' do %>
+            <button type="button" class="btn btn-success">Refund</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade modal-danger" id="cancelLineItem" aria-hidden="true" aria-labelledby="cancelLineItem" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-top">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="exampleModalTitle">Cancel Line Item for variant sku: <span class="confirm-line-item-sku"></span></h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to cancel this item for this order? This action CANNOT be reversed…</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <%= link_to  '#', id: 'cancel-line-item-link' do %>
+            <button type="button" class="btn btn-danger">Yes, Please cancel line item</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

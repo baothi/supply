@@ -1,0 +1,95 @@
+<% content_for :title, "Retailer Onboarding" %>
+<% content_for :main_menu, Hingeto::Section::ONBOARDING %>
+
+<body class="animsition ecommerce_dashboard">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%#= render "retailer/onboarding/side_menu" %>
+
+<!-- Page -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="page-title font-size-26 font-weight-100"><strong>Welcome!</strong></h1>
+  </div>
+
+  <div class="page-content container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <%= render :partial=>"shared/alerts" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card card-inverse bg-warning">
+        <div class="card-block">
+          <h4 class="card-title">Let's get you setup! You will not be charged until these steps are completed.</h4>
+          <p class="card-text">You are moments away from offering your products to our marketplace + special retailers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="progress progress-xs">-->
+      <!--<div class="progress-bar gold-progress" style="width: 75%;" role="progressbar">-->
+        <!--<span class="sr-only">75% Complete</span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+      <%= render 'supplier/onboarding/blocks/verify_email' %>
+      <%#= render 'supplier/onboarding/blocks/install_app', locals: {current_spree_user: current_spree_user} %>
+      <%= render 'supplier/onboarding/blocks/appointment', locals: {current_spree_user: current_spree_user} %>
+      <div class="col-xl-3 col-md-3 col-xs-6 info-panel">
+
+
+        <div class="card card-shadow">
+          <div class="ribbon ribbon-badge ribbon-reverse">
+            <span class="ribbon-inner" style="font-size:11px;">Post-Onboard</span>
+          </div>
+          <div class="card-block bg-white p-20">
+            <!--<span class="m-l-15 font-weight-400">PRODUCTS</span>-->
+            <div class="content-text text-xs-center m-b-0">
+              <span class="font-size-60 font-weight-100"><i class="fa fa-building"></i></span>
+              <p class="blue-grey-400 font-weight-100 m-0">Import your products</p>
+
+              <div style="margin-top:20px">
+                <button type="button" class="btn btn-block btn-primary" disabled><i class="fa fa-lock"></i> Begin Importing</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+
+<% content_for :custom_footer_javascript do %>
+<script>
+  function isCalendlyEvent(e) {
+    return e.data.event &&
+        e.data.event.indexOf('calendly') === 0;
+  };
+
+  window.addEventListener(
+      'message',
+      function(e) {
+        if (isCalendlyEvent(e)) {
+          if (e.data.event == 'calendly.event_scheduled') {
+            $.ajax({
+              type: "post",
+              url: '<%= mark_appointment_as_scheduled_path %>'
+            });
+            // Add mini delay
+            setTimeout(function(){ window.location.reload(false); }, 2000);
+          }
+
+
+        }
+      }
+  );
+</script>
+<% end %>
+</body>

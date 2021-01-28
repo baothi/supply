@@ -1,0 +1,55 @@
+<% if @products.present? && @products.count > 0 %>
+<div class="media-list is-grid p-b-50" data-plugin="animateList" data-animate="fade"
+data-child="li">
+  <ul class="blocks blocks-100 blocks-xxl-4 blocks-xl-3 blocks-lg-3 blocks-md-2 blocks-sm-2"
+  data-plugin="animateList" data-child=">li">
+    <% @products.each do |product| %>
+      <li style="margin-top: 3em;" class="favorite-display" id="<%=product.internal_identifier%>">
+        <figure class="overlay overlay-hover animation-hover">
+          <div class="media-item" data-toggle="slidePanel" data-url="panel.tpl">
+            <div class="image-wrap">
+               <div class="grid-listing-img" style="background-image:url(<%=  product.master.listing_image %>)"></div>
+            </div>
+            <div class="info-wrap">
+              <div class="title product-title"><%= product.name  %></div>
+              <!--<div class="time product-title">$ <%#= product.name %></div>-->
+            </div>
+          </div>
+          <figcaption class="overlay-panel overlay-background overlay-fade text-center">
+            <% if product.retailer_favorite?(current_retailer) %>
+              <%= link_to retailer_remove_favorite_path(product.internal_identifier), remote: true do %>
+              <button type="button" class="btn btn-inverse product-button">Remove From Favorites</button>
+              <% end %>
+            <% else %>
+             <%= link_to retailer_add_to_favorites_path(product.internal_identifier), remote: true do %>
+                <button type="button" class="btn btn-inverse product-button">Add To Favorites</button>
+              <% end %>
+
+            <% end %>
+            <% if product.live?(current_retailer.id) %>
+                <%= link_to shopify_url(product), target: :blank do %><button type="button" class="btn btn-inverse product-button">Open in Shopify</button> <% end %>
+            <% else %>
+              <% if product.can_be_added_to_store? %>
+                <% if product.export_in_progress?(current_retailer) %>
+                  <button type="button" class="btn btn-inverse disabled" style="color: #76838f" disabled>Export In Progress</button>
+                <% else %>
+                  <%= link_to retailer_add_to_shopify_path(product.internal_identifier) do %>
+                    <button type="button" class="btn btn-inverse product-button">Add To Shopify</button>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+              <%= link_to retailer_product_details_path(product.internal_identifier) do %><button type="button" class="btn btn-inverse product-button">View Details</button><% end %>
+          </figcaption>
+        </figure>
+      </li>
+    <% end %>
+
+  </ul>
+</div>
+<% else %>
+    <div>
+      <p>No Products Found</p>
+    </div>
+<% end %>
+

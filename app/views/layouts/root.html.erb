@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TeamUp | Expand Your Product Assortment</title>
+  <%= stylesheet_link_tag    'home', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'home', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%= favicon_link_tag asset_path('teamup-square-24px.png') %>
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <style>
+    /*Dimensions set via css in MovingBoxes version 2.2.2+ */
+    #slider { width: 90%; }
+    #slider li { width: 300px; }
+  </style>
+
+  <%#= render 'layouts/shared/segment' %>
+
+  <script>
+      function __initSlider() {
+
+          var x = $(window).width();
+          var width = $('.js_slide').width();
+          if( x >=991){
+              $('#slider').movingBoxes({
+                  /* width and panelWidth options deprecated, but still work to keep the plugin backwards compatible*/
+                  width: $(window).width(),
+                  reducedSize  : 1,
+                  panelWidth: 0.5,
+                  initAnimation: false,
+                  startPanel : 1, // start with this panel
+                  wrap : true, // if true, the panel will infinitely loop
+                  buildNav : false, // if true, navigation links will be added
+                  navFormatter : null, // function which returns the navigation text for each panel
+                  autoplay: true,
+                  loop: true,
+              });
+          }
+          else
+          {
+              $('#slider').movingBoxes({
+                  /* width and panelWidth options deprecated, but still work to keep the plugin backwards compatible*/
+
+                  width: $(window).width() - 30,
+                  panelWidth: 1,
+                  reducedSize  : 1,
+                  initAnimation: false,
+                  startPanel : 1, // start with this panel
+                  wrap : true, // if true, the panel will infinitely loop
+                  buildNav : false, // if true, navigation links will be added
+                  navFormatter : null, // function which returns the navigation text for each panel
+                  autoplay: true,
+                  loop: true,
+              });
+          }
+      }
+      $(document).ready(function() {
+          var sliderHTML = jQuery('#slider').parent().html();
+          __initSlider();
+
+          $(window).on('resize', function() {
+              jQuery('#slider').parent().parent().parent().html(sliderHTML);
+              __initSlider();
+          });
+          $('mb-slider').css({"position": "relative !important", "padding-left": "33% !important"});
+
+      });
+
+  </script>
+
+</head>
+
+<body>
+
+<%= yield %>
+
+</body>
+</html>

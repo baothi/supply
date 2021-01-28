@@ -1,0 +1,63 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_LICENSE %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-license-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Official Licenses</h1>
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    </div>
+    <%#= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <% unless @featured_banners.nil? || @featured_banners.count.zero? %>
+        <div class="license-top-banner">
+          <%= render 'retailer/products/shared/featured_carousel', featured_banners: @featured_banners %>
+        </div>
+        <% end %>
+        <div class="panel-body">
+          <% @license_grouping.in_groups_of(3) do |license_sub_grouping| %>
+              <div class="row">
+          <% license_sub_grouping.each do |grouping| %>
+              <% next if grouping.nil? %>
+              <% next if grouping.taxons.empty? || grouping.taxons.has_outer_banner.empty? %>
+              <% first_license = grouping.taxons.has_outer_banner.first %>
+              <div class="col-md-4">
+                <div class="card">
+                  <%= link_to retailer_list_license_by_group_path(slug: grouping.slug) do %>
+                  <%= image_tag(first_license.outer_banner, class: 'card-img-top w-full', alt: "#{first_license.name}", ) %>
+                  <% end %>
+                  <div class="card-block">
+                    <h4 class="card-title"><%= grouping.name %></h4>
+                    <!--<p class="card-text">Excepteur sint occaecat cupidatat non laborum.</p>-->
+                    <!--<p class="card-text hidden-md-down">Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+                      <!--cillum dolore eu fugiat nulla pariatur.</p>-->
+                    <p class="card-text">
+                      <small class="text-muted"><%= grouping.taxons_for(current_retailer).count %> licenses</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+                </div>
+          <% end %>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

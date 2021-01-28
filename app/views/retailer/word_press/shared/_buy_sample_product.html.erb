@@ -1,0 +1,90 @@
+  <% address = current_retailer.shipping_address || current_retailer.build_shipping_address %>
+      <button class="btn btn-warning" data-target="#selectVariantSampleProduct" data-toggle="modal" type="button" style="width: 100%">Buy Sample Product</button>
+      <p class="small">You may order 3 samples per month without paying for shipping. <br>You have used <%= @retailer.num_free_shipping_samples_used %> free shipping offer(s) so far this month.</p>
+      <!-- Modal -->
+      <div class="modal fade" id="selectVariantSampleProduct" aria-hidden="false" aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="exampleFormModalLabel">Buy 1 x <%= @product.name %></h4>
+
+            </div>
+            <div class="modal-body">
+            <h6 class="error-msg" style="color: red"></h6>
+            <%= form_tag(retailer_buy_sample_product_path, method: :get, remote: true) do %>
+                  <% if @product.variants.count == 1 %>
+                      <%= hidden_field_tag :variant_id, @product.variants.first.internal_identifier %>
+                  <% else %>
+                      <div class="row">
+                        <div class="col-lg-6 form-group">
+                          <%= select_tag :variant_id, options_for_select( @product.variants.collect{ |v| ["#{v.presentation} - #{number_to_currency(v.cost_price)}", v.internal_identifier] }), { class: 'form-control', :prompt => 'Select Variant', required: 'required'} %>
+                        </div>
+                      </div>
+                  <% end %>
+
+              <div class="row">
+                <div class="col-lg-12 form-group">
+                <h5>Enter Shipping Address</h5>
+                  <div class="row">
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">First Name</label>
+                      <%= text_field_tag "address_fields[first_name]", current_spree_user.first_name, class:"form-control", required: true,
+                                       :placeholder => "Enter your first name" %>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">Last Name</label>
+                      <%= text_field_tag "address_fields[last_name]", current_spree_user.last_name, class:"form-control", required: true,
+                                       :placeholder => "Enter your last name" %>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">Street Address</label>
+                      <%= text_field_tag "address_fields[address1]", address&.address1, class:"form-control", required: true,
+                                       :placeholder => "Enter your shipping street address" %>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">Address 2</label>
+                      <%= text_field_tag "address_fields[address2]", address&.address2, class:"form-control",
+                                       :placeholder => "Continue your shipping street address" %>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">City</label>
+                      <%= text_field_tag "address_fields[city]", address&.city, class:"form-control", required: true, :placeholder => "Enter shipping city" %>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">State</label>
+                      <%= text_field_tag "address_fields[name_of_state]", address&.name_of_state, class:"form-control",
+                                       :placeholder => "Enter your shipping state" %>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicPostalCode">Postal Code</label>
+                      <%= text_field_tag "address_fields[zipcode]", address&.zipcode, class:"form-control", required: true,
+                                       :placeholder => "Enter your shipping postal code" %>
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label class="control-label" for="inputBasicFirstName">Country</label>
+                      <%= text_field_tag "address_fields[country]", address&.country, class:"form-control", autocomplete: "off",disabled: true,
+                                       :placeholder => "", :value => "US", :readonly=>true %>
+                      <p class="help-block">Only the US is currently permitted.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 pull-right">
+                  <%= submit_tag 'Buy Sample', class:"btn btn-primary btn-outline" %>
+                </div>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End Modal -->
+
+  <!-- End Example Form Modal -->
+

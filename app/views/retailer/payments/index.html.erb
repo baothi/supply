@@ -1,0 +1,98 @@
+<% content_for :title, "Payments" %>
+<% content_for :main_menu, Hingeto::Section::PAYMENTS %>
+<% content_for :inner_menu, Hingeto::Section::PAYMENTS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+<!--       <h4 class="page-title">Product Details - Live Products</h4> -->
+    </div>
+    <div class="page-content">
+      <div class='alert-div' >
+        <%= render :partial=>"shared/alerts" %>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel">
+                <div class="panel-heading vendor-payments"><h4 class="panel-title">Credit Card Management</h4></div>
+                <div class="panel-body">
+                  <div class="row product-details margin-bottom">
+                    <div class="col-md-12">
+                      <div>
+                        <div class="row with-margin-top">
+                          <div class="col-md-2">
+                            <div class="margin-bottom" style="line-height: 4em"><span><i class="site-menu-icon wb-plus" aria-hidden="true" style="font-size: 4em"></i></span></div>
+                          </div>
+                          <div class="col-md-10">
+                            <div><h4>Add Payment Information</h4></div>
+                            <div>You will be paying for orders with this card</div>
+                            <div class="clearfix amrgin-bottom"></div>
+                            <div class='row'>
+                              <div class="with-margin-top col-md-6">
+                                <a href="#" data-toggle="modal" data-target="#addCreditCard"><button type="button" class="btn btn-block btn-success">Add credit Card</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row crediit-cards">
+            <div class="col-md-12">
+              <div class="panel">
+                <div class="panel-heading vendor-payments"><h4 class="panel-title">Credit Cards</h4></div>
+                <div class="panel-body">
+                  <div class="row product-details margin-bottom payment-cards">
+                  <%= render partial: "cards", locals: {payment_cards:  @payment_cards} %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade in" id="addCreditCard" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 style="text-align: center"> Add a Payment Card</h4>
+      </div>
+      <div class="modal-body">
+        <%= render "retailer/orders/shared/spinner" %>
+        <%= render partial: 'shared/credit_card', locals:{ path: new_card_retailer_payments_path, remote: true } %>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>
+
+<%= render "layouts/shared/stripe_tags" %>
+

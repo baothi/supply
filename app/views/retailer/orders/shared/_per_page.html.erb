@@ -1,0 +1,8 @@
+<%= form_tag form_path, id: 'set-per-page', enforce_utf8: false, method: :get do %>
+   <span>Results per page &nbsp;</span>
+   <label>
+    <%= hidden_field_tag :q, params[:q] %>
+    <%= hidden_field_tag :status, params[:status] %>
+    <%= select_tag :per_page, options_for_select(Spree::Order::PAGE_QUANTITY_OPTIONS, selected: @per_page), class: "form-control form-control-md" %>
+  </label>
+<% end %>

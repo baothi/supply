@@ -1,0 +1,38 @@
+<div class="page-content">
+  <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+    <div class="panel-body">
+      <% if shopify_order.present? %>
+        <h5>Select Variants</h5>
+        <%= form_tag(retailer_orders_manual_import_path, method: :post, remote: true) do %>        
+        <%= hidden_field_tag :shopify_order_number, shopify_order.name %>
+          <% line_items.each do |item| %>
+            <div class="row" style="margin-bottom: 2em">
+              <div class="col-md-6">
+                <%= item.name %>
+              </div>
+              <% variant_options = variants_from_barcode(item.sku, item.variant_id, retailer, Spree::Supplier.first) %>
+               <div class="col-md-6">
+                    <%= select_tag item.id, options_for_select(variant_options .collect{ |v| ["[Supplier - #{v.supplier&.name}] #{v.full_presentation}", v.internal_identifier] }), { id: item.id, class: 'form-control manual-import-variant-id', :prompt => variant_options.empty? ? 'No Variants found' : 'Select Variant'} %>
+                  <% if variant_options.empty? %>
+                  <h6 id="ppp">Could not auto-detect variant, 
+                  <% end %>
+                  
+                <a href="#" class="open-variant-pairing-modal" style="font-size: 0.858rem;" data-target="#manualVariantFinder" data-toggle="modal" data-line-item-name="<%= item.name %>" data-line-item-id="<%= item.id %>" > Select Manually?</a></h6>
+                
+              </div>
+           <!--    <div class="col-md-2">
+                
+              </div> -->
+            </div>
+          <% end %>
+          <%= button_tag(type: "submit", class: "btn btn-default btn-outline", :name => nil) do %>
+                 <i class="icon wb-download" aria-hidden="true"></i> Import Order
+              <% end %>
+        <% end %>
+      <% else %>
+        <h5> Shopify order was not found </h5>
+      <% end %>    
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,10 @@
+Hello,
+
+The following order was partially cancelled by the supplier.  Please refund your customers.
+
+Order Number | Order Items
+
+<% @line_items.each do |line_item| %>
+<%= @order.retailer_shopify_name %> | <%= line_item.variant.name %>
+<% end %>
+<%= retailer_orders_url %>

@@ -1,0 +1,93 @@
+<div class="modal fade" id="addTracking" aria-hidden="true" aria-labelledby="addTracking"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Add Tracking</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@order, url: supplier_fulfill_line_item_path(@order.internal_identifier)) do |f| %>
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="form-group">
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label class="sr-only" for="inputName">Tracking Number</label>
+                <input type="text" class="form-control" id="website" name="tracking_number" required placeholder="Enter Tracking Number">
+              </div>
+            </div>
+
+            <!--- Fulfillment Table -->
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <div class="table-responsive">
+                  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+                    <thead class="bg-blue-grey-100">
+                    <tr>
+                      <th></th>
+                      <th>Main Image</th>
+                      <th>Title</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <% @order.line_items.each do |line_item| %>
+                      <% product = line_item.variant.product %>
+                      <% variant = line_item.variant %>
+                      <% inventory_unit = line_item.inventory_units[0] %>
+                      <% shipment = inventory_unit.shipment %>
+                      <% next if shipment.state=='shipped' ||  shipment.state=='canceled' %>
+
+                      <tr>
+                        <td>
+                          <span class="checkbox-primary">
+                            <%= check_box_tag "line_items[]", line_item.internal_identifier, false, class: "product-select", id: "line_item_#{line_item.internal_identifier}" %><label></label>
+                          </span>
+                        </td>
+                        <td class="text-xs-left">
+                          <% if variant.present? && variant.listing_image %>
+                              <%= image_tag variant.listing_image,  class:'media-object', alt:'...' %>
+                          <% else %>
+                              <%= image_tag 'placeholder.png',  class:'media-object', alt:'...' %>
+                          <% end %>
+                        </td>
+                        <td class="text-xs-left">
+                          <%= product.name %><br>
+                          Vendor SKU: <%= variant.original_supplier_sku %><br>
+                          Order Item #: <%= line_item.line_item_number %><br>
+                          Purchase Order #: <%= line_item.purchase_order_number %><br>
+                        </td>
+                        <td>
+                          <%=  line_item.quantity %>
+                        </td>
+                        <td>
+                          <%=  number_to_currency(line_item.line_item_cost_without_shipping) %>
+                        </td>
+
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Tracking</button>
+          <br>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

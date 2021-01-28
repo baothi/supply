@@ -1,0 +1,56 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::IN_PROGRESS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+      <br/>
+    </div>
+
+    <div class="page-content">
+
+      <%= render :partial=>"shared/spaced_alerts" %>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">In Progress</h3>
+        </div>
+        <div class="panel-body">
+          <%= render partial: "retailer/products/shared/in_progress_list",
+                     locals: { div_id: 'in_progress_list', in_progress_products: @export_in_progress_products} %>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Issues</h3>
+        </div>
+        <div class="panel-body">
+          <p>The following exports have taken more than 15 minutes to transfer, which likely means there was an error with the transfer.</p>
+          <p>You will need to follow these steps</p>
+          <ol>
+            <li>Mouse over the product below and click "Cancel Export"</li>
+            <li>Find the Product in Shopify and delete it, if it exists.</li>
+            <li>Come back to TeamUp and re-add the product.</li>
+          </ol>
+          <p>If this fails again, please contact teamup-support@dicentral.com.</p>
+          <%= render partial: "retailer/products/shared/in_progress_list",
+                     locals: { div_id: 'error_list', in_progress_products: @export_error_products} %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

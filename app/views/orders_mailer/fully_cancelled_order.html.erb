@@ -1,0 +1,55 @@
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <p>Hello,</p>
+      <p>Unfortunately, the following order was canceled by the supplier. Please refund your customers.</p>
+      <p>If you paid via credit card, please expect a follow up email with refund details shortly after this email.</p>
+
+      <table border="1" cellspacing="0" cellpadding="5" width="100%">
+        <thead>
+          <tr>
+            <th>Order Number</th>
+            <th>Order Items</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.retailer_shopify_name, retailer_order_details_url(id: order.internal_identifier) %></td>
+              <td><%= order.variants.map(&:name).join(', ') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#4f4dfc; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= retailer_orders_url %>" target="_blank" style="color: #fff; text-decoration: none; font-weight: 600; display: block;">VIEW ORDERS</a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

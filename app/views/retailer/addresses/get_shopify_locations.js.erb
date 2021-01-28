@@ -1,0 +1,2 @@
+$('.locations-select-container').empty().append("<%= escape_javascript render(:partial => 'retailer/addresses/shopify_locations_form', locals: {locations: @locations}) %>");
+$("#locationSelectionModal").modal('show');

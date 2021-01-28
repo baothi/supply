@@ -1,0 +1,76 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_CUSTOM_COLLECTION %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    <div class='ajax-alert'>
+      <%= render :partial=>"shared/alerts" %>
+
+    </div>
+    <br/>
+    </div>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+          <div class="row license-info">
+            <div class='col-md-4 col-sm-6'>
+              <div class="license-banner">
+                <%= image_tag(taxon_or_banner_image(@collection, @banner), class: 'standard-width', alt: "#{@collection.name}") %>
+              </div>
+            </div>
+            <div class='col-md-1'>
+              &nbsp;
+            </div>
+            <div class=col-md-5>
+              <div class="row">
+                <div class=col-md-12>
+                  <div class=""><strong><%= @collection.name %></strong></div>
+                  <div><%=  @collection.description %></div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1em;">
+                <div class=col-md-4>
+                  <%#= button_to (current_retailer.following?(@collection) ? "UNFOLLOW" : "FOLLOW"), follow_unfollow_retailer_taxon_path(@collection.id), id: "follow-taxon-bottom", class: "btn btn-raised btn-block #{current_retailer.following?(@collection) ? 'btn-default' : 'btn-primary'}", remote: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class=col-md-3 id='inner-taxon-listing'>
+              <div><strong>
+                <%= link_to "All Products", retailer_list_products_by_custom_collection_path(@collection.name, banner: @banner.try(:internal_identifier)) %>
+              </strong></div>
+              <div class="with-margin-top" id="product-categories"></div>
+              <div class="with-margin-top" id="product-licenses"></div>
+            </div>
+            <div class=col-md-9>
+
+              <%= render "retailer/products/shared/list" %>
+              <%= paginate @products , theme: 'twitter-bootstrap-4' %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<%= render "shared/platform/footer" %>
+</body>

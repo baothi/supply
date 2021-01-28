@@ -1,0 +1,53 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::GLOBAL_MARGIN_RULES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Global Margin Rules</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <!-- <h3 class="panel-title">General</h3> -->
+        </div>
+        <div class="panel-body">
+          <div class="row with-large-top-bottom-margin">
+            <div class="col-md-3">
+              <br/>
+              <p></p>
+              All Products
+            </div>
+            <div class="col-md-3">
+              Example Product Cost<br/><p></p>
+              <input type="text" class="form-control" id="inputPlaceholder" placeholder="$20.00">
+            </div>
+            <div class="col-md-3">
+              Margin Markup<br/><p></p>
+              <input type="text" class="form-control" id="inputPlaceholder" placeholder="50%">
+            </div>
+            <div class="col-md-3">
+              Example Retail<br/><p></p>
+              <input type="text" class="form-control" id="inputPlaceholder" placeholder="$40.00">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

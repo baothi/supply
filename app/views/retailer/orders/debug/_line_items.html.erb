@@ -1,0 +1,85 @@
+<% line_items.each do |line_item| %>
+    <div class="modal fade in order-payment" id="line-item-<%=line_item.internal_identifier%>" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+      <%= render "retailer/orders/shared/spinner" %>
+      <div class="modal-dialog modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <% variant = line_item.variant %>
+
+            <h4 class="modal-title"><strong><%=variant.name %>(<%=variant.original_supplier_sku %>)</strong></h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <h5>Num Inventory Units</h5>
+                <%= text_field_tag 'inventory_units_count',
+                                   line_item.inventory_units.count,
+                                   class: "form-control", disabled: true %>
+                <p><small>This is a value for the tech team to understand the number of packages that were created for htis line item. The rule is that this number should equal this line item's quantity otherwise</small></p>
+              </div>
+              <div class="col-sm-12 col-xs-12">
+                <h5>Orders with this variant</h5>
+                <%= text_field_tag 'num_orders',
+                                   variant.orders.count,
+                                   class: "form-control", disabled: true %>
+                <p><small>The number of other orders with this variant</small></p>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Num In Stock</h5>
+                <%= text_field_tag 'available_quantity',
+                                   variant.available_quantity,
+                                   class: "form-control", disabled: true %>
+              </div>
+
+              <div class="col-sm-6 col-xs-6">
+                <h5>Variant ID</h5>
+                <%= text_field_tag 'variant_id',
+                                   variant.id,
+                                   class: "form-control", disabled: true %>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Variant Created At</h5>
+                <%= text_field_tag 'created_at',
+                                   variant.created_at,
+                                   class: "form-control", disabled: true %>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Variant Updated At</h5>
+                <%= text_field_tag 'updated_at',
+                                   variant.updated_at,
+                                   class: "form-control", disabled: true %>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Line Item Created At</h5>
+                <%= text_field_tag 'created_at',
+                                   line_item.created_at,
+                                   class: "form-control", disabled: true %>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Line Item Updated At</h5>
+                <%= text_field_tag 'updated_at',
+                                   line_item.updated_at,
+                                   class: "form-control", disabled: true %>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <h5>Tracking Numbers</h5>
+                <%= text_field_tag 'tracking_numbers',
+                                   line_item.tracking_numbers,
+                                   class: "form-control", disabled: true %>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a target="_blank" class="btn btn-success" href="<%= variant.shopify_link %>" role="button">Open in Shopify</a>
+            <a target="_blank" class="btn btn-primary" href="/active/admin/spree_products/<%=variant.product&.slug %>" role="button">Open Product in ActiveAdmin</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+

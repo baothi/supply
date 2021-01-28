@@ -1,0 +1,20 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Main</h5>
+          <div class="list-group">
+            <!--<a class="list-group-item <%#= check_if_active_css(yield(:inner_menu), Hingeto::Section::SUBSCRIPTION) %>" href="/retailer/invoices"><i class="icon fa fa-tasks" aria-hidden="true"></i>Subscription Invoices</a>-->
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::ORDER) %>" href="/retailer/invoices/orders"><i class="icon wb-order" aria-hidden="true"></i>Invoices</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

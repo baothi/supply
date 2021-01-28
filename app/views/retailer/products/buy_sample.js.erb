@@ -1,0 +1,12 @@
+<% if @order&.persisted? %>
+  $('#order-amount').text("$ " + "<%= @order.grand_total %>");
+  $('#order-number').text("<%= @order.number %>");
+  $('#order-date').text("<%= @order.completed_at %>");
+  $('#payment-form-order-id').val("<%= @order.number %>");
+  $('#payment-form-order-internal-id').val("<%= @order.internal_identifier %>");
+  $("#payWith").modal('show');
+  $('#selectVariantSampleProduct').modal('hide');
+  $('.error-msg').empty();
+<% else %>
+  $('.error-msg').empty().text('Product could not be purchased. Please ensure all fields are present & try again.')
+<% end %>

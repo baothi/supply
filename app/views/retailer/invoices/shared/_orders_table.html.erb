@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <!--<th><span class="checkbox-custom checkbox-primary"><input class="selectable-all" type="checkbox"> <label></label></span></th>-->
+      <th>Invoice #</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Order #</th>
+<!--       <th>Channel</th> -->
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @invoices.each_with_index do |invoice, i| %>
+        <% next if invoice.order.nil? %>
+        <%# new_status = (status == :all ? statuses[rand(6)] : status) %>
+        <tr>
+          <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+          <td><!-- <a href="/invoices/details"> -->#HNG-<%= invoice.number %><!-- </a> --></td>
+          <td><span><%= invoice.created_at.strftime('%Y-%m-%d') %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+          <td><span><%= number_to_currency invoice.amount %></span></td>
+          <td><span><%= link_to retailer_order_details_path(id: invoice.order.internal_identifier) do %><%= invoice.order.retailer_shopify_order_number %><% end %></span></td>
+<!--           <td>Hot Topic Dropship</td> -->
+          <td><%= invoice_status(invoice.status) %></td>
+        </tr>
+    <% end %>
+
+    <!--<tr>-->
+      <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+      <!--<td>-->
+        <!--<a href="javascript:void(0)">In Progress</a><i aria-hidden="true" class="icon wb-help-circle m-l-10 orange-600" data-container="body" data-original-title="help" data-toggle="tooltip" title=""></i>-->
+      <!--</td>-->
+      <!--<td>Lorem ipsum dolor sit amet</td>-->
+      <!--<td><i aria-hidden="true" class="icon wb-chat"><span class="m-l-5">18</span></i></td>-->
+      <!--<td><span>3 days ago</span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+</div>

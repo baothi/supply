@@ -1,0 +1,11 @@
+<% if @followed %>
+  toastr.success("You're now following <%= @taxon.name %>")
+  $('#follow-taxon-bottom').val("UNFOLLOW")
+  $('#follow-taxon-bottom').removeClass("btn-primary")
+  $('#follow-taxon-bottom').addClass("btn-default")
+<% else %>
+  toastr.success("You no longer follow <%= @taxon.name %>")
+  $('#follow-taxon-bottom').val("FOLLOW")
+  $('#follow-taxon-bottom').removeClass("btn-default")
+  $('#follow-taxon-bottom').addClass("btn-primary")
+<% end %>

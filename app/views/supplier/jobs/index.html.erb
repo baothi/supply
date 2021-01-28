@@ -1,0 +1,48 @@
+<% content_for :title, "Jobs" %>
+<% content_for :main_menu, Hingeto::Section::JOBS %>
+<% content_for :inner_menu, Hingeto::Section::OVERVIEW %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "supplier/jobs/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Overview</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+
+
+        <%= render "supplier/jobs/shared/job_type" %>
+
+
+        <div class="panel-body">
+          <% if @jobs.size.positive? %>
+              <%#= render "supplier/jobs/shared/filter" %>
+              <%= render partial: "supplier/jobs/shared/table", locals: {jobs: @jobs} %>
+          <% else %>
+              <div class="row">
+                <div class="col-lg-12">
+                  No jobs found yet.
+                </div>
+              </div>
+          <% end %>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

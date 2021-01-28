@@ -1,0 +1,13 @@
+Hello,
+
+The following order was fully refunded. You can expect the balance to show in your bank in 5-10 business days at most.
+
+Typically, it shows up in no more than 3 business days.
+
+Order Number | Grand Total | Order Items
+
+<% @orders.each do |order| %>
+<%= order.retailer_shopify_name %> | <%= order.grand_total %> | <%= order.variants.map(&:name).join(', ') %>
+<% end %>
+
+<%= retailer_orders_url %>

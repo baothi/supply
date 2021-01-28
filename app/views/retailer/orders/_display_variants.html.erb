@@ -1,0 +1,12 @@
+<div style="margin-top: 2em;">
+  <h4 class="modal-title">Select Variant</h4>
+  <div class="list-group product-variants-display">
+    <% if variants %>
+      <% variants.each do |v| %>
+        <a class="list-group-item  manual-variant-display-list" id="<%= v.internal_identifier %>"><%= v.full_presentation %></a>
+      <% end %>
+      <% else %>
+        No variant found
+    <% end %>
+  </div>
+</div>

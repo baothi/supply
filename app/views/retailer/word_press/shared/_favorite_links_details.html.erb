@@ -1,0 +1,13 @@
+<div>
+  <% if product.retailer_favorite?(current_retailer) %>
+    <%= link_to retailer_remove_favorite_path(product.internal_identifier), remote: true do %>
+      <button type="button" class="btn btn-primary listings_action-btn" style="width:100%" id="update-variant-btn">Remove From Favorites</button>
+    <% end %>
+  <% else %>
+    <%= link_to retailer_add_to_favorites_path(product.internal_identifier), remote: true do %>
+      <button type="button" class="btn btn-primary listings_action-btn" style="width:100%" id="update-variant-btn">Add To Favorites</button>
+    <% end %>
+  <% end %>
+  <small align="center" style="margin: 0 auto;">Add to favorites or remove from favorites.</small>
+</div>
+<br>

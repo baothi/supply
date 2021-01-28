@@ -1,0 +1,52 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::ORDERS %>
+<% content_for :inner_menu, Hingeto::Section::ORDER_DIAGNOSIS %>
+<%= javascript_include_tag 'channels/job_notifications.js' %>
+<%= javascript_include_tag 'cable.js' %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/orders/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">  
+    </div>
+    <div class="page-content">
+      <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+        <div class="panel-heading">
+          <h3 class="panel-title">Order Diagnosis</h3>
+        </div>
+        <div class="panel-body">
+          <%= render :partial=>"shared/alerts" %>
+          <p>To diagnose a specific order that doesn't already show in MXED, please enter the Shopify Order Number below (with the #. For example for #1052, enter #1052) </p>
+          <div class="row">
+            <div class="col-md-12">
+              <%= form_tag(retailer_orders_diagnose_path, method: :get, id: 'order-diagnosis-form', remote: true) do %>
+              <div class="form-group col-sm-6">
+                <%= text_field_tag :shopify_order_number, params[:order_name], class: "form-control", required: 'required', placeholder: "Enter Shopify order name with the # if applicable" %>
+                <small style="color:red;">This tool only works with orders not yet imported into MXED.</small>
+              </div>
+              <div class="form-group col-sm-2">
+                <%= button_tag(type: "submit", class: "btn btn-default btn-outline", id: 'diagnose-order', :name => nil) do %>
+                   <i class="icon fa fa-heartbeat" aria-hidden="true"></i> Diagnose
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>     
+        </div>
+      </div>
+    </div>
+    
+    <div id='order-diagnosis-report-div'>
+      
+    </div>
+  </div>
+</div>
+
+</body>
+
+

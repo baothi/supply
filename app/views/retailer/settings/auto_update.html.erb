@@ -1,0 +1,113 @@
+<% content_for :title, "Auto Update Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::SHOPIFY_SETTINGS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Auto Update Settings</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+          <div class="row with-large-top-bottom-margin">
+            <div class="col-md-12">
+              <span>Product is removed from being sellable</span>
+            </div>
+          </div>
+          <div class="row with-margin-top margin-bottom">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-block btn-default">No action</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Set Product not visible</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Set Quantity to Zero</button>
+            </div>
+          </div>
+          <div class="checkbox-custom checkbox-primary with-margin-top">
+            <input type="checkbox" id="inputUnchecked">
+            <label for="inputUnchecked">Email Me</label>
+          </div>
+          <hr>
+
+          <div class="row with-large-top-bottom-margin ">
+            <div class="col-md-12">
+              <span>Product Inventory is updated</span>
+            </div>
+          </div>
+          <div class="row with-margin-top margin-bottom">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-block btn-default">No action</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Update Automatically</button>
+            </div>
+          </div>
+          <div class="checkbox-custom checkbox-primary with-margin-top">
+            <input type="checkbox" id="inputUnchecked">
+            <label for="inputUnchecked">Email Me</label>
+          </div>
+          <hr>
+
+          <div class="row with-large-top-bottom-margin">
+            <div class="col-md-12">
+              <span>Product cost changes</span>
+            </div>
+          </div>
+          <div class="row with-margin-top margin-bottom">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-block btn-default">No action</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Update Automatically</button>
+            </div>
+          </div>
+          <div class="checkbox-custom checkbox-primary with-margin-top">
+            <input type="checkbox" id="inputUnchecked">
+            <label for="inputUnchecked">Email Me</label>
+          </div>
+          <hr>
+
+          <div class="row with-large-top-bottom-margin">
+            <div class="col-md-12">
+              <span>Product variant is removed</span>
+            </div>
+          </div>
+          <div class="row with-margin-top margin-bottom">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-block btn-default">No action</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Set Variant not visible</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-block btn-default">Set Quantity to Zero</button>
+            </div>
+          </div>
+          <div class="checkbox-custom checkbox-primary with-margin-top">
+            <input type="checkbox" id="inputUnchecked">
+            <label for="inputUnchecked">Email Me</label>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

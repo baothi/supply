@@ -1,0 +1,6 @@
+<p>
+  <h4 class="example-title">Select Collection</h4>
+  <div class="form-group">
+    <%= select_tag :collection_id, options_from_collection_for_select(collections, "id", "title"), class: 'form-control' %>
+  </div>
+</p>

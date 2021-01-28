@@ -1,0 +1,371 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::PRODUCTS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <div class="page-main">
+    <div class="page-header">
+      <% if params[:action] == "show" %>
+          <h1 class="page-title">Manage Product</h1>
+      <% else %>
+          <h1 class="page-title">Add Product</h1>
+      <% end %>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <% if params[:action] == "show" %>
+      <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+        <!--<span aria-hidden="true">×</span>-->
+        <!--</button>-->
+        <i class="icon fa-gear" aria-hidden="true"></i>
+        This product was not approved for the following reasons
+        <ul>
+          <li>Not enough stock</li>
+          <li>All variants do not have unique SKUs</li>
+        </ul>
+
+      </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-xxl-9 col-xl-8 col-lg-12 col-xs-12">
+
+          <div class="panel">
+            <div class="panel-heading">
+              <!--<h3 class="panel-title">&nbsp;</h3>-->
+              <h4 class="panel-title">
+                Title
+              </h4>
+            </div>
+
+            <div class="panel-body">
+              <div class="form-group">
+                <div class="input-group">
+
+                  <% if params[:action] == "show" %>
+                      <input type="text" class="form-control" value="Sample Product">
+                  <% else %>
+                      <input type="text" class="form-control">
+                <% end %>
+                </div>
+              </div>
+
+              <h4 class="project-title">
+                Description
+              </h4>
+              <div data-plugin="summernote" data-plugin-options='{"toolbar":[["style", ["bold", "italic", "underline", "clear"]],["color", ["color"]],["para", ["ul", "ol", "paragraph"]]]}'>
+                <p>Product Description goes here</p>
+                <br>
+                <br>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing  -->
+          <div class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Pricing
+              </h4>
+            </div>
+            <div class="panel-body">
+              <!--<div class="row">-->
+                <!--<div class="col-sm-6 col-xs-6">-->
+                  <!--<p>If this product comes in different sizes & colors, please specify below.</p>-->
+                <!--</div>-->
+              <!--</div>-->
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <h5>Sales Price</h5>
+                  <input type="text" class="form-control" placeholder="e.g. $4.00">
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <h5>MSRP</h5>
+                  <input type="text" class="form-control" placeholder="e.g. $5.00">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                  <div class="form-group clearfix">
+                    <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+                      <input type="checkbox" id="inputCheckbox" name="term">
+                      <label for="inputCheckbox"></label>
+                    </div>
+                    <p class="">&nbsp;&nbsp; Exclude from <a href="javascript:void(0)" style="margin-left:0px;">retailer promotions</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Pricing -->
+
+          <!-- Inventory  -->
+          <div class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Inventory
+              </h4>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <h5>SKU</h5>
+                  <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <h5>Retailer SKU</h5>
+                  <input type="text" class="form-control" placeholder="" disabled>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <h5>Barcode (ISBN, UPC, GTIN etc)</h5>
+                  <input type="text" class="form-control" placeholder="">
+                </div>
+                <!--<div class="col-sm-6 col-xs-6">-->
+                  <!--<h5>Retailer SKU</h5>-->
+                  <!--<input type="text" class="form-control" placeholder="" disabled>-->
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
+          <!-- End Inventory -->
+
+          <!-- Product Settings -->
+          <div class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Additional Information
+              </h4>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                  <label class="form-control-label m-b-15" for="topicCategory">Gender:</label>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Unisex</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                  <label class="form-control-label m-b-15" for="topic_tags">Product Type:</label>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>Clothing</option>
+                      <option>Accessories</option>
+                      <option>Footwear</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                  <label class="form-control-label m-b-15" for="topicCategory">Category:</label>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>T Shirts</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                  <label class="form-control-label m-b-15" for="topic_tags">Sub-category:</label>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>Graphic T-Shirt</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Product Settings -->
+
+          <!-- Start File Uploads -->
+          <div class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Image Upload
+              </h4>
+            </div>
+            <div class="panel-body">
+              <%= render "retailer/products/components/file_uploads" %>
+            </div>
+          </div>
+          <!-- End File Uploads -->
+
+          <!-- Variants  -->
+          <div class="panel">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                Variants
+              </h4>
+
+            </div>
+            <div class="panel-body">
+              <% if params[:action] == "show" %>
+              <%= render "retailer/products/components/existing_variants" %>
+              <% else %>
+              <%= render "retailer/products/components/new_variants" %>
+              <% end %>
+            </div>
+          </div>
+          <!-- End Variants -->
+
+
+
+        </div>
+
+        <div class="col-xxl-3 col-xl-4 col-lg-12 col-xs-12">
+
+          <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">Channels</h3>
+          </div>
+
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group clearfix">
+                  <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+                    <input type="checkbox" id="inputCheckbox" name="term">
+                    <label for="inputCheckbox"></label>
+                  </div>
+                  <p class="">&nbsp;&nbsp; Hot Topic - Marketplace</p>
+                </div>
+                <div class="form-group clearfix">
+                  <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+                    <input type="checkbox" id="inputCheckbox" name="term">
+                    <label for="inputCheckbox"></label>
+                  </div>
+                  <p class="">&nbsp;&nbsp; Hot Topic - Main Destination</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+          <div class="panel">
+            <div class="panel-heading">
+              <h3 class="panel-title">Commission Structure</h3>
+            </div>
+
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-12">
+
+                  <h5> Commission Structure</h5>
+                  <p>Revenue-Share</p>
+                  <h5> Commission Terms</h5>
+                  <p> 60% (Brand) / 40% (Retailer)</p>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+          <div class="card">
+            <div class="card-block">
+              <p class="m-b-10">
+                <span class="pull-xs-right p-l-10">Shopify</span>
+                Source:
+              </p>
+              <p>
+                <span class="pull-xs-right p-l-10">
+                  <span class="tag tag-success m-r-5 m-b-5">Approved</span>
+                </span>
+                Status
+              </p>
+
+              </ul>
+              <p>Product Completeness</p>
+              <div class="progress progress-xs m-b-10">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100"
+                     aria-valuemin="0" aria-valuenow="60" style="width: 100%;">
+                </div>
+              </div>
+            </div>
+
+            <%#= render "retailer/products/components/people" %>
+            <div class="card-block project-dates">
+              <h4 class="project-option-title">Dates</h4>
+              <p class="m-b-10">
+                <span>Created:</span>
+                5 days ago
+              </p>
+              <p class="m-b-10">
+                <span>Updates:</span>
+                6 days ago
+              </p>
+            </div>
+
+            <div class="card-block project-fast-operation">
+              <a href="#">
+                <i class="icon wb-tag m-r-10"></i>
+                <span>Duplicate Product</span>
+              </a>
+              <a href="#">
+                <i class="icon fa-remove m-r-10"></i>
+                <span>Delete Product</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Buttons Row -->
+      <div class="row" style="padding-bottom:20px;">
+        <div class="col-xs-6">
+          <div class="text-xs-left">
+            <button type="button" onclick="javascript:confirm('Are you sure you want to cancel?');" class="btn btn-primary btn-danger btn-dark">
+                <span>
+                Save</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="text-xs-right">
+            <button type="button" class="btn btn-default btn-outline" data-target="#addTracking" data-toggle="modal">
+              <span>Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+
+&nbsp;
+</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3">
+    <button type="button" class="btn btn-dark"><i class="icon wb-upload" aria-hidden="true"></i> Search</button>
+  </div>
+</div></body>

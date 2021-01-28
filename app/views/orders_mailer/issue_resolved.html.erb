@@ -1,0 +1,59 @@
+
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <div style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+        <p>Hello,</p>
+        <% if @report.declined? %>
+          <p>After looking into the issue, we're not able to offer you a credit for Order <%= @order.retailer_shopify_name %>.</p>
+          <% if @report.decline_reason.present? %>
+            <h4>Provided Reason</h4>
+            <p>
+              <blockquote><em><%= @report.decline_reason %></em></blockquote>
+            </p>
+          <% end %>
+
+          <p>We regret any inconveniences this decision may cause and we hope to serve you better moving forward.</p>
+          <p>Please contact us if you disagree with this decision.</p>
+        <% elsif @report.resolved_supplier? || @report.resolved_hingeto? %>
+          <p>We apologize for the issue with Order <%= @order.retailer_shopify_name %>. We have refunded <%= number_to_currency(@report.amount_credited) %> into your credit balance. You can apply your credit to future order purchases.</p>
+          <p>Your total credit as at the time of this email is <%= number_to_currency(@retailer.total_available_credit) %>.</p>
+
+        <% end %>
+
+        <p>Thank you,</p>
+        <p>The TeamUp Team</p>
+
+      </div>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#e4bf70; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= retailer_orders_reported_url %>" style="color: #fff;text-decoration: none;font-weight: 600;display: block;">VIEW LIST OF PROBLEMATIC ORDERS</a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

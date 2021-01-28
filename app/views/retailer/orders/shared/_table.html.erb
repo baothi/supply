@@ -1,0 +1,132 @@
+
+<%= form_tag retailer_orders_batch_action_path, id: 'batch-action-form', method: :post do %>
+  <div class="table-responsive">
+    <table class="table table-hover orders-table" data-plugin="selectable" data-role="content" data-row-selectable="true">
+      <thead class="bg-blue-grey-100">
+        <tr>
+          <th style="vertical-align: top;"><span class="checkbox-custom checkbox-primary order-batch-action-select-all-span"><input class="selectable-all order-batch-checkbox" type="checkbox"> <label></label></span></th>
+          <th class="orders-header">Order #</th>
+          <th class="orders-header">Risk Level</th>
+          <th class="orders-header">Warehouse ID</th>
+          <th class="orders-header">Order Date</th>
+          <th class="orders-header">Customer</th>
+          <th class="orders-header">Payment Status</th>
+          <th class="orders-header">Fulfillment Status</th>
+          <th class="orders-header">Total</th>
+          <th class="orders-header"></th>
+          <%= render 'retailer/orders/shared/batch_action_header' %>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @orders.empty? %>
+        <td colspan="8">
+          No Orders Found
+        </td>
+      <% else %>
+        <% @orders.each do |order| %>
+            <tr class="order-select-tr">
+              <td>
+                <span class="checkbox-custom checkbox-primary order-batch-action-span">
+                  <%= check_box_tag "order_ids[]", order.internal_identifier, false, class: "product-select selectable-item  order-batch-checkbox" %><label></label>
+                </span>
+              </td>
+
+              <td><%= link_to retailer_order_details_path(id: order.internal_identifier) do %><%= order.retailer_shopify_name || order.number %><% end %>
+
+                <% if order.has_refunds? %>
+                  <i class="fa fa-sticky-note-o" rel="This order has a refund" id="refund-<%=order.internal_identifier %>"></i>
+                <% end %>
+              </td>
+
+              <td><span class="tag <%= order.risk_severity_class %>"><%= order.risk_recommendation  %></span></td>
+              <td><%= order.supplier&.pseudonym  %></td>
+              <td><span><%= order.completed_at %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+              <td><%= order.name  %></td>
+
+              <td>
+                <div class="radio-custom radio-primary">
+                  <% payment_state_display = order.payment_state_display %>
+                  <%= order.payment_state_display.humanize unless  payment_state_display.nil? %>
+                </div>
+              </td>
+              <td>
+                <%#= order.fulfillment_state_display %> <!--i aria-hidden="true" class="icon wb-help-circle m-l-10 red-600" data-container="body" data-original-title="help" data-toggle="tooltip" title=""></i-->
+                <span class="tag <%= shipping_status_tag_class(order.shipment_state) %>"><%= translate_to_shopify_shipping_status(order.shipment_state)  %></span>
+              </td>
+              <td>
+                <% if order.shipment_state == 'canceled' %>
+                  N/A
+                <% else %>
+                  <%= number_to_currency order.grand_total %>
+                <% end %>
+              </td>
+
+              <td>
+                <% unless order.archived?  %>
+                  <% if order.shipment_state == 'canceled' %>
+                    &nbsp;
+                  <% elsif order.has_inventory_available_for_line_items? %>
+
+                    <% if !order.paid? && order.eligible_for_ordering_based_on_country? &&
+                        !order.in_remittance_process? && !order.error? && !order.successfully_sent_order? %>
+                        <% if !current_retailer.disable_payments %>
+                          <a href="#" data-toggle="modal" data-target="#payWith" class="open-order-payment-modal"  data-amount= "<%= order.grand_total %>" data-customer="<%= order.email %>" data-date="<%= order.completed_at %>" data-order="<%= order.number %>" data-identifier="<%= order.internal_identifier %>">
+
+                              <button type="button" class="btn btn-info btn-sm waves-effect" >Order Product</button>
+                          </a>
+                          <% else %>
+                            <button type="button" class="btn btn-info btn-sm waves-effect disabled" >Order Product</button>
+                          <% end %>
+
+                    <% elsif !order.eligible_for_ordering_based_on_country? %>
+
+                            <button  type="button" class="btn btn-danger btn-sm"
+                                    data-toggle="modal" data-target="#international-<%= order.internal_identifier %>">View Errors</button>
+
+                          <%= render partial: 'retailer/orders/shared/modal/international_order', locals: {order: order} %>
+
+                    <% elsif order.in_remittance_process? && !order.paid_and_fulfilled? %>
+
+                        <div>
+                          <span class="tag tag-pill tag-warning">We are currently processing this order.</span>
+                        </div>
+                    <% elsif order.error? %>
+
+                            <button  type="button" class="btn btn-danger btn-sm"
+                                    data-toggle="modal" data-target="#<%= order.internal_identifier %>">View Errors</button>
+
+                         <%= render partial: 'retailer/orders/shared/modal/error', locals: {order: order} %>
+                    <% end %>
+
+                  <% else %>
+
+                        <!--<span class="tag tag-pill tag-danger"></span>-->
+
+                        <% unless order.paid? || order.payments.count.positive? || order.successfully_sent_order? || order.in_remittance_process? %>
+                        <button  type="button" class="btn btn-danger btn-sm"
+                                data-toggle="modal" data-target="#inventory-<%= order.internal_identifier %>">View Errors</button>
+
+                      <%= render partial: 'retailer/orders/shared/modal/missing_inventory', locals: {order: order} %>
+
+                        <% end %>
+
+                 <% end %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <!--<tr>-->
+    <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+    <!--<td>-->
+    <!--<a href="javascript:void(0)">In Progress</a><i aria-hidden="true" class="icon wb-help-circle m-l-10 orange-600" data-container="body" data-original-title="help" data-toggle="tooltip" title=""></i>-->
+    <!--</td>-->
+    <!--<td>Lorem ipsum dolor sit amet</td>-->
+    <!--<td><i aria-hidden="true" class="icon wb-chat"><span class="m-l-5">18</span></i></td>-->
+    <!--<td><span>3 days ago</span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+</div>

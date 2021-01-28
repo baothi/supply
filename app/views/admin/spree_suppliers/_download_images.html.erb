@@ -1,0 +1,13 @@
+<%= form_tag download_product_images_admin_spree_supplier_path, method: :get do %>
+  <table style="width: 30%">
+   <tbody>
+ <tr>
+   <td><%= submit_tag "Download Images" %></td>
+    <td> <%= check_box_tag :force_refresh %></td>
+   <td><%= label_tag :force_refresh %><br/></td>
+
+  </tr>
+   </tbody>
+  </table>
+
+<% end %>

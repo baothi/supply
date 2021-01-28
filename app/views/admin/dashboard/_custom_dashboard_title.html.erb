@@ -1,0 +1,42 @@
+<%
+period = params[:period] || 'all-times'
+from = params[:from] || Time.now.to_s
+to = params[:to] || Time.now.to_s
+show_hide = params[:period] == 'custom' ? 'visible' : 'hidden'
+%>
+
+<div class="dashboard-title-row">
+  <div class="dashboard-title-left">
+    <h2 id="page_title">Dashboard</h2>
+  </div>
+  <div class="dashboard-title-right">
+    <div class="period-selection-div">
+      <select name="period" id="period-select">
+        <option value="<%= admin_dashboard_path(period: "all-times") %>" <%= "selected" if period == 'all-times' %>>All Times</option>
+        <option value="<%= admin_dashboard_path(period: "today") %>" <%= "selected" if period == 'today' %>>Today</option>
+        <option value="<%= admin_dashboard_path(period: "yesterday") %>" <%= "selected" if period == 'yesterday' %>>Yesterday</option>
+        <option value="<%= admin_dashboard_path(period: "last-week") %>" <%= "selected" if period == 'last-week' %>>Last Week</option>
+        <option value="<%= admin_dashboard_path(period: "last-seven-days") %>" <%= "selected" if period == 'last_seven-days' %>>Last 7 Days</option>
+        <option value="<%= admin_dashboard_path(period: "this-week") %>" <%= "selected" if period == 'this-week' %>>This Week</option>
+        <option value="<%= admin_dashboard_path(period: "this-month") %>" <%= "selected" if period == 'this-month' %>>This Month</option>
+        <option value="<%= admin_dashboard_path(period: "this-quarter") %>" <%= "selected" if period == 'this-quarter' %>>This Quarter</option>
+        <option value="<%= admin_dashboard_path(period: "last-quarter") %>" <%= "selected" if period == 'last-quarter' %>>Last Quarter</option>
+        <option value="period-select-custom" <%= "selected" if period == 'custom' %>>Custom Range</option>
+      </select>
+    </div>
+    <div id="date-range-selection" style="visibility: <%= show_hide %>">
+      <%= form_tag admin_dashboard_path, method: :get, class: "form-inline" do %>
+        <%= hidden_field_tag :period, "custom" %>
+        <div class="" style="width: 40%; float: left;">
+          <%= date_field_tag :from, Date.parse(from), class: "form-control" %>
+        </div>
+        <div class="" style="width: 40%; float: left;">
+          <%= date_field_tag :to, Date.parse(to), class: "form-control" %>
+        </div>
+        <div class="" style="width: 20%; float: left;">
+          <%= submit_tag :go %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

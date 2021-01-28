@@ -1,0 +1,7 @@
+<% if resource.dsco_identifier.present? %>
+  <%= form_tag batch_import_dsco_fulfillments_admin_spree_supplier_path, method: :post, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import Fulfillments" %>
+  <% end %>
+
+<% end %>

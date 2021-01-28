@@ -1,0 +1,71 @@
+ <div class="col-md-12">
+  <% if  payment_cards.blank? %>
+    <br/>
+    <h5> No Credit Card Added, Click Add Button Above to Add Cards</h5>
+  <% end %>
+    <% payment_cards.each do |card| %>
+    <div class="row with-margin-top with-margin-below">
+      <div class="col-md-2 col-xs-2">
+        <i class="card-logo <%= card_logo(card.brand) if card %>" aria-hidden="true"></i>
+      </div>
+      <div class="col-md-5">
+        <span style="font-size: 15px; line-height: 36px; letter-spacing: 1px"><%= card.last_four_fancy %></span>
+      </div>
+      <div class="col-md-3" style='line-height: 36px;'>
+        <span class='remove-icon'><!-- <i class="fa fa-remove" aria-hidden="true"></i> -->
+          <i class="fa fa-trash remove-card-icon" data-identifier="<%= card.internal_identifier %>" data-target="#deleteCreditCard" data-toggle="modal" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="col-md-2">
+        <div class="mark-card-as-default-wrapper">
+          <% if card.default? %>
+            <span class="label label-success"><em>Default</em></span>
+          <% else %>
+            <%= link_to "Mark As Default", mark_card_as_default_retailer_payments_path(id: card.internal_identifier), authenticity_token: true, method: :patch, class: "btn btn-info btn-xs btn-outline" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <% end %>
+</div>
+
+<div class="row row-lg">
+  <div class="col-xl-12">
+    <div>
+      <div class="row row-lg">
+        <div class="col-xl-3 col-md-6">
+          <!-- Example Center -->
+          <div class="example-wrap">
+            <div class="example">
+              <!-- Modal -->
+              <div class="modal fade" id="deleteCreditCard" aria-labelledby="deleteCreditCard" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-simple modal-center">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <h4 class="modal-title">Delete Credit Card</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete this card? This action cannot be reversed</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <%= link_to remove_billing_card_retailer_payments_path, method: :delete, class: 'confirm-remove-card' do %>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal -->
+            </div>
+          </div>
+          <!-- End Example Center -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

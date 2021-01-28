@@ -1,0 +1,32 @@
+<div class="page-content">
+  <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+    <div class="panel-body">
+      <% if orders.present? %>
+        <div class="alert alert-success alert-dismissible dark col-sm-12 3">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+         </button>
+          <p>Order has been successfully imported as the following orders</p>
+          <% orders.each do |order| %>
+            <%= link_to "View #{order.number}", retailer_order_details_path(id: order.internal_identifier), style: "color: white; text-decoration: none;", target: :blank %> </br>
+          <% end %>
+
+        </div>
+      <% else %>
+         <div class="alert alert-danger alert-dismissible dark col-sm-12 3">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+         </button>
+          Order could not be imported, here are some reasons why this might have happened
+        </div>
+        <div style="margin-top: 6em;">
+          <ul class="list-group list-group-full">
+            <li class="list-group-item">Order has already been imported</li>
+            <li class="list-group-item">Order does not contain valid mxed products</li>
+            <li class="list-group-item">All/Some of the line items in the order are out of stock</li>
+          </ul>
+          <p>Please try <%= link_to retailer_order_diagnosis_path(order_name: order_name), target: :blank do %> diagnosing <% end %> Order
+          <p>Please try again shortly and contact us for assistance with this order if this import failure persists.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="panel">
+  <div class="panel-heading">
+    <h4 class="panel-title ">Order Risks</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-hover" data-plugin="" data-role="content">
+          <thead class="bg-blue-grey-100">
+            <tr>
+              <th class="orders-header">ID</th>
+              <th class="orders-header">Recommendation</th>
+              <th class="orders-header">Message</th>
+              <th class="orders-header">Score</th>
+              <th class="orders-header">Source</th>
+              <th class="orders-header">Cause Cancel</th>
+              <th class="orders-header">Display</th>
+              <th class="orders-header">Shopify Identifier</th>
+              <th class="orders-header">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.order_risks.each do |error| %>
+              <tr>
+                <td class=""><%= error.id %></td>
+                <td class="">
+                  <span class="tag <%= order.risk_severity_class(error.recommendation) %>">
+                    <%= error.recommendation  %>
+                  </span>
+                </td>
+                <td class=""><%= error.message %></td>
+                <td class=""><%= error.score %></td>
+                <td class=""><%= error.source %></td>
+                <td class=""><%= error.cause_cancel %></td>
+                <td class=""><%= error.display %></td>
+                <td class=""><%= error.shopify_identifier %></td>
+                <td class=""><%= error.created_at.strftime('%F') %></td>
+              </tr>
+            <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

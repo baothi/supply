@@ -1,0 +1,23 @@
+Hi <%= @first_name %>!
+
+<% if @state == 'outstock' %>
+
+  The following product(s) that you either have in your store or added to your TeamUp favorites is either low, or out of stock:
+
+  <%= @product_name %>: <%= retailer_product_details_url(:product_id => @internal_identifier) %>
+
+  Please refer to your TeamUp Dashboard <%= retailer_dashboard_url %> to manage these listings
+  We’ll reach back out once these items have been restocked!
+
+<% else %>
+  The following product(s) that you either have in your store or added to your TeamUp favorites is back in stock:
+
+  <%= @product_name %>: <%= retailer_product_details_url(:product_id => @internal_identifier) %>
+
+  We know how important it is to stay up to speed on your products inventory levels.  We’ll be sure to continue communicating with you regarding out of stock and back in stock items so you can keep your customers happy and coming back!
+
+  Please refer to your TeamUp Dashboard <%= retailer_dashboard_url %> to manage these listings
+
+  Happy selling!
+<% end %>
+The TeamUp Team

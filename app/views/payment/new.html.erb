@@ -1,0 +1,29 @@
+d<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <%= image_tag 'teamup-horizontal.png',
+                    class:'img-responsive',
+                    style: "margin-bottom: 6px;",
+                    width: '160px' %>
+
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <h3 class="font-size-24">Successfully payment</h3>
+      <%= render :partial=>"shared/alerts" %>
+
+      <p>If you do not receive an email within an hour, please contact us at teamup-support@dicentral.com</p>
+
+      <footer class="page-copyright">
+        <p>powered by DiCentral <%= image_tag "higeto-logo-24.png", class:"img-responsive" %></p>
+      </footer>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

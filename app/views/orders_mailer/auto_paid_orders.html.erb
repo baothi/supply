@@ -1,0 +1,62 @@
+<%#= content_for :banner do %>
+    <%#= image_tag "email/2.png", class: '100p', style: 'display:block;', alt: '', border: '0', usemap: '#Map' %>
+<%# end %>
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <p>Hello,</p>
+      <p>The following order(s) were paid automatically in the past hour. You don't have to do anything. The supplier is handling the fulfillment</p>
+
+      <table border="1" cellspacing="0" cellpadding="5" width="100%">
+        <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Grand Total</th>
+          <th>Order Items</th>
+          <th>Paid At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.retailer_shopify_name, retailer_order_details_url(order.internal_identifier) %></td>
+              <td><%= number_to_currency(order.grand_total) %></td>
+              <td><%= order.variants.map(&:name).join(', ') %></td>
+              <td><%= order.auto_paid_at&.strftime("#{order.auto_paid_at.day.ordinalize} %b, %Y at %I:%M%p") %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#000000; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= retailer_orders_url %>" target="_blank" style="color: #fff; text-decoration: none; font-weight: 600; display: block;">VIEW ORDERS</a>
+
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

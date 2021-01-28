@@ -1,0 +1,89 @@
+<div class="panel">
+  <div class="panel-heading">
+    <!--<h3 class="panel-title">&nbsp;</h3>-->
+    <h4 class="panel-title ">
+      Order Information
+    </h4>
+  </div>
+
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12">
+        <h5>Retailer Display Name</h5>
+        <%= text_field_tag 'msrp',
+                           @order.retailer_name,
+                           class: "form-control", disabled: true %>
+        <h5>Retailer Order Name</h5>
+        <%= text_field_tag 'msrp',
+                           @order.retailer_shopify_name,
+                           class: "form-control", disabled: true %>
+      </div>
+
+      <% if admin_user? %>
+        <% if @order.shopify_order? %>
+            <div class="col-sm-12 col-xs-12">
+              <h5>Retailer Shopify Order Number</h5>
+              <%= text_field_tag 'retailer_shopify_number',
+                                @order.retailer_shopify_number,
+                                class: "form-control", disabled: true %>
+            </div>
+
+            <div class="col-sm-12 col-xs-12">
+              <h5>Retailer Shopify Identifier</h5>
+              <%= text_field_tag 'retailer_shopify_identifier',
+                                @order.retailer_shopify_identifier,
+                                class: "form-control", disabled: true %>
+            </div>
+        <% end %>
+
+      <% end %>
+
+      <div class="col-sm-12 col-xs-12">
+        <h5>Supplier Display Name</h5>
+        <%= text_field_tag 'msrp',
+                           @order.supplier_name,
+                           class: "form-control", disabled: true %>
+        <h5>Supplier Order Name</h5>
+        <%= text_field_tag 'supplier_shopify_name',
+                           @order.supplier_shopify_order_name,
+                           class: "form-control", disabled: true %>
+      </div>
+
+      <% if admin_user? %>
+        <% if @order.shopify_order? %>
+            <div class="col-sm-12 col-xs-12">
+              <h5>Supplier Shopify Order Number</h5>
+              <%= text_field_tag 'supplier_shopify_number',
+                                @order.supplier_shopify_number,
+                                class: "form-control", disabled: true %>
+            </div>
+
+            <div class="col-sm-12 col-xs-12">
+              <h5>Supplier Shopify Identifier</h5>
+              <%= text_field_tag 'supplier_shopify_identifier',
+                                @order.supplier_shopify_identifier,
+                                class: "form-control", disabled: true %>
+            </div>
+
+          <div class="col-sm-12 col-xs-12">
+              <h5>Sent to Supplier's Shopify at</h5>
+              <%= text_field_tag 'shopify_sent_at',
+                                @order.shopify_sent_at,
+                                class: "form-control", disabled: true %>
+          </div>
+
+          <% elsif @order.edi_order? %>
+
+          <div class="col-sm-12 col-xs-12">
+              <h5>Sent via EDI at</h5>
+              <%= text_field_tag 'sent_via_edi_at',
+                                @order.sent_via_edi_at,
+                                class: "form-control", disabled: true %>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

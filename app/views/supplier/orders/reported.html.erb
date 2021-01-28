@@ -1,0 +1,114 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::ORDERS %>
+<% content_for :inner_menu, Hingeto::Section::REPORTED_ORDERS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+  <div class="page">
+    <%#= render "supplier/orders/shared/menu" %>
+    <div class="page-main">
+      <div class="page-header">
+        <h1 class="page-title">Reported Orders</h1>
+
+
+      </div>
+
+      <div class="page-content">
+        <!-- <div class="panel">
+          <div class="panel-body">
+            <span><strong>Available Credit: </strong> <%#= number_to_currency(current_retailer.total_available_credit) %></span>
+          </div>
+        </div> -->
+        <div class="panel">
+          <div class="panel-body">
+                    <%= render :partial=>"shared/alerts" %>
+            <!-- Filters -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                <%= form_tag(supplier_orders_reported_path, method: :get) do %>
+                  <div class="input-group">
+                    <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Enter Keyword" %>
+                    <div class="input-group-btn">
+                      <%= button_tag(type: "submit", class: "btn btn-default btn-outline", :name => nil) do %>
+                        <i class="icon wb-search" aria-hidden="true"></i>Search
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Retailer</th>
+                    <th>Date</th>
+                    <th>Amount Paid</th>
+                    <th style="width: 50%">Report Description</th>
+
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @orders.each do |order| %>
+                    <% order_issue_report = order.order_issue_report %>
+                    <tr>
+                      <td>
+                        <%= link_to supplier_order_details_path(id: order.internal_identifier) do %><%= order.supplier_order_number %><% end %>
+                      </td>
+                      <td><%= order.try(:retailer).try(:shopify_url) %></td>
+                      <td><%= order_issue_report.try(:created_at) %></td>
+                      <td><%= number_to_currency order.grand_total %></td>
+                      <td>
+                        <%=
+
+                        truncate(order_issue_report.try(:description), :length => 50,  :separator => ' ') do
+                          link_to "More", supplier_order_details_path(id: order.internal_identifier)
+                          end
+
+                         %>
+                      </td>
+
+                      <td>
+                        <% if order.order_issue_report.resolved? %>
+                          <% if order.order_issue_report.declined? %>
+                            <span class="tag tag-danger">« declined »</span>
+                          <% else %>
+                            <span class="tag tag-success">« credited »</span>
+                          <% end %>
+                        <% else %>
+                          <span class="tag tag-warning">« pending »</span>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if  order.order_issue_report.present? %>
+                          <%= link_to supplier_order_details_path(id: order.internal_identifier) do %>
+                          <button id="<%= order.internal_identifier %>" class="btn-xs btn-primary btn-danger btn-dark" type="button">
+                            <span> View</span></button>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <%= paginate @orders , theme: 'twitter-bootstrap-4' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+

@@ -1,0 +1,47 @@
+<% label = team == 'supplier' ? 'Retailers' : 'Brands or Vendor' %>
+
+
+  <div class="referral-description">
+  <div class="referral-form">
+
+    <%= form_for @referral, url: { action: 'create', controller: controller_name } do |f| %>
+        <% if @referral.errors.any? %>
+            <div id="error_explanation">
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p><strong>This form contains <%= pluralize(@referral.errors.count, 'error') %>.</strong></p>
+                <ul>
+                  <% @referral.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :name, "#{label} Name" %>
+          <%= f.text_field :name, class: 'form-control', required: true, placeholder: 'Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :url, "#{label} URL" %>
+          <%= f.text_field :url, class: 'form-control', required: true, placeholder: 'http://www.example.com' %>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+            <input type="checkbox" id="inputCheckbox" name=<%= "#{f.object_name}[has_relationship]" %>>
+            <label for="inputCheckbox"></label>
+          </div>
+          <p class="m-l-40">Existing Relationship?</p>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit 'ADD', class: 'btn btn-primary form-button' %>
+        </div>
+
+
+    <% end %>
+  </div>
+
+  <%#= render partial: "shared/referrals/footer", locals: { team: team, member: member } %>
+</div>

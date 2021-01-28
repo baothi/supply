@@ -1,0 +1,34 @@
+{
+  "original_hash": {
+    "data": {
+      "inventoryBulkAdjustQuantityAtLocation": {
+        "inventoryLevels": [
+          {
+            "id": "inventory_level_graph_ql_unique_identifier_1",
+            "available": 50,
+            "item": {
+              "id": "inventory_item_graph_ql_unique_identifier_1",
+              "sku": "ABC-123",
+              "variant": {
+                "id": "gid://shopify/ProductVariant/444555",
+                "sku": "ABC-123"
+              }
+            }
+          },
+          {
+            "id": "inventory_level_graph_ql_unique_identifier_2",
+            "available": 65,
+            "item": {
+              "id": "inventory_item_graph_ql_unique_identifier_2",
+              "sku": "ABC-456",
+              "variant": {
+                "id": "gid://shopify/ProductVariant/666777",
+                "sku": "ABC-456"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

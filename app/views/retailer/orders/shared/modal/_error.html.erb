@@ -1,0 +1,26 @@
+<div class="modal fade in" id="<%= order.internal_identifier %>" aria-hidden="false" aria-labelledby="<%= order.internal_identifier %>Label" role="dialog" tabindex="-1">
+  <div class="modal-dialog order-import-form">
+    <div class='modal-content'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="exampleFormModalLabel">Order <%= order.retailer_shopify_order_number %></h4>
+      </div>
+      <div class="modal-body">
+        <p>There was an error submitting this order. Common reasons include</p>
+        <ul>
+          <li>Invalid Credit Card Number or Information</li>
+          <li>Invalid Address</li>
+        </ul>
+
+        <p>If you'd like to retry paying for this order / retransmitting it, please clear the error by pressing the button below & try again shortly.</p>
+        <p>If the error persists, please contact us at support@mxedapp.com</p>
+        <%= link_to retailer_orders_clear_errors_path(id: order.internal_identifier), method: :post do %>
+            <button type="button" class="btn btn-success"
+                     title="Error">Clear Errors</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

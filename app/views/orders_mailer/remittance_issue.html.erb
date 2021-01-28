@@ -1,0 +1,54 @@
+
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <p style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+        Hi Admins, <br><br>
+        There was an issue with remitting order <%= @order.try(:retailer_shopify_name) %> to the TeamUp supplier shopify account.
+        <br>
+        <br>
+        The error was:
+
+        <br>
+        <br>
+
+        <%= @message %>
+
+        <br>
+        <br>
+
+        Please login and handle this asap!
+
+      </p>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#e4bf70; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= @retailer_link %>" style="color: #fff;text-decoration: none;font-weight: 600;display: block;">IMPERSONATE RETAILER & REMIT ORDER</a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

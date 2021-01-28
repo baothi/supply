@@ -1,0 +1,26 @@
+<div class="carousel slide" id="exampleCarouselDefault" data-ride="carousel">
+  <ol class="carousel-indicators carousel-indicators-fall">
+    <% featured_banners.count.times do |i| %>
+      <li data-slide-to="<%= i %>" data-target="#exampleCarouselDefault"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner featured-banner-carousel" role="listbox">
+    <% featured_banners.each_with_index do |banner, i| %>
+      <% next if (banner_image = banner_or_taxon_image(banner)) =~ /noimage/ %>
+      <div class="carousel-item <%= 'active' if i == 0 %>">
+        <%= link_to featured_banner_link(banner) do %>
+          <%= image_tag(banner_image, class: 'w-full', alt: banner.title) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <a class="left carousel-control" href="#exampleCarouselDefault" role="button" data-slide="prev">
+    <span class="icon wb-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#exampleCarouselDefault" role="button"
+  data-slide="next">
+    <span class="icon wb-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

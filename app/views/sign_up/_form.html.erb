@@ -1,0 +1,114 @@
+<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <div class="logo-main">
+        <%= image_tag 'teamup-horizontal.png',
+                      class:'img-responsive',
+                      style: "margin-bottom: 6px;",
+                      width: '160px' %>
+      </div>
+
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <h3 class="font-size-24">Sign Up</h3>
+      <p>Create an account to become a <%= @user.try(:type) || 'partner' %> with Hingeto</p>
+      <%= render :partial=>"shared/alerts" %>
+
+      <%= form_for @user, url: wizard_path, method: 'put' do |f| %>
+        <div class="form-group">
+          <%= f.label :business_name, 'Business Name' %>
+          <%= f.text_field :business_name, class: 'form-control', required: true, placeholder: 'Enter your business name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :phone_number, 'Phone Number' %>
+          <%= f.telephone_field :phone_number, class: 'form-control', required: true, placeholder: '999 999 9999' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :website, 'Website' %>
+          <%= f.text_field :website, class: 'form-control', required: true, placeholder: 'Enter your website' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :facebook_url, class: "sr-only" do %> <span>Facebook URL *</span> <% end %>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">https://www.facebook.com/</span>
+            <%= f.text_field :facebook_url, class: "form-control", placeholder: "(Optional) FB Page Username", minlength: 2 %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :instagram_url, class: "sr-only" do %> <span>Instagram URL *</span> <% end %>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">https://www.instagram.com/</span>
+            <%= f.text_field :instagram_url, class: "form-control", placeholder: "(Optional) IG Username", minlength: 2 %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :ecommerce_platform, 'Ecommerce Platform' %>
+          <%= f.select :ecommerce_platform,
+                       [
+                           %w(BigCommerce big_commerce),
+                           %w(CommerceCloud commerce_cloud),
+                           %w(DSCO dsco),
+                           %w(EDI edi),
+                           %w(Etsy etsy),
+                           %w(Homegrown home_grown),
+                           %w(Magento magento),
+                           %w(Shopify shopify),
+                           %w(SquareSpace square_space),
+                           %w(Webflow web_flow),
+                           %w(Weebly weebly),
+                           %w(WooCommerce woo_commerce),
+                           %w(Other other)],
+                       {
+                           selected: 'shopify'
+                       },
+                       required: true,
+                       class: 'form-control',
+                       prompt: 'Select your Ecommerce Platform'%>
+        </div>
+
+        <%= yield f %>
+
+        <div class="form-group clearfix">
+          <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+            <input type="checkbox" id="inputCheckbox" name="term" required="required">
+            <label for="inputCheckbox"></label>
+          </div>
+          <p class="m-l-40">Agree to our <a href="https://www.hingeto.com/terms-and-conditions" target="_blank">
+            Terms and conditions</a>.</p>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Complete Registration', class: 'btn btn-primary form-button' %>
+        </div>
+<!--        <div class="actions">-->
+          <%#= f.submit "Submit Application" %>
+<!--          or <%#= link_to "skip this step", next_wizard_path %>-->
+<!--        </div>-->
+      <% end %>
+
+      <p>Already signed up? <%= link_to "Sign In Now", new_spree_user_session_path %></p>
+      <footer class="page-copyright">
+        <p>powered by DiCentral <%= image_tag "dicentral-square-24px-blue.png", class: "img-responsive" %></p>
+        <!--<p>© 2017. All RIGHT RESERVED.</p>-->
+        <!-- <div class="social">
+          <a class="btn btn-icon btn-round social-twitter" href="javascript:void(0)">
+            <i class="icon bd-twitter" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-facebook" href="javascript:void(0)">
+            <i class="icon bd-facebook" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-google-plus" href="javascript:void(0)">
+            <i class="icon bd-google-plus" aria-hidden="true"></i>
+          </a>
+        </div> -->
+      </footer>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

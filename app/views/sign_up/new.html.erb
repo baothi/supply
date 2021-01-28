@@ -1,0 +1,70 @@
+<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <div class="logo-main">
+        <%= image_tag 'teamup-horizontal.png',
+                      class:'img-responsive',
+                      style: "margin-bottom: 6px;",
+                      width: '160px' %>
+      </div>
+
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <h3 class="font-size-24">Sign Up</h3>
+      <%= render :partial=>"shared/alerts" %>
+
+      <%= form_for @user, url: { action: 'create', controller: 'sign_up' } do |f| %>
+        <div class="form-group">
+          <%= f.label :email, 'Email' %>
+          <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'Your email address' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, 'Password' %>
+          <%= f.password_field :password, class: 'form-control', required: true, placeholder: 'Password' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'Confirm Password' %>
+          <%= f.password_field :password_confirmation, class: 'form-control', required: true, placeholder: 'Confirm Password' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :type, 'Business Category' %>
+          <%= f.select :type, [%w(Retailer retailer), %w(Supplier supplier)], {},
+                       required: false,
+                       class: 'form-control',
+                       prompt: 'Pick a business category',
+                       selected: 'retailer'%>
+          <p style="font-size:11px;">
+            Select <b>Retailer</b> is you are interested in launching a marketplace.
+            Select <b>Supplier</b> if you are interested in increasing  your distribution or selling products to our retail partners. If you are both, select <b>Retailer</b> for now.</p>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Next', class: 'btn btn-primary form-button' %>
+        </div>
+      <% end %>
+
+      <p>Already signed up? <%= link_to "Sign In Now", new_spree_user_session_path, class: 'dark-blue' %></p>
+      <footer class="page-copyright">
+        <!--<p>© 2017. All RIGHT RESERVED.</p>-->
+        <!-- <div class="social">
+          <a class="btn btn-icon btn-round social-twitter" href="javascript:void(0)">
+            <i class="icon bd-twitter" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-facebook" href="javascript:void(0)">
+            <i class="icon bd-facebook" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-google-plus" href="javascript:void(0)">
+            <i class="icon bd-google-plus" aria-hidden="true"></i>
+          </a>
+        </div> -->
+      </footer>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

@@ -1,0 +1,19 @@
+<% if in_progress_products.present? && in_progress_products.count > 0 %>
+<div id="<%= div_id %>" class="media-list is-grid p-b-50" data-plugin="animateList" data-animate="fade"
+data-child="li">
+  <ul class="blocks blocks-100 blocks-xxl-4 blocks-xl-3 blocks-lg-3 blocks-md-2 blocks-sm-2"
+  data-plugin="animateList" data-child=">li">
+    <% in_progress_products.each do |progress| %>
+      <% product = progress.product %>
+      <% next if product.nil? %>
+      <li style="margin-top: 3em;" class="product-display" id="<%=product.internal_identifier%>">
+        <%= render partial: 'retailer/products/shared/product', locals: { product: product} %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<% else %>
+    <div>
+      <p>No Products Found</p>
+    </div>
+<% end %>

@@ -1,0 +1,220 @@
+<body>
+  <header class="header">
+
+    <div class="header__wrapper">
+      <div class="header__topbar">
+         <%= image_tag "home/logo.png", class: "header__logo", alt: "mxed" %>
+        <nav class="header__nav">
+          <ul class="header__nav-list">
+            <li class="header__nav-item">
+              <a href="#features" class="header__nav-link" data-scroll="">Features</a>
+            </li>
+            <li class="header__nav-item">
+              <a href="#howitworks" class="header__nav-link" data-scroll="">How It Works</a>
+            </li>
+            <li class="header__nav-item">
+              <a href="#pricing" class="header__nav-link" data-scroll="">Pricing</a>
+            </li>
+            <button class="btn btn--topbar btn--border">Login</button>
+            <button class="btn btn--topbar">Sign Up</button>
+          </ul>
+        </nav>
+      </div>
+      <button class="burger js-burger" type="button">
+        <span class="burger-box">
+          <span class="burger-inner"></span>
+        </span>
+      </button>
+    </div>
+
+
+
+    <div class="header__main">
+      <div class="header__row">
+        <div class="header__column">
+          <h1 class="header__title">Double Your Shopify Sales with Official Licensed Products</h1>
+          <p class="header__text">TeamUp allows you to find and sell a curated selection of products without holding inventory</p>
+          <button class="btn btn--header">
+            <p class="btn__text add-to-shopify-btn">Add the app to</p>
+            <%= image_tag "home/shopify-logo.png", class: "btn__logo", alt: "shopify logo" %>
+          </button>
+          <p class="header__text header__text--small">No inventory required - 100% free (beta)</p>
+        </div>
+        <%= image_tag "home/img-right.png", class: "header__image", alt: "hero image" %>
+      </div>
+      <p class="header__text header__text--center">Partnered with:</p>
+      <div class="header__icons">
+        <%= image_tag "home/partners/Lucasfilm_Ltd._logo.png", alt: "" %>
+        <%= image_tag "home/partners/Warner_Bros.png", alt: "" %>
+        <%= image_tag "home/partners/MarvelLogo.png", alt: "" %>
+        <%= image_tag "home/partners/Nickelodeon_logo_new.png", alt: "" %>
+        <%= image_tag "home/partners/DC_Comics_logo.png", alt: "" %>
+        <%= image_tag "home/partners/Nintendo.png", alt: "" %>
+        <%= image_tag "home/partners/Activision.png", alt: "" %>
+      </div>
+    </div>
+  </header>
+
+  <section class="section section-offer" id="features">
+    <h2 class="section__title">What You Can Do With MXED</h2>
+    <div class="row">
+      <div class="column">
+        <%= image_tag "home/icons/icon-1.png", alt: "", class: "section__icon section__icon--large" %>
+        <h3 class="section__subtitle">Curated Top Brands</h3>
+        <p class="section__text">MXED helps you find and add top quality products shipped from the USA</p>
+      </div>
+      <div class="column">
+        <%= image_tag "home/icons/icon-2.png", alt: "", class: "section__icon section__icon--large" %>
+        <h3 class="section__subtitle">We Ship Your Orders</h3>
+        <p class="section__text">After a sale, we will ship directly to your customer (3-5 business days)</p>
+      </div>
+      <div class="column">
+        <%= image_tag "home/icons/icon-3.png", alt: "", class: "section__icon section__icon--large" %>
+        <h3 class="section__subtitle">Drive Sales</h3>
+        <p class="section__text">You focus on marketing your business and well focus on the rest</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-testimonials">
+    <div class="card">
+      <%= image_tag "home/icons/icon-4.png", alt: "", class: "card__icon" %>
+      <p class="card__text">After I installed BioHinge, my sales increased 73% - a new record for me!</p>
+      <div class="card__id">
+        <%= image_tag "home/photo.png", alt: "", class: "card__avatar" %>
+        <div class="card__info">
+          <h3 class="card__title">Leandrew Robinson</h3>
+          <p class="card__subtitle">Ecommerce Store Owner at Company.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-information" id="howitworks">
+    <h2 class="section__title">How It Works</h2>
+    <h3 class="section__text">MXED helps stores find products from your favorite movies, games and TV-shows to sell on Shopify</h3>
+    <div class="row">
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-5.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <h3 class="section__subtitle">Find Products</h3>
+        <p class="section__text">Start selling immediately by adding products in to your Shopify store</p>
+      </div>
+    </div>
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-6.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <h3 class="section__subtitle">Products are Shipped</h3>
+        <p class="section__text">Sit back and watch order sent directly to buyers</p>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-7.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <h3 class="section__subtitle">Promote and Sell</h3>
+        <p class="section__text">Drive traffic without having to worry about inventory</p>
+      </div>
+    </div>
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-8.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <h3 class="section__subtitle">Collect your Profits</h3>
+        <p class="section__text">Shopify stores rely on MXED to grow their sales</p>
+      </div>
+    </div>
+    </div>
+    <%= image_tag "home/macbook-mb.png", alt: "", class: "section__image" %>
+    <%= image_tag "home/macbook.png", alt: "", class: "section__image section__image--large" %>
+  </section>
+
+  <section class="section section-pricing" id="pricing">
+    <h2 class="section__title section__title--margin">Choose Your Pricing Plan</h2>
+    <div class="row">
+    <div class="box">
+      <h3 class="box__title">Noob</h3>
+      <p class="box__main">$0<span class="box__info"> /month</span></p>
+      <div class="box__texts">
+        <p class="box__text">10 Products</p>
+        <p class="box__text">20 orders per month</p>
+      </div>
+      <button class="btn btn--box">Start Free Trial</button>
+    </div>
+    <div class="box box--dark">
+      <h3 class="box__title">Pro</h3>
+      <p class="box__main">$49<span class="box__info"> /month</span></p>
+      <div class="box__texts">
+        <p class="box__text">250 Products</p>
+        <p class="box__text">500 orders per month</p>
+      </div>
+      <button class="btn btn--box btn--dark">Start Free Trial</button>
+    </div>
+    <div class="box">
+      <h3 class="box__title">Expert*</h3>
+      <p class="box__main">$99<span class="box__info"> /month</span></p>
+      <div class="box__texts  box__texts--narrow">
+        <p class="box__text">500 Products</p>
+        <p class="box__text">Unlimited orders</p>
+        <p class="box__text">Early access to new features</p>
+        <p class="box__text">Multiple Users & Messaging</p>
+      </div>
+      <button class="btn btn--box">Start Free Trial</button>
+    </div>
+    </div>
+    <p class="section__text">* Since Beta you would get everything from Expert Section for free!</p>
+  </section>
+
+  <section class="section section-benefits">
+    <h2 class="section__title section__title--margin">Features & Benefits To Help You Sell</h2>
+    <div class="row">
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-9.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <p class="section__text">Wide product selection that gets better over time</p>
+      </div>
+    </div>
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-10.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <p class="section__text">Orders are fullfilled automatically</p>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-11.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <p class="section__text">Top quality products from your favorite brands</p>
+      </div>
+    </div>
+    <div class="section__row">
+      <%= image_tag "home/icons/icon-12.png", alt: "", class: "section__icon" %>
+      <div class="section__column">
+        <p class="section__text">Zero inventory, no risk, no problems</p>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="section__row">
+        <%= image_tag "home/icons/icon-13.png", alt: "", class: "section__icon" %>
+        <div class="section__column">
+          <p class="section__text">Auto pricing and inventory updates</p>
+        </div>
+    </div>
+    <div class="section__row">
+        <%= image_tag "home/icons/icon-14.png", alt: "", class: "section__icon" %>
+        <div class="section__column">
+          <p class="section__text">Great profit margins with added benefits as you scale</p>
+        </div>
+    </div>
+    </div>
+  </section>
+
+  <footer class="section footer">
+    <h2 class="section__title">Ready to Start?</h2>
+    <p class="section__text">Add Products & Drive Sales in Minutes</p>
+    <button class="btn btn--footer">Start Selling Today</button>
+    <%= image_tag "home/prods.png", alt: "", class: "footer__image" %>
+  </footer>
+</body>

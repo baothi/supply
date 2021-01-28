@@ -1,0 +1,64 @@
+<style type="text/css">
+  .mail_order: {
+    style="padding: 2.5em;
+    font-family: Arial, Helvetica,
+    sans-serif;
+    font-size:15px;
+    color:#505050;
+    line-height:22px;
+    font-weight:400;"
+  }
+</style>
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th>Order #</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Order date</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @total_order.each do |order| %>
+      <tr>
+        <td class="mail_order">
+            <%= order[0] %>
+        </td>
+        <td class="mail_order">
+          <%= order[1] %>
+        </td>
+        <td class="mail_order">
+          <%= order[2] %>
+        </td>
+        <td class="mail_order">
+          <%= order[3] %>
+        </td>
+        <td class="mail_order">
+          <%= order[4] %>
+        </td>
+        <td class="mail_order">
+          <%= order[5] %>
+        </td>
+        <td class="mail_order">
+          <table>
+            <tbody>
+              <% order[6].each do |product_lineitem| %>
+                <% product_lineitem.each do |product|%>
+                  <td>
+                    Name: <%= product[0] %><br/>
+                    Option: <%= product[1] %><br/>
+                    Sku: <%= product[2] %><br/>
+                    Quantity: <%= product[3] %><br/>
+                  </td>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+  <tbody>
+</table>

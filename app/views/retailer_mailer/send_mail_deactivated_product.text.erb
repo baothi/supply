@@ -1,0 +1,8 @@
+Hi <%= @first_name %>!
+The following product(s) that you either have in your store or added to your TeamUp favorites has been deactivated by the supplier. We have unpublished the product(s) from your store, please do not republish it, as it is not available for sale:
+
+<%= @product_name %> <%= retailer_product_details_url(:product_id => @product_internal_identifier)  %>
+
+Please refer to your TeamUp Dashboard <%= retailer_dashboard_url %> to manage these listings.
+
+The TeamUp Team

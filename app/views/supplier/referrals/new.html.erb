@@ -1,0 +1,4 @@
+<% locals = { team: 'supplier',  member: current_supplier} %>
+<%= render layout: 'shared/referrals/base', locals:  locals do %>
+    <%= render partial: "shared/referrals/create", locals: locals %>
+<% end %>

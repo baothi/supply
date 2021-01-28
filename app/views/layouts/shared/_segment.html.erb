@@ -1,0 +1,43 @@
+<% segment_loaded = false %>
+<% if ENV['DROPSHIPPER_ENV'] == 'production' || ENV['ENABLE_SEGMENT'] == 'true' %>
+   <script>
+       !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+       analytics.load("<%= ENV['SEGMENT_KEY'] %>");
+       analytics.page();
+       }}();
+   </script>
+<% segment_loaded = true %>
+<% end %>
+
+<% if segment_loaded %>
+<% if current_spree_user %>
+  <script>
+    analytics.identify('<%= current_spree_user.id %>', {
+      name: '<%= current_spree_user.full_name %>',
+      email: '<%= current_spree_user.email %>',
+      sign_in_count: '<%= current_spree_user.sign_in_count %>',
+      shopify_url: '<%= current_spree_user.shopify_url %>',
+      shopify_slug: '<%= current_spree_user.shopify_slug %>',
+      application: 'mxed',
+      brand: 'N/A'
+    });
+
+    <% if @retailer.present? && (@team_type == 'Spree::Retailer' || @team_type == 'retailer') %>
+    analytics.group('<%= @retailer.name %>', {
+      site: '<%= @retailer.shopify_url %>',
+      slug: '<%= @retailer.slug %>',
+      email: '<%= @retailer.email %>',
+      owner: '<%= @retailer.shop_owner %>',
+      facebook_url: '<%= @retailer.facebook_url %>',
+      instagram_url: '<%= @retailer.instagram_url %>',
+      state: '<%= @retailer.state %>',
+      num_product_listings: <%= @retailer.product_listings.count %>,
+      num_orders: <%= @retailer.orders.count %>,
+      num_sample_orders: <%= @retailer.orders.sample_orders.count %>
+    });
+    <% end %>
+
+  </script>
+<% else %>
+<% end %>
+<% end %>

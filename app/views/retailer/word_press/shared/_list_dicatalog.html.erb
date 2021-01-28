@@ -1,0 +1,27 @@
+<% if @products.present? && @products.length > 0 %>
+    <div class="media-list is-grid p-b-50" data-plugin="animateList" data-animate="fade"
+         data-child="li">
+      <ul class="blocks blocks-100 blocks-xxl-4 blocks-xl-3 blocks-lg-3 blocks-md-2 blocks-sm-2"
+          data-plugin="animateList" data-child=">li">
+        <% @products.each do |product| %>
+            <li style="margin-top: 3em;" class="product-display" id="<%=product['Id'] %>">
+            <%#= render partial: 'retailer/products/word_press/shared/product_dicatalog', locals: { product: product} %>
+            <figure class="overlay overlay-hover animation-hover">
+                <div class="media-item" data-toggle="slidePanel" data-url="panel.tpl">
+                  <div class="image-wrap">
+                    <div class="grid-listing-img" style="background-image:url(<%=  product['ImageUrls'].first %>)"></div>
+                  </div>
+                  <div class="info-wrap">
+                    <div class="title product-title"><%= product['ProductCode']  %></div>
+                  </div>
+                </div>
+              </figure>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+<% else %>
+    <div>
+      <p>No Products Found</p>
+    </div>
+<% end %>

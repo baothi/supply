@@ -1,0 +1,11 @@
+Hello,
+
+The following order(s) were paid for automatically in the past hour. You don't have to do anything. The supplier is handling the fulfillment.
+
+Order Number | Grand Total | Order Items | Auto-Paid At
+
+<% @orders.each do |order| %>
+    <%= order.retailer_shopify_name %> | <%= order.grand_total %> | <%= order.variants.map(&:name).join(', ') %> | <%= order.auto_paid_at %>
+<% end %>
+
+<%= retailer_orders_url %>

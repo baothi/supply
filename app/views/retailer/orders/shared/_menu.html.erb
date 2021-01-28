@@ -1,0 +1,42 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Orders</h5>
+          <div class="list-group">
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::ORDERS) %>" href="/retailer/orders">
+              <i class="icon wb-order" aria-hidden="true"></i>Store Orders
+            </a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SAMPLE_ORDERS) %>" href="/retailer/orders/samples">
+              <i class="icon wb-order" aria-hidden="true"></i>Samples
+            </a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::ARCHIVED_ORDERS) %>" href="/retailer/orders/archived">
+             <i class="icon fa fa-file-archive-o" aria-hidden="true"></i>Archived orders
+            </a>
+            <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+              <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::MANUAL_ORDER_IMPORT) %>" href="/retailer/orders/manual-import">
+                <i class="icon wb-order" aria-hidden="true"></i>Manual Import
+              </a>
+            <% end %>
+
+            <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+              <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::ORDER_DIAGNOSIS) %>" href="/retailer/orders/diagnosis">
+                <i class="icon fa fa-heartbeat" aria-hidden="true"></i>Order Diagnosis
+              </a>
+            <% end %>
+
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::REPORTED_ORDERS) %>" href="/retailer/orders/reported">
+             <i class="icon fa fa-flag" aria-hidden="true"></i>Reported Orders
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

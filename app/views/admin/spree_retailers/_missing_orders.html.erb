@@ -1,0 +1,24 @@
+<%= form_tag look_for_ghost_orders_admin_spree_retailer_path, method: :get do %>
+    <table style="width: 50%">
+      <tbody>
+      <tr>
+        <td colspan="2">
+          Currently the from/to only goes back two weeks. Please contact engineering if you need a longer time horizon.
+          <br><br>
+          Upon completion, you'll recieve an email.
+        </td>
+      </tr>
+      <tr>
+        <td><%= label_tag "From" %></td>
+        <td><%= text_field_tag "from", "#{DateTime.now - 2.weeks}", readonly: true %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag "To" %></td>
+        <td><%= text_field_tag "to", "#{DateTime.now}", readonly: true %></td>
+      </tr>
+      <tr>
+        <td><%= submit_tag "Look for Orders" %></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>

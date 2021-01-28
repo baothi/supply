@@ -1,0 +1,50 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::ADVANCED %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render :partial=>"shared/alerts" %>
+      <h1 class="page-title">Advanced</h1>
+    </div>
+
+    <div class="page-content">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Ownership Transfer</h3>
+        </div>
+        <div class="panel-body">
+          <%# if current_spree_user.retailer_owner? || admin_user? %>
+          <% if 1 == 2 %>
+            <%= form_tag transfer_ownership_retailer_settings_advanced_index_path do %>
+              <div class="row">
+                <div class="col-md-5">
+                  <%= select_tag :new_owner, options_for_select(possible_new_owners_map), { prompt: 'Select new owner', class: 'form-control' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= submit_tag 'Transfer', class: 'btn btn-warning' %>
+                </div>
+                <div class="col-md-4">
+                  <p>By transfering ownership of this retailer account, the selected user will hence have full right to manage the account. You will hencefort no longer be the owner but an admin.</p>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <em>This has been disabled for the time being</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

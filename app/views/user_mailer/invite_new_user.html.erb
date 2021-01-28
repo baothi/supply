@@ -1,0 +1,46 @@
+<%= content_for :banner do %>
+    <%= image_tag "email/welcome.jpg", class: '100p', style: 'display:block;', alt: '', border: '0', usemap: '#Map' %>
+<% end %>
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td colspan="7" height="30">
+      </td>
+    </tr>
+    <tr>
+      <td width="6%">
+      </td>
+      <td>
+        <p style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+          Hello, <br><br>
+          You have been added as a team member in TeamUp. <br><br>Please log on to <%= link_to "TeamUp Supply", new_spree_user_session_url %> with the following credentials
+          <br><br>
+          <strong>Email:</strong> <%= @user.email %> <br>
+          <strong>Password:</strong> <%= @password %>
+          <br><br>
+          Please be sure to change this default password once you login in the "Settings Page"
+        </p>
+      </td>
+      <td width="6%">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" height="30">
+      </td>
+    </tr>
+    <tr>
+      <td width="6%">
+      </td>
+      <td style=" background-color:#000000; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px; ">
+       <a href="<%= new_spree_user_session_url %>" target="_blank" style="color: #fff;text-decoration: none;font-weight: 600;display: block;">LOGIN</a>
+     </td>
+     <td width="6%">
+     </td>
+   </tr>
+   <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+</tbody >
+</table>

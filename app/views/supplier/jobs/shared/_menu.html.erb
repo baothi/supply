@@ -1,0 +1,29 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Main</h5>
+          <div class="list-group">
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::OVERVIEW) %>" href="/supplier/jobs/"><i class="icon wb-home" aria-hidden="true"></i>Overview</a>
+          </div>
+        </section>
+
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">History</h5>
+          <div class="list-group">
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SAMPLE_PRODUCTS) %>" href="/supplier/jobs/imports"><i class="icon wb-home" aria-hidden="true"></i>Imports</a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SAMPLE_PRODUCTS) %>" href="/supplier/jobs/exports"><i class="icon wb-home" aria-hidden="true"></i>Exports</a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SAMPLE_PRODUCTS) %>" href="/supplier/jobs/errors"><i class="icon wb-home" aria-hidden="true"></i>Errors</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

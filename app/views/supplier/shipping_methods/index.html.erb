@@ -1,0 +1,85 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::SHIPPING_METHODS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+
+<div class="page">
+  <%= render "#{@team_type}/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Shipping Methods</h1>
+    </div>
+
+    <div class="page-content">
+      <%= render :partial=>"shared/alerts" %>
+      <% @couriers.each do |courier| %>
+      <% shipping_methods = courier.shipping_methods.active %>
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= courier.name %></h3>
+        </div>
+        <div class="panel-body">
+        <!-- Content -->
+         <div class="row">
+           <div class="col-lg-12 col-xs-12">
+             <!-- Example Basic -->
+             <div class="example-wrap">
+               <div class="example table-responsive">
+
+                <% if shipping_methods.nil? || shipping_methods.empty? %>
+                     <p>No shipping methods found.</p>
+               <% else %>
+                 <table class="table">
+                   <thead>
+                   <tr>
+                     <!--<th>Preview</th>-->
+                     <th>TeamUp Code</th>
+                     <th>Display Name</th>
+                     <th>Supplier Value</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <% shipping_methods.each do |shipping_method| %>
+                     <tr>
+                      <td>
+                        <%= link_to "#{shipping_method.service_code}",
+                                    supplier_shipping_methods_details_path(
+                                        service_code: shipping_method.service_code.downcase
+                                    ) %>
+                      </td>
+                       <td>
+                         <%= shipping_method.service_name %>
+                       </td>
+                       <td>
+                         <%= shipping_method.mapped_value_for_team(@supplier) %>
+                       </td>
+
+                     </tr>
+                   <% end %>
+                   </tbody>
+                 </table>
+                 <% end %>
+               </div>
+             </div>
+             <!-- End Example Basic -->
+           </div>
+         </div>
+
+        </div>
+      </div>
+      <% end %>
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

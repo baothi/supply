@@ -1,0 +1,39 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <th><span class="checkbox-custom checkbox-primary"><input class="selectable-all" type="checkbox"> <label></label></span></th>
+      <th>Invoice #</th>
+      <th>Date</th>
+      <th>Amount</th>
+<!--       <th>Channel</th> -->
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%# status = "blah" %>
+
+    <% (1..6).each do |i| %>
+        <% new_status = (status == :all ? statuses[rand(6)] : status) %>
+        <tr>
+          <td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>
+          <td><!-- <a href="/invoices/details"> -->#HNG-<%= Faker::Number.number(3) %>-<%= Faker::Number.number(5) %><!-- </a> --></td>
+          <td><span><%= Faker::Date.forward(23) %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+          <td><span><%= number_to_currency Faker::Number.between(1, 2000) %></span></td>
+<!--           <td>Hot Topic Dropship</td> -->
+          <td><%= invoice_status(new_status) %></td>
+        </tr>
+    <% end %>
+
+    <!--<tr>-->
+      <!--<td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td>-->
+      <!--<td>-->
+        <!--<a href="javascript:void(0)">In Progress</a><i aria-hidden="true" class="icon wb-help-circle m-l-10 orange-600" data-container="body" data-original-title="help" data-toggle="tooltip" title=""></i>-->
+      <!--</td>-->
+      <!--<td>Lorem ipsum dolor sit amet</td>-->
+      <!--<td><i aria-hidden="true" class="icon wb-chat"><span class="m-l-5">18</span></i></td>-->
+      <!--<td><span>3 days ago</span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>-->
+    <!--</tr>-->
+    </tbody>
+  </table>
+</div>

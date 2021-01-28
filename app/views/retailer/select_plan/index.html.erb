@@ -1,0 +1,210 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::SETTINGS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/orders/shared/menu" %>
+  <div class="page-main">
+    <div class="page-content">
+      <div class="row">
+      <%= render :partial=>"shared/alerts" %>
+    </div>
+      <br>
+
+      <% if current_spree_user.confirmed? %>
+
+      <div class="row">
+        <div class="card card-inverse bg-warning">
+          <div class="card-block">
+            <h4 class="card-title">Select a pricing plan</h4>
+            <p class="card-text">You are moments away from obtaining the superpower to sell any product in the world. Please select a plan below to continue.</p>
+          </div>
+        </div>
+      </div>
+      <%#= current_spree_user.confirmed? %>
+
+
+      <div class="row">
+        <div class="card card-inverse" style="background-color:#430398">
+          <div class="card-block">
+            <h4 class="card-title">Psssst.. Are you a former MXED retailer?</h4>
+            <p class="card-text">We are making you a special offer. Please click the link below to learn more.</p>
+            <div class="col-4">
+            <p class="mt-15">
+              <%= link_to 'Learn More', 'https://www.hingeto.com/special-offer',
+                          target: '_blank',
+                          class: "btn btn-success"%>
+              <!--<button class="btn btn-link white" type="button">Or this</button>-->
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-example" style="margin-top:0px;">
+        <div class="example">
+          <div class="pricing-table">
+            <div class="pricing-column-three">
+              <div class="pricing-header">
+                <div class="pricing-price">
+                  <span class="pricing-currency">$</span>
+                  <span class="pricing-amount">199</span>
+                  <span class="pricing-period">/ mo</span>
+                </div>
+                <div class="pricing-title">Core</div>
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <strong>Daily</strong> Inventory Updates</li>
+                <li>
+                  <strong>Daily</strong> Order updates</li>
+                <li>
+                  <strong>General</strong> Catalog</li>
+                <li>
+                  Add up to <strong>200</strong> Products monthly</li>
+
+                <li>
+                  Up to <strong>500 </strong> Monthly Orders</li>
+
+                <li>
+                  Up to <strong>2 </strong> Team Members</li>
+
+                <li>
+                  <strong>General </strong> Support (Email)</li>
+
+                <li>
+                  &nbsp;
+                </li>
+
+              </ul>
+              <div class="pricing-footer">
+                <%= link_to 'Begin Today', pricing_plan_path(role: 'retailer', plan_id: 'retailer-core'),
+                            class: "btn btn-block btn-primary" %>
+              </div>
+            </div>
+            <div class="pricing-column-three featured">
+              <div class="pricing-header">
+                <div class="pricing-price">
+                  <span class="pricing-currency">$</span>
+                  <span class="pricing-amount">499</span>
+                  <span class="pricing-period">/ mo</span>
+                </div>
+                <div class="pricing-title">Premium</div>
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <strong>Hourly</strong> Inventory Updates</li>
+                <li>
+                  <strong>Hourly</strong> Order updates</li>
+                <li>
+                  <strong>General & Exclusive</strong> Catalog</li>
+                <li>
+                  Add up to <strong>2,500</strong> Products monthly</li>
+                <li>
+                  Up to <strong>5,000 </strong> Monthly Orders</li>
+                <li>
+                  Up to <strong>5 </strong> Team members</li>
+
+                <li>
+                  <strong>Dedicated </strong> Support (Email)</li>
+
+                <li>
+                  Ability to refer vendors (coming soon)
+                </li>
+              </ul>
+              <div class="pricing-footer">
+                <%= link_to 'Begin Today', pricing_plan_path(role: 'retailer', plan_id: 'retailer-premium'),
+                            class: "btn btn-block btn-primary" %>
+              </div>
+            </div>
+            <div class="pricing-column-three">
+              <div class="pricing-header">
+                <div class="pricing-price">
+                  <span class="pricing-currency"></span>
+                  <span class="pricing-amount">Contact us</span>
+                  <span class="pricing-period"></span>
+                </div>
+                <div class="pricing-title">Enterprise</div>
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <strong>Near Real Time</strong> Inventory Updates</li>
+                <li>
+                  <strong>Near Real Time</strong> Order updates</li>
+                <li>
+                  <strong>General + Exclusive + Private</strong> Catalog</li>
+                <li>
+                  Add <strong>Unlimited</strong> Products</li>
+                <li>
+                  <strong>Unlimited </strong> Monthly Orders</li>
+
+                <li>
+                  Add <strong>Unlimited </strong> Team Members</li>
+
+                <li>
+                  <strong>Dedicated </strong> Support (Email + Phone)</li>
+
+                <li>
+                  <strong>Full service</strong> vendor recruitment & management</li>
+
+              </ul>
+              <div class="pricing-footer">
+                <%= link_to 'Contact Us', 'https://www.hingeto.com/contact-us',
+                            class: "btn btn-block btn-primary", target: "_blank" %>
+              </div>
+            </div>
+            <!--<div class="pricing-column-four">-->
+              <!--<div class="pricing-header">-->
+                <!--<div class="pricing-price">-->
+                  <!--<span class="pricing-currency">$</span>-->
+                  <!--<span class="pricing-amount">70</span>-->
+                  <!--<span class="pricing-period">/ mo</span>-->
+                <!--</div>-->
+                <!--<div class="pricing-title">Flagship</div>-->
+              <!--</div>-->
+              <!--<ul class="pricing-features">-->
+                <!--<li>-->
+                  <!--<strong>10GB</strong> of Lorem ipsum</li>-->
+                <!--<li>-->
+                  <!--<strong>200MB</strong> Max File Size</li>-->
+                <!--<li>-->
+                  <!--<strong>2GHZ</strong> CPU</li>-->
+                <!--<li>-->
+                  <!--<strong>256MB</strong> Memory</li>-->
+                <!--<li>-->
+                  <!--<strong>8 GB</strong> Storage</li>-->
+              <!--</ul>-->
+              <!--<div class="pricing-footer">-->
+                <!--<a class="btn btn-primary btn-outline" role="button" href="#"><i class="icon wb-arrow-right font-size-16 mr-15" aria-hidden="true"></i>Add to card</a>-->
+              <!--</div>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+
+
+
+      <br>
+
+      <h3>Other great stores leveraging TeamUp</h3>
+      <div class="referral-partner-logos">
+        <%= image_tag 'partner-logos/group.png', class: 'brand-img img-responsive brand-logos' %>
+      </div>
+      <br>
+      <br>
+
+      <% end %>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+</body>

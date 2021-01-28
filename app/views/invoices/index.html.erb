@@ -1,0 +1,70 @@
+<% content_for :title, "Invoices" %>
+<% content_for :main_menu, Hingeto::Section::INVOICES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Invoices</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+        <!--<div class="panel-heading">-->
+        <!--<h3 class="panel-title">Tabs In The Panel</h3>-->
+        <!--</div>-->
+        <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+          <% statuses = [:approved, :scheduled, :void, :sent, :closed, :draft, :all] %>
+          <%# statuses = [:exampleTopHome, :exampleTopComponents, :exampleTopCss, :exampleTopJavascript] %>
+          <% statuses.each_with_index do |status, i| %>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#<%= status.to_s %>" aria-controls="<%= status.to_s %>" role="tab" aria-expanded="false"><i class="icon wb-file" aria-hidden="true"></i><%= status.to_s.capitalize %></a>
+              </li>
+          <% end %>
+
+          <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopComponents" aria-controls="exampleTopComponents" role="tab" aria-expanded="true"><i class="icon wb-tag" aria-hidden="true"></i>Delivered</a></li>-->
+          <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopCss" aria-controls="exampleTopCss" role="tab" aria-expanded="false"><i class="icon wb-tag" aria-hidden="true"></i>Cancelled</a></li>-->
+          <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopJavascript" aria-controls="exampleTopJavascript" role="tab" aria-expanded="false"><i class="icon wb-tag" aria-hidden="true"></i>All</a></li>-->
+          <li class="dropdown nav-item" style="display: none;">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Dropdown </a>
+            <div class="dropdown-menu" role="menu">
+              <% statuses.each_with_index do |status, i| %>
+              <a class="dropdown-item" data-toggle="tab" href="#<%= status.to_s %>" aria-controls="<%= status.to_s %>" role="tab"><i class="icon wb-file" aria-hidden="true"></i><%= status.to_s.capitalize %></a>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+        <div class="panel-body">
+              <div class="tab-content">
+                <% statuses.each_with_index do |status, i| %>
+                  <div class="tab-pane<%= i==0 ? " active":"" %>" id="<%= status.to_s %>" role="tabpanel" aria-expanded="<%= i== 0 ? "true" :  "false" %>">
+                    <%= render partial: "invoices/shared/table", locals: {statuses: statuses, status: status} %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+    <%= render "shared/platform/footer" %>
+
+    &nbsp;
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3">
+    <button type="button" class="btn btn-dark"><i class="icon wb-upload" aria-hidden="true"></i> Search</button>
+  </div>
+</div></body>

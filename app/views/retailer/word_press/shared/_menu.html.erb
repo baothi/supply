@@ -1,0 +1,37 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Explore</h5>
+          <div class="list-group">
+            <!-- <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::PRODUCTS) %>" href="/retailer/products"><i class="icon fa fa-home" aria-hidden="true"></i>Overview</a> -->
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::SEARCH) %>" href="/retailer/products/list"><i class="icon wb-search" aria-hidden="true"></i>Search</a>
+            <% if admin_user? || current_retailer.can_view_supplier_name %>
+              <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::BY_SUPPLIER) %>" href="/retailer/products/by-supplier"><i class="icon wb-search" aria-hidden="true"></i>By Supplier</a>
+            <% end %>
+          </div>
+          <h5 class="page-aside-title">My Store</h5>
+          <div class="list-group">
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::LIVE_PRODUCTS) %>" href="/retailer/products/live">
+              <i class="icon fa-globe" aria-hidden="true"></i>Live Products
+              <span class="tag tag-pill tag-success"><%= @num_live_products %></span>
+            </a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::IN_PROGRESS) %>" href="/retailer/products/in_progress">
+              <i class="icon fa-exchange" aria-hidden="true"></i>In Progress
+              <span class="tag tag-pill tag-danger"><%= @export_error_count %></span>
+              <span class="tag tag-pill tag-info"><%= @export_in_progress_count %></span>
+            </a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::MY_FAVORITES) %>" href="/retailer/products/favorites"><i class="icon fa-star" aria-hidden="true"></i>My Favorites</a>
+            <a class="list-group-item <%= check_if_active_css(yield(:inner_menu), Hingeto::Section::FOLLOWINGS) %>" href="/retailer/products/followings"><i class="icon fa-thumbs-up" aria-hidden="true"></i>Followings</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

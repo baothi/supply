@@ -1,0 +1,36 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::POLICIES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <!-- <h3 class="panel-title">General</h3> -->
+        </div>
+        <div class="panel-body">
+          <%= render 'policies_faq' %>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>
+

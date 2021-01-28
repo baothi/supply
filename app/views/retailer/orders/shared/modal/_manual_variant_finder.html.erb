@@ -1,0 +1,98 @@
+
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  <!-- Modal -->
+<div class="modal fade manual-variant-finder-algolia" id="manualVariantFinder" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple  modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close mmk" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Select Product</h4>
+        <h5 class="modal-title" id="selecting-variant-for-product">Selecting Variant for </h5>
+      </div>
+      <div class="modal-body">
+        <header>
+          <div class="manual-variant-finder-aloglia-search-box">
+             <input id="search-input" style="width: 100%;" placeholder="Search for products">
+             <!-- We use a specific placeholder in the input to guides users in their search. -->
+          </div>
+        </header>
+
+        <main>
+          <div id="hits" class="manual-variant-finder-algolia-hits"></div>
+          <div id="pagination"></div>
+        </main>
+        <%= hidden_field_tag :line_item_identifier %>
+
+        <script type="text/html" id="hit-template">
+          <div class="hit">
+            <input type="hidden", value="{{{internal_identifier}}}" name="product_id"/>
+            <p class="hit-name">{{{_highlightResult.name.value}}}</p>
+          </div>
+        </script>
+        <div class="show-variants">
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var search = instantsearch({
+// Replace with your own values
+   appId: '<%= ENV['ALGOLIASEARCH_APPLICATION_ID'] %>',
+    apiKey: '<%= ENV['ALGOLIASEARCH_API_KEY_SEARCH'] %>',
+    indexName: '<%= Spree::Product.index_name %>',
+    searchParameters: {
+      hitsPerPage: 10
+    }
+  });
+
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#search-input'
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#hits',
+      templates: {
+        item: document.getElementById('hit-template').innerHTML,
+        empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
+      }
+    })
+  );
+
+  search.start();
+  $(document).on("keyup", ".manual-variant-finder-aloglia-search-box .ais-search-box--input", function(e){
+    q = $(".manual-variant-finder-aloglia-search-box .ais-search-box--input").val();
+    if(q.length > 0){
+      $(".manual-variant-finder-algolia-hits").show();
+    }
+
+  })
+  $(document).on("click", ".ais-hits--item", function(e) {
+    $(".manual-variant-finder-algolia-hits").hide();
+    var selectedProductName =  $(this).find('.hit-name').text();
+    $("#search-input").val(selectedProductName)
+    var product_id = $(this).find("input[name='product_id']").val();
+    if (product_id) {
+      $('.show-variants').html("<div class='spinner'></div>")
+      var url = "/retailer/products/get_variants"
+      $.ajax({
+          type: "GET",
+          url: url,
+          data: { product_id: product_id }
+      })
+    }
+  });
+</script>
+
+

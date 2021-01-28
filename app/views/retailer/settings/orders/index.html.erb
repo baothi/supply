@@ -1,0 +1,41 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::ORDERS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+ <div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render :partial=>"shared/alerts" %>
+      <h1 class="page-title">Orders</h1>
+    </div>
+     <div class="page-content">
+       <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Auto Order Payment</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag retailer_auto_payment_setting_retailer_settings_orders_path do %>
+            <div class="row">
+              <div class="col-md-7">
+                <label><%= check_box_tag :auto_pay, true, current_retailer.order_auto_payment %> Automatically pay for my orders</label>
+              </div>
+              <div class="col-md-5">
+                <p>By checking this option, we'll automatically try to pay for your orders once they come in using your default payment card.</p>
+                <p><em><strong>NOTE:</strong> We will only auto-pay for an order if it is NOT more than $100.00.</em></p>
+                <p><em><strong>NOTE:</strong> This feature will only work if you have added your credit card</em></p>
+              </div>
+            </div>
+            <%= submit_tag 'Save', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

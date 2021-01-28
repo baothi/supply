@@ -1,0 +1,42 @@
+d<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <%= image_tag 'teamup-horizontal.png',
+                    class:'img-responsive',
+                    style: "margin-bottom: 6px;",
+                    width: '160px' %>
+
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <h3 class="font-size-24">Forgot Your Password?</h3>
+      <p>Enter your email address and shopify name <br>to get your password recovery link</p>
+      <%= render :partial=>"shared/alerts" %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name),  method: :post, class: "login-form") do |f| %>
+        <%= render "shared/devise_errors", resource: resource %>
+
+        <div class="form-group">
+          <%= f.label :email, "Email", class: "sr-only" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Enter your email address", autofocus: "autofocus", required: 'required' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Send me reset password instruction', class: 'btn btn-primary form-button' %>
+        </div>
+      <% end %>
+
+      <p>Not yet signed up? <%= link_to "Sign Up Now", root_path %></p>
+      <p>Remember your password? <%= link_to "Sign In", new_spree_user_session_path %></p>
+
+      <footer class="page-copyright">
+        <p>powered by DiCentral <%= image_tag "dicentral-square-24px-blue.png", class:"img-responsive" %></p>
+      </footer>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

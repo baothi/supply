@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <th>Order #</th>
+      <th>Channel</th>
+      <th>Ship Date</th>
+      <th>Retail Price</th>
+      <th>Discount Price</th>
+      <th>Quantity</th>
+      <th>Vendor Commission</th>
+      <th>Shipping</th>
+      <th>Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% (1..4).each do |i| %>
+        <%
+          retail_price = Faker::Number.between(50, 120)
+          discount_price = (Faker::Number.between(0, 100) / 100.to_f)*retail_price
+          quantity = Faker::Number.between(1, 10)
+          vendor_commission = Faker::Number.between(1, 10)
+          balance = Faker::Number.between(1, 10)
+          shipping = Faker::Number.between(1, 0)
+        %>
+        <tr>
+          <td><a href="/orders/details">#HNG-<%= Faker::Number.number(3) %>-<%= Faker::Number.number(5) %></a></td>
+          <td>Marketplace</td>
+          <td><span><%= Faker::Date.forward(23) %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+          <td><span><%= number_to_currency retail_price %></span></td>
+          <td><span><%= number_to_currency discount_price %></span></td>
+          <td><span><%= quantity %></span></td>
+          <td><span><%= number_to_currency vendor_commission %></span></td>
+          <td><span><%= number_to_currency shipping %></span></td>
+          <td><%= colored_dollar_amount(number_to_currency (balance)) %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <% total = Faker::Number.between(1, 300) %>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td><%= number_to_currency total %></td>
+      <td><%= number_to_currency total %></td>
+      <td></td>
+      <td><%= number_to_currency total %></td>
+      <td><%= number_to_currency total %></td>
+      <td><%= colored_dollar_amount(number_to_currency (total)) %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

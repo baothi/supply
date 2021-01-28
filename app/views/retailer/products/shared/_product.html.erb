@@ -1,0 +1,56 @@
+<figure class="overlay overlay-hover animation-hover">
+    <div class="media-item" data-toggle="slidePanel" data-url="panel.tpl">
+      <div class="image-wrap">
+        <div class="grid-listing-img" style="background-image:url(<%=  product.master.listing_image %>)"></div>
+      </div>
+      <div class="info-wrap">
+        <div class="title product-title"><%= product.propercase_name  %></div>
+      </div>
+    </div>
+    <figcaption class="overlay-panel overlay-background overlay-fade text-center">
+      <div class="spinner" style="display: none" id="spinner-<%= product.internal_identifier %>"></div>
+
+      <% product_listing = product.retailer_listing(current_retailer) %>
+      <% if yield(:inner_menu) == 'live_products' && product_listing %>
+          <%= link_to retailer_delete_from_shopify_path(product_listing.internal_identifier) do %>
+              <button type="button" class="btn btn-inverse product-button">Delete Product</button>
+          <% end %>
+      <% else %>
+          <div class='fav-action'>
+            <%= render partial: 'retailer/products/shared/favorite_links', locals: {product: product} %>
+          </div>
+      <% end %>
+      <% if product.live?(current_retailer.id) %>
+        <% if shopify_link = shopify_url(product) %>
+          <%= link_to shopify_link, target: :blank do %><button type="button" class="btn btn-inverse product-button">Open in Shopify</button>
+          <% end %>
+        <% end %>
+      <% else %>
+          <% if product.can_be_added_to_store? %>
+              <% export_process = product.locate_export_in_progress(current_retailer) %>
+                 <% if export_process.present? && export_process.in_progress? %>
+                  <% if export_process.updated_less_than_15_minutes_ago? %>
+                      <button type="button" class="btn btn-inverse disabled" style="color: #76838f" disabled>Export In Progress</button>
+                  <% else %>
+                      <%= link_to retailer_cancel_export_path(product.internal_identifier), id: "cancel-#{product.internal_identifier}" do %>
+                        <button type="button" class="btn btn-danger cancel-export-button product-button">Cancel Export</button>
+                      <% end %>
+                  <% end %>
+
+              <% else %>
+                  <%= link_to retailer_add_to_shopify_path(product.internal_identifier), remote: true do %>
+                      <button type="button"  id="add-to-shopify-<%= product.internal_identifier %>" data-product="<%= product.internal_identifier %>" class="btn btn-inverse product-button add-to-shopify-btn">Add To Shopify</button>
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end %>
+      <%= link_to retailer_product_details_path(product.internal_identifier) do %><button type="button" class="btn btn-inverse product-button">View Details</button><% end %>
+    </figcaption>
+  </figure>
+  <script>
+
+    $(".add-to-shopify-btn").on("click", function(){
+      product = $(this).data('product')
+      $("#spinner-" + product).show();
+    })
+  </script>

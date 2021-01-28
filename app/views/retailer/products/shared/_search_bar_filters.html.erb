@@ -1,0 +1,24 @@
+<div id="product-filters">
+  <label>
+    <%= check_box_tag 'exclude_shopify_products', "yes", params[:exclude_shopify_products] == "yes" %> Exclude items from my store
+
+  </label>
+  &nbsp;&nbsp;
+  &nbsp;
+  <label>
+    <%= check_box_tag 'exclude_zero_inventory', "yes", params[:exclude_zero_inventory]=="yes" %> Exclude zero inventory items
+
+  </label>
+  &nbsp;
+  &nbsp;
+  <label>
+    <%= check_box_tag 'exclude_us_only_product', "yes", params[:exclude_us_only_product]=="yes" %> Exclude products ineligible for international sale/stores
+  </label>
+   &nbsp;
+  &nbsp;
+  <label>
+    <%# default checked %>
+    <%= check_box_tag 'exclude_deactivated_items', "yes", params[:exclude_deactivated_items]=="yes" %> Exclude deactivated items
+  </label>
+
+</div>

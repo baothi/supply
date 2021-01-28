@@ -1,0 +1,48 @@
+<div class="modal fade in order-payment" id="paymentInformation" aria-hidden="false" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+<%= render "retailer/orders/shared/spinner" %>
+  <div class="modal-dialog modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="close">×</span>
+        </button>
+        <h4 class="modal-title"><strong>Payment</strong></h4>
+      </div>
+      <div class="modal-body">
+        <% @cards.each do |card| %>
+          <%= link_to retailer_orders_switch_card_path(internal_identifier: card.internal_identifier), remote: true do %>
+            <div class="select-other-payment-div" data-toggle="modal" data-dismiss="modal">
+              <div class="row pay-with-row">
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label style="font-size: 18px;"><%= card.last_four_fancy %></label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span class="credit-label">Credit Card</span>
+                    </div>
+                  </div>
+                </div>
+                 <div class="col-md-4">
+                  <i class="card-logo <%= card_logo(card.brand) %>" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <div class='pay-now-div'>
+          <button type="button" class="btn btn-block btn-default"  data-target="#newPaymentMethod" id="add-new-payment-method" data-toggle="modal" data-dismiss="modal">ADD NEW PAYMENT METHOD</button>
+        </div>
+        <div class="centered with-margin-top">
+          <span class= "select-other-payment back-to-payment">Cancel</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

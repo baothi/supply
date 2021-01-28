@@ -1,0 +1,11 @@
+Subscription plan charge receipt
+
+Bill To: <%= @strippable.name %>
+Brand Name: <%= @strippable.name %>
+Receipt Number: #<%= @invoice.receipt_number %>
+Date: <%= Hingeto::Dropshipper.format_date(@invoice.date) %>
+
+Description: <%= @invoice.statement_descriptor || 'Default invoice description' %>
+Total Amount: <%= number_to_currency(@invoice.total_in_dollars) %>
+
+Have a question? Send us email

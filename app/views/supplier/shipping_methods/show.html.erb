@@ -1,0 +1,78 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::SHIPPING_METHODS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+
+<div class="page">
+  <%= render "#{@team_type}/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Manage <%= @shipping_method.name %></h1>
+    </div>
+
+    <div class="page-content">
+
+    <%= render :partial=>"shared/alerts" %>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Manage <%= @shipping_method.name %></h3>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+
+            <%= form_for(:mapped_shipping_method,
+                         :url => supplier_update_shipping_method_mapping_path(
+                             service_code: @shipping_method.service_code
+                         )
+                ) do |f| %>
+
+            <div class="form-group col-sm-12">
+              <label class="control-label" for="inputBasicFirstName">TeamUp Value</label>
+              <%= text_field_tag 'service_code', @shipping_method.service_code, class:"form-control", disabled: true %>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="control-label" for="inputBasicFirstName">TeamUp Display Name</label>
+              <%= text_field_tag 'service_name', @shipping_method.service_name, class:"form-control", disabled: true %>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="control-label" for="inputBasicFirstName">Supplier Value</label>
+              <%= f.text_field :value, class:"form-control", :placeholder =>'Enter retailer value to map this shipping method to e.g. PSOD', required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit "Update Mapping", class: "btn btn-primary" -%>
+            </div>
+
+
+            <% end %>
+          </div>
+
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

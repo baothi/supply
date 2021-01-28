@@ -1,0 +1,75 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_SUPPLIER %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    <div class='ajax-alert'>
+      <%= render :partial=>"shared/alerts" %>
+
+    </div>
+    <br/>
+    </div>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+          <div class="row license-info">
+            <div class='col-md-4 col-sm-6'>
+              <div class="license-banner">
+                <%= image_tag((@supplier.logo.exists? ? @supplier.logo : image_placeholder), class: 'standard-width', alt: "#{@supplier.display_name}") %>
+              </div>
+            </div>
+            <div class='col-md-1'>
+              &nbsp;
+            </div>
+            <div class=col-md-5>
+              <div class="row">
+                <div class=col-md-12>
+                  <div class=""><strong><%= @supplier.display_name %></strong></div>
+                  <div><%#=  @supplier.description %></div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1em;">
+                <div class=col-md-4>
+                  <%#= button_to (current_retailer.following?(@license) ? "UNFOLLOW" : "FOLLOW"), follow_unfollow_retailer_taxon_path(@license.id), id: "follow-taxon-bottom", class: "btn btn-raised btn-block #{current_retailer.following?(@license) ? 'btn-default' : 'btn-primary'}", remote: true %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class=col-md-3>
+              <div><strong>
+                <%= link_to "All Products", retailer_list_products_by_supplier_path(@supplier.slug) %>
+              </strong></div>
+              <div class="with-margin-top" id="product-categories"></div>
+            </div>
+            <div class=col-md-9>
+
+              <%= render "retailer/products/shared/list" %>
+              <%= paginate @products , theme: 'twitter-bootstrap-4' %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<%= render "shared/platform/footer" %>
+</body>

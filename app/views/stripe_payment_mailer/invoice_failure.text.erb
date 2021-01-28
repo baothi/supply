@@ -1,0 +1,8 @@
+Hello <%= @strippable.name %>,
+
+After the <%= @invoice.attempt_count.ordinalize %> attempt, we're unable to charge your charge your card. It's likely that your card has expired or has been blocked by your bank. Please update your card details or add another card from the "Billing Information" page.
+
+<% if @invoice.next_payment_attempt %>
+We'll attempt to charge you again on <%= Hingeto::Dropshipper.format_date(@invoice.next_payment_attempt) %> for the <%= (@invoice.attempt_count + 1).ordinalize %> time
+<% end %>
+Do send us a mail if you need assistance.

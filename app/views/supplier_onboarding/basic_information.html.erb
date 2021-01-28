@@ -1,0 +1,102 @@
+
+<body class="animsition page-register-v3 layout-full">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page vertical-align text-xs-center" data-animsition-in="fade-in" data-animsition-out="fade-out">>
+  <div class="page-content vertical-align-middle animation-slide-top animation-duration-1">
+    <div class="panel" style="width:500px">
+      <div class="panel-body">
+        <%= render partial: 'supplier_onboarding/shared/logo' %>
+        <br>
+        <div class="pearls row">
+          <div class="pearl col-xs-3 done current" aria-expanded="true">
+            <div class="pearl-icon"><i class="icon wb-user" aria-hidden="true"></i></div>
+            <span class="pearl-title">Basic Info</span>
+          </div>
+          <div class="pearl col-xs-3 disabled" aria-expanded="false">
+            <div class="pearl-icon"><i class="icon wb-payment" aria-hidden="true"></i></div>
+            <span class="pearl-title">Banking Info</span>
+          </div>
+          <div class="pearl col-xs-3 disabled" aria-expanded="false">
+            <div class="pearl-icon"><i class="icon wb-payment" aria-hidden="true"></i></div>
+            <span class="pearl-title">Contact</span>
+          </div>
+          <div class="pearl col-xs-3 disabled" aria-expanded="false">
+            <div class="pearl-icon"><i class="icon wb-check" aria-hidden="true"></i></div>
+            <span class="pearl-title">Terms & Agreement</span>
+          </div>
+        </div>
+
+
+        <form method="get" style="margin-top:50px" action="/supplier_onboarding/payment_information">
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="text" class="form-control" name="name" value="Brand Name" disabled/>
+            <label class="floating-label">Brand Name</label>
+          </div>
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="text" class="form-control" name="email" value="brand@brand.com" disabled/>
+            <label class="floating-label">Email Address</label>
+          </div>
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="text" class="form-control" name="full_name" value="Julian Moore" disabled />
+            <label class="floating-label">Full Name</label>
+          </div>
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="password" class="form-control" name="password" />
+            <label class="floating-label">Password</label>
+          </div>
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="password" class="form-control" name="PasswordCheck" />
+            <label class="floating-label">Re-enter Password</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg m-t-40">Next</button>
+        </form>
+        <p>Have account already? Please go to <a href="login-v3.html">Sign In</a></p>
+      </div>
+    </div>
+    <footer class="page-copyright page-copyright-inverse">
+
+      <p style="color:#000;">powered by DiCentral <%= image_tag "dicentral-square-24px-blue.png", class:"img-responsive", alt:"Logo" %></p>
+
+      <!--<div class="social">-->
+        <!--<a class="btn btn-icon btn-pure" href="javascript:void(0)">-->
+          <!--<i class="icon bd-twitter" aria-hidden="true"></i>-->
+        <!--</a>-->
+        <!--<a class="btn btn-icon btn-pure" href="javascript:void(0)">-->
+          <!--<i class="icon bd-facebook" aria-hidden="true"></i>-->
+        <!--</a>-->
+        <!--<a class="btn btn-icon btn-pure" href="javascript:void(0)">-->
+          <!--<i class="icon bd-google-plus" aria-hidden="true"></i>-->
+        <!--</a>-->
+      <!--</div>-->
+    </footer>
+  </div>
+</div>
+
+<!-- End Page -->
+<!-- Core  -->
+<!-- Scripts -->
+<!--<script src="../../../global/js/State.js"></script>-->
+<!--<script src="../../../global/js/Component.js"></script>-->
+<!--<script src="../../../global/js/Plugin.js"></script>-->
+<!--<script src="../../../global/js/Base.js"></script>-->
+<!--<script src="../../../global/js/Config.js"></script>-->
+<!--<script src="../../assets/js/Section/Menubar.js"></script>-->
+<!--<script src="../../assets/js/Section/GridMenu.js"></script>-->
+<!--<script src="../../assets/js/Section/Sidebar.js"></script>-->
+<!--<script src="../../assets/js/Section/PageAside.js"></script>-->
+<!--<script src="../../assets/js/Plugin/menu.js"></script>-->
+<!--<script src="../../../global/js/config/colors.js"></script>-->
+<!--<script src="../../assets/js/config/tour.js"></script>-->
+
+<!-- Page -->
+<!--<script src="../../assets/js/Site.js.erb"></script>-->
+<!--<script src="../../../global/js/Plugin/asscrollable.js"></script>-->
+<!--<script src="../../../global/js/Plugin/slidepanel.js"></script>-->
+<!--<script src="../../../global/js/Plugin/switchery.js"></script>-->
+<!--<script src="../../../global/js/Plugin/jquery-placeholder.js"></script>-->
+<!--<script src="../../../global/js/Plugin/material.js"></script>-->
+
+</body>

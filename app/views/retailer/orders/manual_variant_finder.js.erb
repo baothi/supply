@@ -1,0 +1,15 @@
+
+<% if @variant.present? %>
+ $("#<%= @line_item_selector %>").append($('<option>', {
+    value: "<%= @variant.internal_identifier %>",
+    text: "<%= raw @variant.full_presentation %>",
+    selected: 'selected'
+  }));
+
+$("#manual_variant-finder-div").html("<%= escape_javascript render(:partial => 'retailer/orders/shared/modal/manual_variant_finder') %>");
+$(".modal-backdrop").remove();
+$('.show-variants').empty();
+
+<% else %>
+  $(".pair-error").show();
+<% end %>

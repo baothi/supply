@@ -1,0 +1,6 @@
+<%= render partial: 'retailer/products/shared/download_latest_images', locals: {product: @product} %>
+<br>
+<%= link_to retailer_resync_product_path(@product.internal_identifier) do %>
+  <button type="button" class="btn btn-success listings_action-btn" style="width:100%">Resync From Shopify</button>
+<% end %>
+<small align="center" style="margin: 0 auto;">Resync product from supplier shopify store.</small>

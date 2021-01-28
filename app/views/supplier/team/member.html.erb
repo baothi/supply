@@ -1,0 +1,113 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::TEAM %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render :partial=>"shared/alerts" %>
+      <h1 class="page-title">Team</h1>
+    </div>
+
+    <div class="page-content">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Team Member Information</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="control-label" for="inputBasicFirstName">Email Address</label>
+              <%= email_field_tag nil, @team_member.user.email, class: "form-control", :readonly => true %>
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label class="control-label" for="inputBasicFirstName">First Name </label>
+              <%= text_field_tag nil, @team_member.user.first_name, class: "form-control", readonly: true %>
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="control-label" for="inputBasicFirstName">Last Name </label>
+              <%= text_field_tag nil, @team_member.user.last_name, class: "form-control", readonly: true %>
+            </div>
+          </div>
+
+          <% if current_spree_user.supplier_owner_or_admin? %>
+            <% if @team_member.user.id == current_spree_user.id %>
+              <label class="control-label" for="inputBasicFirstName">Account Role </label>
+              <%= text_field_tag nil, @team_member.role.name.humanize.titleize, class: "form-control", readonly: true %>
+              <em>You cannot update your own role</em>
+            <% elsif @team_member.role.name == Spree::Supplier::SUPPLIER_OWNER %>
+              <label class="control-label" for="inputBasicFirstName">Account Role </label>
+              <%= text_field_tag nil, @team_member.role.name.humanize.titleize, class: "form-control", readonly: true %>
+              <em>You cannot update the Retailer Owner's role</em>
+            <% else %>
+              <%= form_for(@team_member, :url => { :action => "update_account"}) do |f| %>
+                <%= f.hidden_field :internal_identifier %>
+
+                <div class="row">
+                  <div class="form-group col-sm-12">
+                    <label class="control-label" for="inputBasicFirstName">Account Role</label>
+                  <%= f.select :role_id, options_for_select(Spree::Role.where(name: ['supplier_admin']).map { |role| [role.name.humanize.titleize, role.id] }, @team_member.role_id), { prompt: "Please select account's role" }, class: "form-control" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= f.submit "Update Role", class: "btn btn-primary" -%>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <label class="control-label" for="inputBasicFirstName">Account Role </label>
+            <%= text_field_tag nil, @team_member.role.name.humanize.titleize, class: "form-control", readonly: true %>
+          <% end %>
+
+        </div>
+      </div>
+      <!-- Remove Team Member -->
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Remove Team Member</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <p>Deleted team members accounts will be permanently removed from your account. This action cannot be reversed!</p>
+            </div>
+          </div>
+
+          <% if current_spree_user.supplier_owner_or_admin? %>
+            <% if @team_member.user.id == current_spree_user.id %>
+              <em>You cannot remove your own account.</em>
+            <% elsif @team_member.role.name == Spree::Supplier::SUPPLIER_OWNER %>
+              <em>You cannot remove the Retailer Owner. Please first assign the Supplier Owner role to another user before removal.</em>
+            <% else %>
+              <%= form_for(@team_member, :url => { :action => "delete_account"}) do |f| %>
+                <%= f.hidden_field :internal_identifier %>
+
+                <div class="form-group">
+                  <%= f.submit "Remove Member", class: "btn btn-danger" -%>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <label class="control-label" for="inputBasicFirstName">Account Role </label>
+            <%= text_field_tag nil, @team_member.role.name.humanize.titleize, class: "form-control", readonly: true %>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

@@ -1,0 +1,26 @@
+<div class="new-card">
+  <div class="row with-large-top-bottom-margin">
+    <%= form_tag save_billing_card_retailer_payments_path, id: "stripe-form", authenticity_token: true,  style: "margin:0px 0px 0px 0px;" do %>
+      <div id="error-alert" class="alert alert-danger hidden" role="alert"></div>
+      <label>
+        <span>Name</span>
+        <input name="cardholder-name" class="field" placeholder="Jane Doe" required="required" />
+      </label>
+      <label>
+        <span>ZIP code</span>
+        <input name="address-zip" class="field" placeholder="94110" />
+      </label>
+      <%= hidden_field_tag :token, nil, class: 'token' %>
+      <div id="card-element" class="field">
+        <!-- a Stripe Element will be inserted here. -->
+      </div>
+
+      <div style="margin-top: 2em;">
+        <%= button_tag id: "continue-payment-method", class: "btn btn-primary" do %>
+          <span class="stripe-payment-button-content">Add Credit Card</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

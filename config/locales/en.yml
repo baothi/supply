@@ -31,3 +31,77 @@
 
 en:
   hello: "Hello world"
+  setting_updated_successfully: "%{setting} updated successfully"
+  error_updating_setting: "Error: %{error}"
+  duplicate_retailer_host: "There is an existing Retailer with this host or alternate_host name"
+  cannot_run_in_production: "Cannot run this in production!"
+  in_production: "We are in production!"
+  successfully_dropped_and_recreated_tables: "Successfully dropped & recreated & seeded tables"
+  successfully_loaded_data: "Successfully loaded data"
+  successfully_approved_products: "Successfully approved all products"
+  successfully_declined_products: "Successfully declined all products"
+  database_left_intact: "Databases left intact."
+  no_data_imported: "No data was imported."
+  no_products_approved: "No products were approved."
+  no_products_declined: "No products were declined."
+  title_greater_than_25: "Title must be less than 25 characters"
+  title_with_invalid_symbols: "Title may not contain any invalid symbols"
+  description_greater_than_2000: "Description must be less than 2000 characters"
+  description_with_invalid_symbols: "Description may not contain any invalid symbols"
+  requires_same_sku_and_upc: "Requires same SKU and UPC"
+  error_empty_mapping: "There was an error. You cannot select empty mapping. To clear mapping, please press the clear mapping button"
+  invalid_confirmation: "You did not enter the correct confirmation text. Please try again"
+  successfully_cleared_order_errors: "Order %{number} has been cleared of its errors. You may try submitting it again."
+  order_issue_report_received: "We have received your order complaint and will respond within 3-5 business days"
+  edi:
+    invalid_supplier: "Supplier with Internal Vendor Number: %{internal_vendor_number} not found"
+    invalid_asn_reference: "Error: This ASN references an invalid line item: %{line_number}. Purchase Order Number: %{po_number}"
+    discrepancy_error: "There is a discrepancy between the original amount of %{quantity} & the fulfilled amount of %{shipped_quantity}"
+  active_admin:
+    powered_by: "powered by DiCentral Company"
+    hint:
+      instance_type: "Do not change this without consulting the engineering team"
+      supplier_markup: "If this supplier would like retailers to sell for 40% markup - or more - enter 0.4"
+      retailer:
+        us_default_shipping: "The shipping method to send to supplier for US orders if one isnt specified on order"
+        canada_default_shipping: "The shipping method to send to supplier for Canadian orders if one isnt specified on order"
+        rest_of_world_default_shipping: "The shipping method to send to supplier for Rest of World orders if one isnt specified on order"
+    looking_for_ghost_orders: "We are working on this in the background. Please give platform 15 - 30 minutes."
+    shopify_inventory_audit: "We are working on this in the background. Please give platform 15 - 30 minutes."
+    leaderboard: 'Leader Board'
+  products:
+    shopify:
+      product_import_job_completion: "We have successfully completed the job to bring in products from %{supplier}'s Shopify account. %{num_products} were recently created. <br/><br/>Please check to see if the products were properly brought in."
+    error:
+      deletion_not_allowed: "Sorry. Deletion not allowed as this product has orders/listings associated to it."
+      insufficient_sales_authority: "This product cannot be added to your store at this time."
+      international_retailer: "This product cannot be added to international stores at this time."
+      temporarily_disabled: "We have temporarily disabled product addition. Please try again in 15 minutes."
+      shopify_location_required: "Please select a Shopify location in your <a style='color:white; text-decoration: underline;' href='/retailer/settings/addresses'>settings</a> before adding products."
+      compliance_issue: "This product is not compliant and cannot be added. Please contact support@hingeto.com"
+      bulk_inventory_update_issue: "Bulk inventory update failed at location: %{location_id} for Retailer: %{retailer_id}/%{retailer_name}"
+    success:
+      addition_in_progress: 'Adding Product to Shopify. This can take up to 30 seconds.'
+    compliance:
+      minimum_title_length: "Title must be less than %{num} characters"
+      description_required: "Description is required"
+      requires_images: "Product images are required"
+      variants_require_skus: "All variants must a valid SKUs"
+      variants_require_unique_skus: "All variants must have unique SKUs. %{sku} is not unique"
+      minimum_inventory_required: "We require at least 1 to be in stock. %{sku} only has %{num}"
+      requires_one_variant: "All products must have at least one non-discontinued & compliant variant."
+      check_on_all_supplier_products_confirmation: "There are %{product_count} products being updated. You will receive approximately %{num_emails} email(s) when completed"
+  orders:
+    cannot_cancel_order_request_instead: 'This order has been sent and hence you cannot cancel. Please request cancellation instead'
+    cannot_cancel_order_shipped: 'This order has been shipped and cannot be canceled'
+    cannot_cancel_line_item_shipped: 'This line item has been shipped and cannot be canceled'
+    refunds:
+      successful: "Processed refund for payment: %{number} in the amount of %{amount}"
+      error: "Unable to process refund for: %{number}. Issue was: %{error}"
+      email: "%{order_name} - your payment has been refunded"
+      partial_refund: "%{order_name} - your payment has been partially refunded"
+    cancel:
+          full_cancellation_email: "%{order_name} - your order has been canceled by the supplier"
+          partial_cancellation_email: "%{order_name} - your order has been partially canceled by the supplier"
+    shopify:
+      line_item_cancellation: '%{quantity} x %{title} was canceled by %{app_name} Supplier. Please refund customer'

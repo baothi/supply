@@ -1,0 +1,37 @@
+<div class="col-xl-3 col-md-3 col-xs-6 info-panel">
+  <div class="card card-shadow">
+
+    <% if @team.completed_onboarding_at.present? %>
+
+        <div class="ribbon ribbon-badge ribbon-reverse">
+          <span class="ribbon-inner" style="font-size:11px;">Completed</span>
+        </div>
+
+    <% elsif @team.scheduled_onboarding_at.present? %>
+        <div class="ribbon ribbon-badge ribbon-reverse">
+          <span class="ribbon-inner" style="font-size:11px;">Scheduled</span>
+        </div>
+    <% end %>
+
+    <div class="card-block bg-white p-20">
+      <!--<span class="m-l-15 font-weight-400">REVENUE</span>-->
+      <div class="content-text text-xs-center m-b-0">
+        <span class="font-size-60 font-weight-100"><i class="fa fa-headphones"></i></span>
+        <p class="blue-grey-400 font-weight-100 m-0">Onboard with an onboarding specialist</p>
+        <div style="margin-top:20px">
+          <!--<button type="button" class="btn btn-block btn-primary">Schedule Meeting</button>-->
+
+          <!-- Calendly link widget begin -->
+          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+          <% if @team.scheduled_onboarding_at.present? %>
+              <a class="btn btn-block btn-primary" href="javascript:void(0);" onclick="return alert('To make changes, please reschedule using the link found in the email in the calendar invitation sent to you via email. Please contact teamup-support@dicentral.com if you are having issues rescheduling.'); return false;">Change Appt.</a>
+          <% else @team.onboarding_session_at.nil? %>
+              <a class="btn btn-block btn-primary" href="javascript:void(0);" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/hingeto-onboarding/retailer-onboarding?hide_event_type_details=1&text_color=000000&primary_color=0d0dd6', prefill: { email: '<%= current_spree_user.email %>', name: '<%= current_spree_user.full_name %>'}});return false;">Schedule Meeting</a>
+          <% end %>
+          <!-- Calendly link widget end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

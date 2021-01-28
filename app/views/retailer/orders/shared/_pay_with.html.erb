@@ -1,0 +1,73 @@
+<div class="modal fade in order-payment" id="payWith" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
+<%= render "retailer/orders/shared/spinner" %>
+  <div class="modal-dialog modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title"><strong>Paying with</strong></h4>
+      </div>
+      <div class="modal-body">
+<!--         <div class="size-card"> -->
+        <div class='no-card-div'  style="display: <%= @selected_card.present? ? 'none' : 'block' %>">
+          <h5 class="text-center">You have not added any card yet</h5>
+          <div class="clearfix"></div>
+          <div class='pay-now-div'>
+            <button type="button" class="btn btn-block btn-primary"  data-target="#newPaymentMethod" id="add-new-payment-method" data-toggle="modal" data-dismiss="modal">ADD NEW PAYMENT METHOD</button>
+          </div>
+        </div>
+
+        <div class="main-payment-div" style="display: <%= @selected_card.present? ? 'block' : 'none' %>">
+
+          <div class="pay-with-div">
+            <%= render "retailer/orders/shared/current_payment_method" %>
+          </div>
+        <!-- <hr> -->
+          <div class="row with-large-top-bottom-margin centered">
+            <div class="col-md-6">
+              <span id="order-number"></span>
+            </div>
+            <div class="col-md-6">
+              <span id="order-amount"></span>
+            </div>
+            <div class="col-md-6">
+              <span style="color: #ccc">ORDER</span>
+            </div>
+            <div class="col-md-6">
+              <span style="color: #ccc">TOTAL</span>
+            </div>
+          </div>
+          <div class='pay-now-div'>
+
+          <%= form_tag(retailer_orders_pay_path, method: "post", id: "order-payment-form") do %>
+              <%= hidden_field_tag :order,  "", id: 'payment-form-order-id' %>
+              <%= hidden_field_tag :order_ids,  "", id: 'payment-form-order-internal-id' %>
+              <%= hidden_field_tag :source_identifier, @selected_card&.internal_identifier, id: 'payment-form-source-id' %>
+              <% if retailer.has_credit? %>
+                <label>
+                  <%= check_box_tag :apply_credit, "1", checked: true %>
+                  Apply your credit. <em>(You have <strong>$<%= retailer.total_available_credit || 0.00 %></strong> available credit.)</em>
+                </label>
+              <% end %>
+              <% if @selected_card.present? %>
+                <button type="submit" class="btn btn-block btn-primary" >Pay Now</button>
+              <% else %>
+                <button type="submit" class="btn btn-block btn-default pay-now-btn" disabled='disabled' disabled="disabled" >Pay Now</button>
+              <% end %>
+          <% end %>
+          </div>
+          <div class="centered with-margin-top">
+            <%= link_to retailer_orders_all_cards_path, remote: true do %>
+              <span class= "select-other-payment" id="select-other-payment" data-toggle="modal">or select other payment method</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

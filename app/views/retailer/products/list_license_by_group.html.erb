@@ -1,0 +1,60 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_LICENSE %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-category-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title"><%= link_to "Licenses".html_safe, retailer_products_by_license_path %> > <%= @group.name %></h1>
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    </div>
+
+
+    <div class="page-content">
+      <%= render :partial=>"shared/alerts" %>
+
+      <div class="panel">
+        <% if @taxons.any? %>
+          <div class="panel-heading">
+            <span class="example-title" style="float:right; margin: 20px 30px;">
+              <%= link_to "Return to Overview".html_safe, retailer_products_by_license_path %>
+            </span>
+            <div style="clear:right"></div>
+          </div>
+        <% end %>
+        <div class="panel-body">
+          <div class="row ">
+
+            <% if @taxons.any? %>
+
+              <% @taxons.each do |license| %>
+                <div class="col-md-4 margin-bottom">
+                  <%= link_to retailer_list_products_by_license_path(license.slug) do %>
+                    <div class="item">
+                      <%= image_tag(license.outer_banner, class: 'standard-width ', alt: "#{license.friendly_name}", width: '320px') %>
+                      <p> <%= license.friendly_name %> (~ <%= license.products.marketplace_compliant_and_approved.count %> products)</p>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                <h1 class="panel-heading">License group "<%= params[:name] %>" not found</h1>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

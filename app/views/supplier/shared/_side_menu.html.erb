@@ -1,0 +1,113 @@
+
+
+<div class="site-menubar">
+  <div class="site-menubar-body">
+    <div>
+      <div>
+        <ul class="site-menu" data-plugin="menu">
+          <li class="site-menu-category">General</li>
+
+
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::HOME) %>">
+            <a class="animsition-link" href="/supplier/dashboard">
+              <i class="site-menu-icon wb-home" aria-hidden="true"></i>
+              <span class="site-menu-title">Home</span>
+            </a>
+          </li>
+
+
+          <li class="site-menu-item <%= check_if_open_css(yield(:main_menu), Hingeto::Section::INTEGRATIONS) %> <%= check_if_active_css(yield(:main_menu), Hingeto::Section::INTEGRATIONS) %> has-sub">
+            <%= link_to 'javascript:void(0);', id:'side-menu-integrations', class:'animsition-link' do %>
+                <i class="site-menu-icon wb-hammer" aria-hidden="true"></i>
+                <span class="site-menu-title">Integrations</span>
+            <% end %>
+            <%= render 'supplier/shared/integrations_inner_menu' %>
+          </li>
+
+          <li class="site-menu-item <%= check_if_open_css(yield(:main_menu), Hingeto::Section::ORDERS) %> <%= check_if_active_css(yield(:main_menu), Hingeto::Section::ORDERS) %> has-sub">
+            <a class="animsition-link" href="javascript:void(0)">
+              <i class="site-menu-icon  wb-order" aria-hidden="true"></i>
+              <span class="site-menu-title">Orders</span>
+              <div class="site-menu-badge">
+                <span class="tag tag-pill tag-danger">2</span>
+                <span class="tag tag-pill tag-warning">1</span>
+                <!--<span class="icon wb-lock" aria-hidden="true"></span>-->
+              </div>
+            </a>
+
+            <%= render 'supplier/shared/orders_inner_menu' %>
+          </li>
+
+
+          <!-- <li class="site-menu-item <%#= check_if_active_css(yield(:main_menu), Hingeto::Section::COMPLIANCE) %>">
+            <a class="animsition-link" href="/compliance">
+              <i class="site-menu-icon wb-stats-bars" aria-hidden="true"></i>
+              <span class="site-menu-title">Mailbox</span>
+            </a>
+          </li> -->
+          <li class="site-menu-item <%= check_if_open_css(yield(:main_menu), Hingeto::Section::PRODUCTS) %> <%= check_if_active_css(yield(:main_menu), Hingeto::Section::PRODUCTS) %> has-sub">
+
+          <a class="animsition-link" href="javascript:void(0);">
+              <i class="site-menu-icon wb-tag" aria-hidden="true"></i>
+              <span class="site-menu-title">Products</span>
+              <div class="site-menu-badge">
+                <span class="tag tag-pill tag-success"></span>
+              </div>
+            </a>
+            <%= render 'supplier/shared/products_inner_menu' %>
+          </li>
+
+          <li class="site-menu-item <%= check_if_open_css(yield(:main_menu), Hingeto::Section::PRODUCT_COMPLIANCE) %> <%= check_if_active_css(yield(:main_menu), Hingeto::Section::PRODUCT_COMPLIANCE) %>">
+            <a class="animsition-link" href="<%= supplier_product_compliance_path %>">
+              <i class="site-menu-icon  wb-warning" aria-hidden="true"></i>
+              <span class="site-menu-title">Product Compliance</span>
+              <div class="site-menu-badge">
+                <span class="tag tag-pill tag-danger">3</span>
+                <!--<span class="icon wb-lock" aria-hidden="true"></span>-->
+              </div>
+            </a>
+            <%#= render 'supplier/shared/product_compliance_inner_menu' %>
+
+            <!--<div class="site-menu-badge">-->
+              <!--<span class="tag tag-pill tag-success">3</span>-->
+              <!--&lt;!&ndash;<span class="icon wb-lock" aria-hidden="true"></span>&ndash;&gt;-->
+            <!--</div>-->
+          </li>
+
+
+
+          <li class="site-menu-item <%= check_if_open_css(yield(:main_menu), Hingeto::Section::SETTINGS) %> <%= check_if_active_css(yield(:main_menu), Hingeto::Section::SETTINGS) %> has-sub">
+            <a class="animsition-link" href="javascript:void(0)">
+              <i class="site-menu-icon wb-settings" aria-hidden="true"></i>
+              <span class="site-menu-title">Settings</span>
+            </a>
+            <%= render 'supplier/shared/settings_inner_menu' %>
+          </li>
+
+
+
+        </ul>
+        <div class="site-menubar-section">
+          <h5>
+            <span class="tag tag-dark">Supplier Account</span>
+          </h5>
+
+          <!--<h5>-->
+            <!--Profile Information-->
+            <!--<span class="pull-xs-right">30%</span>-->
+          <!--</h5>-->
+          <!--<div class="progress progress-xs">-->
+            <!--<div class="progress-bar active" style="width: 30%;" role="progressbar"></div>-->
+          <!--</div>-->
+          <!--<h5>-->
+            <!--Payment Information-->
+            <!--<span class="pull-xs-right">60%</span>-->
+          <!--</h5>-->
+          <!--<div class="progress progress-xs">-->
+            <!--<div class="progress-bar progress-bar-warning" style="width: 60%;" role="progressbar"></div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

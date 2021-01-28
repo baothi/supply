@@ -1,0 +1,93 @@
+<div class="page-content">
+  <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+    <div class="panel-body">
+    <% if report.present? && report.order.present? %>
+      <%= line_report(report.order.present?, 'Order exist on Shopify').html_safe %></div>
+      <%= line_report(report.paid_check, 'Order is paid for').html_safe %></div>
+      <%= line_report(report.mxed_check, 'Contains Mxed Product').html_safe %></div>
+      <%= line_report(report.archive_check, 'Order is not archived').html_safe %>&nbsp;
+        <% unless report.archive_check %>
+          <%= link_to shopify_order_url(report.order.id, retailer), target: :blank do %>
+                      <button type="button" class="btn btn-primary btn-xs">Unarchive</button>
+                    <% end %>
+        <% end %>
+        </div>
+      <%= line_report(report.address_check && report.us_address, 'Order contains valid US address').html_safe %></div>
+      <%= line_report(report.fulfilled, 'Line items are unfulfilled').html_safe %></div>
+      <%= line_report(report.stock_check, 'All line items are available(in stock and not discontinued)').html_safe %></div>
+
+    <% elsif report.present? && report.order.blank? %>
+      <p>Order does not exist on shopify.</p>
+    <% else %>
+      <p>Please try again shortly and contact us for assistance with this order if this failure persists.</p>
+    <% end %>
+    </div>
+  </div> 
+</div>
+<% if report.present? && report.order.present? %>
+<div class="page-content">
+  <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+    <div class="panel-body">
+      <div class="panel-group" id="exampleAccordionDefault" aria-multiselectable="true" role="tablist">
+        <div class="panel">
+          <div class="panel-heading" id="exampleHeadingDefaultOne" role="tab">
+            <h4 class="example-title panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultOne" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultOne">mxed products</h4>
+        
+          </div>
+          <div class="panel-collapse collapse" id="exampleCollapseDefaultOne" aria-labelledby="exampleHeadingDefaultOne" role="tabpanel" style="">
+            <div class="panel-body">
+              <% if report.mxed_check %>
+                <ul class="list-group list-group-full">
+                  <% report.line_items.each do |line_item| %>
+                    <li class="list-group-item">
+                      <%= line_item.name %> 
+                      <% if report.out_of_stock.include?(line_item) %>
+                        <span class="tag tag-danger">Out of stock/Discontinued</span>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <span style="color: red">No Mxed Product Present</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% if report.fulfilled_with_tracking.present? || report.fulfilled_without_tracking.present? %>
+        <div class="panel">
+          <div class="panel-heading" id="exampleHeadingDefaultTwo" role="tab">
+            <h4 class="example-title panel-title collapsed" data-toggle="collapse" href="#exampleCollapseDefaultTwo" data-parent="#exampleAccordionDefault" aria-expanded="false" aria-controls="exampleCollapseDefaultTwo">
+            Already Fulfilled Items</h4>
+          </a>
+          </div>
+          <div class="panel-collapse collapse" id="exampleCollapseDefaultTwo" aria-labelledby="exampleHeadingDefaultTwo" role="tabpanel">
+            <div class="panel-body">
+              <ul class="list-group list-group-full">
+                <% if report.fulfilled_without_tracking.present? %>
+                  <% report.fulfilled_without_tracking.flatten.each do |line_item| %>
+                    <li class="list-group-item">
+                      <%= line_item.name %>&nbsp;<span class="tag tag-danger">No tracking number, &nbsp;</span>
+                      <%= link_to shopify_order_url(report.order.id, retailer), target: :blank do %>
+                        <button type="button" class="btn btn-primary btn-xs">Unfulfill</button>
+                      <% end %>
+
+                    </li>
+                  <% end %>
+                <% end %>
+                <% if report.fulfilled_with_tracking.present? %>
+                  <% report.fulfilled_with_tracking.flatten.each do |line_item| %>
+                    <li class="list-group-item">
+                      <%= line_item.name %> 
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div> 
+</div>
+<% end %>

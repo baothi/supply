@@ -1,0 +1,8 @@
+Hello,
+
+There was an error trying to pay for order <%= @order.retailer_shopify_name %> automatically.
+
+The error log is:
+<%= @error_msg %>
+
+<%= retailer_order_details_url(@order.internal_identifier) %>

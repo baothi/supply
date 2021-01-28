@@ -1,0 +1,29 @@
+<div class="table-responsive with-margin-top">
+  <% if @invoices.any? %>
+    <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+      <thead class="bg-blue-grey-100">
+      <tr>
+        <!-- <th><span class="checkbox-custom checkbox-primary"><input class="selectable-all" type="checkbox"> <label></label></span></th> -->
+        <th>Invoice #</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+
+        <% @invoices.each_with_index do |invoice, i| %>
+          <tr>
+            <!-- <td><span class="checkbox-custom checkbox-primary"><input class="selectable-item" type="checkbox"> <label></label></span></td> -->
+            <td><%= invoice.invoice_identifier %></td>
+            <td><span><%= invoice.date.present? ? invoice.date.strftime('%Y-%m-%d') : '–' %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+            <td><span><%= number_to_currency invoice.total %></span></td>
+            <td><%= invoice.paid ? 'Paid' : 'Not Paid' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No invoice exist</p>
+  <% end %>
+</div>

@@ -1,0 +1,63 @@
+<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <div class="logo-main">
+        <%= image_tag 'teamup-horizontal.png',
+                      class:'img-responsive',
+                      style: "margin-bottom: 6px;",
+                      width: '160px' %>
+      </div>
+
+      <!--<p class="font-size-20">Welcome to our dropship platform</p>-->
+      <!--<ul class="list-unstyled">-->
+        <!--<li><i class="icon wb-users" aria-hidden="true" style="font-size:25px;width:35px;"></i>&nbsp;&nbsp;<span class="font-size-16">Reach millions of new customers</span></li>-->
+        <!--<li><i class="icon wb-tag" aria-hidden="true" style="font-size:25px;width:35px;"></i>&nbsp;&nbsp;<span class="font-size-16">Easy inventory & order management</span></li>-->
+        <!--<li><i class="icon fa-dollar" aria-hidden="true" style="font-size:25px;width:35px;"></i>&nbsp;&nbsp;<span class="font-size-16">Prompt monthly payment & fair terms</span></li>-->
+        <!--<li><i class="icon wb-grid-9" aria-hidden="true" style="font-size:25px;width:35px;"></i>&nbsp;&nbsp;<span class="font-size-16">Sell more of your catalog to PacSun customers</span></li>-->
+      <!--</ul>-->
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <div class="brand hidden-md-up">
+        <%= image_tag 'teamup-horizontal.png',
+                      width: '160px',
+                      class:"brand-img img-responsive" %>
+        <h3 class="brand-text font-size-40"></h3>
+      </div>
+      <div class="hidden-md-down">
+        <h3 class="font-size-24">Sign In</h3>
+      </div>
+      <%= render :partial=>"shared/alerts" %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "login-form") do |f| %>
+        <div class="form-group">
+          <%= f.label :email, "Email", class: "" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Enter your email address", autofocus: "autofocus", required: 'required' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, "Password", class: "" %>
+           <%= f.password_field :password, class: "form-control", placeholder: "Enter your password", required: 'required' %>
+        </div>
+        <div class="form-group clearfix">
+          <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+            <input type="checkbox" id="remember" name="checkbox">
+            <label for="inputCheckbox">Remember me</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Sign in', class: 'btn btn-primary form-button' %>
+        </div>
+      <% end %>
+
+      <!-- <p>Not yet signed up? <%= link_to "Sign Up Now", '' %></p> -->
+      <p>Forgot your password? <%= link_to "Reset Password", new_spree_user_password_path,class: 'dark-blue' %></p>
+      <%= link_to 'Create new account', new_sign_up_path, class: 'register-text dark-blue' %>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

@@ -1,0 +1,27 @@
+<div class="page-aside">
+  <div class="page-aside-switch">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div class="page-aside-inner page-aside-scroll">
+    <div data-role="container">
+      <div data-role="content">
+        <section class="page-aside-section">
+          <h5 class="page-aside-title">Main</h5>
+          <div class="list-group">
+            <%= link_to supplier_integrations_path, class:"list-group-item #{check_if_active_css(yield(:inner_menu), Hingeto::Section::OVERVIEW)}" do %>
+              <i class="icon wb-home" aria-hidden="true"></i>Overview
+            <% end %>
+            <%= link_to supplier_integrations_shopify_path, class:"list-group-item #{check_if_active_css(yield(:inner_menu), Hingeto::Section::SHOPIFY)}" do %>
+              <i class="icon fa-gear" aria-hidden="true"></i>Shopify
+            <% end %>
+            <%= link_to supplier_integrations_edi_path, class:"list-group-item #{check_if_active_css(yield(:inner_menu), Hingeto::Section::EDI)}" do %>
+                <i class="icon fa-gear" aria-hidden="true"></i>EDI
+            <% end %>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <!---page-aside-inner-->
+</div>

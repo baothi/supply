@@ -1,0 +1,37 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::PRODUCTS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Product</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <p>Show Product</p>
+
+    </div>
+
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+
+&nbsp;
+</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3">
+    <button type="button" class="btn btn-dark"><i class="icon wb-upload" aria-hidden="true"></i> Search</button>
+  </div>
+</div></body>

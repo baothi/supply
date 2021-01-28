@@ -1,0 +1,17 @@
+<% job = Spree::LongRunningJob.new %>
+<%= semantic_form_for job, url: monitor_orders_fulfillment_admin_spree_orders_path, method: :post  do |f| %>
+  <%= f.inputs  "Download Report", :id => "export_by" do %>
+
+    <%= f.input :from_date, :as => :date_picker, :input_html => { :value => Date.today - 2.weeks }  %>
+
+    <%= f.input :to_date, :as => :date_picker, :input_html => { :value => Date.today } %>
+
+    <%= f.input :retailer,
+                input_html: { id: 'selling-authority-retailer-id' },
+                hint: "Exporting w/o selecting a Retailer include all retailer orders within the range."
+    %>
+    <%= f.actions do %>
+      <%= f.action :submit, :label => "Export" %>
+    <% end %>
+  <% end %>
+<% end %>

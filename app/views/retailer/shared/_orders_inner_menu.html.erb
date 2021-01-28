@@ -1,0 +1,48 @@
+<%
+menu = [
+    {
+      section: Hingeto::Section::ORDERS,
+      title: 'All Orders',
+      link: retailer_orders_path,
+      secret: false
+    },
+    {
+        section: Hingeto::Section::ARCHIVED_ORDERS,
+        title: 'Archived Orders',
+        link: retailer_orders_archived_path,
+        secret: false
+    },
+    {
+        section: Hingeto::Section::MANUAL_ORDER_IMPORT,
+        title: 'Manual Import',
+        link: retailer_orders_manual_import_path,
+        secret: true
+    },
+    {
+        section: Hingeto::Section::ORDER_DIAGNOSIS,
+        title: 'Order Diagnosis',
+        link: retailer_order_diagnosis_path,
+        secret: true
+    },
+    {
+        section: Hingeto::Section::REPORTED_ORDERS,
+        title: 'Reported Orders',
+        link: retailer_orders_reported_path,
+        secret: true
+    }
+]
+%>
+
+<ul class="site-menu-sub">
+  <% menu.each do |menu| %>
+      <%= inner_menu_html(
+              inner_menu: yield(:inner_menu),
+              link: menu[:link],
+              section: menu[:section],
+              title: menu[:title],
+              secret: menu[:secret],
+              true_user: true_spree_user
+          )
+      %>
+<% end %>
+</ul>

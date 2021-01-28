@@ -1,0 +1,68 @@
+<td>
+  <table width="100%" bgcolor="#f3f4fa" align="center" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td colspan="4" height="20"></td>
+      </tr>
+      <tr>
+        <td>
+          <!--<p style="text-align:center; color:#252f39; font-family: 'Montserrat', sans-serif; padding:0px; margin:0px; line-height: 18px; font-size:12px;"> Need Help? <a href="#" style="color:#252f39; text-decoration:underline;"> Lets Experts do the work for you.</a></p>-->
+          <!--<p style="text-align:center; color:#252f39; font-family: 'Montserrat', sans-serif;padding:0px; margin:0px; line-height: 18px; font-size:12px;">TeamUp Team Experts are also available 24/7 to answer your questions</p>-->
+          <p style="text-align:center; color:#252f39; font-family: 'Montserrat', sans-serif;padding:0px; margin:0px; line-height: 18px;
+          font-size:12px;">
+           We help you source hard to access, exclusive, products and dropship them quickly from the US.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" height="20"></td>
+      </tr>
+
+      <tr>
+        <td style="color: #252f39;font-family: Verdana, Geneva, sans-serif;font-size: 13px;text-align: center;line-height: 50px;">
+          <a href="mailto:<%= ENV['SUPPORT_EMAIL'] %>" style="color: #f3f4fa; text-decoration: none;background: #000000; padding: 10px 25px; border-radius: 2px;"><%= ENV['SUPPORT_EMAIL']%></a>
+          <% if @Unsubscribe.present? && ! @retailer.unsubscribe_hash.nil? %>
+            <%= render "retailer/shared/unsubscribe_link", subscription_type: @Unsubscribe %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" height="20"></td>
+      </tr>
+
+      <!--<tr>-->
+        <!--<td style="text-align:center;">-->
+          <!--<a href="#"><%#= image_tag 'email/fb.png', class: 'social', alt: 'FB' %></a>-->
+          <!--<a href="#"><%#= image_tag 'email/twitter.png', class: 'social', alt: 'Twitter' %></a>-->
+          <!--<a href="#"><%#= image_tag 'email/in.png', class: 'social', alt: 'In' %></a>-->
+          <!--<a href="#"><%#= image_tag 'email/pintrest.png', class: 'social', alt: 'Pin' %></a>-->
+        <!--</td>-->
+      <!--</tr>-->
+
+      <tr>
+        <td colspan="4" height="20"></td>
+      </tr>
+
+      <tr>
+        <td  style="text-align:center; color:#252f39; font-family: 'Montserrat', sans-serif; padding:0px; margin:0px; line-height: 18px; font-size:12px;">DiCentral TeamUp |  1199 NASA Parkway
+        Houston, TX 77058 · USA
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" height="20"></td>
+      </tr>
+
+      <!--<tr>-->
+        <!--<td style="text-align:center; color:#252f39; font-family: 'Montserrat', sans-serif; font-weight:700; font-size:13px;">-->
+          <!--<a href="#" style="color:#252f39; text-decoration:none;">Unsubscribe</a>-->
+        <!--</td>-->
+      <!--</tr>-->
+
+      <!--<tr>-->
+        <!--<td colspan="4" height="15"></td>-->
+      <!--</tr>-->
+    </tbody>
+  </table>
+</td>

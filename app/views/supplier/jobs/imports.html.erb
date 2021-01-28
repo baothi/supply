@@ -1,0 +1,38 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::JOBS %>
+<% content_for :inner_menu, Hingeto::Section::OVERVIEW %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "supplier/jobs/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Overview</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+
+
+        <div class="panel-body">
+
+          <%= render "supplier/jobs/shared/table" %>
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

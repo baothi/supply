@@ -1,0 +1,46 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::MY_FAVORITES %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+      <div class='ajax-alert'>
+      <%= render :partial=>"shared/alerts" %>
+
+    </div>
+    <br/>
+    </div>
+    <%#= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Favorites</h3>
+        </div>
+        <div class="panel-body">
+          <%= render "retailer/products/shared/search_bar" %>
+          <%= render "retailer/products/shared/favorite_list" %>
+          <div class="row">
+            <div class="col-lg-12">
+              <nav>
+                <%= paginate @products , theme: 'twitter-bootstrap-4' %>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

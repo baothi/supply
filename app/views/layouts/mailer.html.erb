@@ -1,13 +1,97 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <title>TeamUp</title>
+
     <style>
-      /* Email styles need to be inline */
+      .logo{width: 160px!important;}
+      .social{ width:auto!important;}
+      img{width:100% !important;}
+      /* These are our tablet/medium screen media queries */
+      @media screen and (max-width: 630px) {
+        /* This sets elements to 100% width and fixes the height issues too, a god send */
+        .div_responsive {width:100% !important; height:auto !important;}
+      }
     </style>
   </head>
 
-  <body>
-    <%= yield %>
+  <body style="margin:0px; padding:0px; background:#f8f0dc;">
+    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="div_responsive">
+      <tbody>
+      <% unless yield(:skip_logo)=='true' %>
+        <tr>
+          <td>
+            <table align="center" width="100%" bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td colspan="7" height="20"></td>
+                </tr>
+                <tr>
+                  <td width="6%">
+                  </td>
+                  <td>
+                    <%= image_tag 'teamup-horizontal.png', class: 'logo', alt: 'TeamUp' %>
+                  </td>
+
+                  <td valign="middle" >
+                    <table align="right" border="0" cellspacing="0" cellpadding="0">
+                      <tbody>
+                        <tr>
+                          <!--<td style=" font-family: 'Montserrat', sans-serif;font-size: 14px;"><a style="color:#fff; text-decoration:none;" href="<%#= ENV['SITE_URL'] %>#features">Features</a></td>-->
+                          <!--<td style="padding-left:20px; font-family: 'Montserrat', sans-serif;font-size: 14px;"><a style="color:#fff; text-decoration:none;" href="<%#= ENV['SITE_URL'] %>#howitworks">How It Works</a></td>-->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+
+                  <td width="6%">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="7" height="20"></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+
+        <tr>
+          <td>
+            <table align="center" border="0" cellspacing="0" cellpadding="0"  bgcolor="#ffffff" >
+              <tbody>
+                <tr>
+                  <td>
+                    <%= yield :banner %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+
+            <%= yield %>
+
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          <%= render "shared/signature" %>
+          </td>
+        </tr>
+
+        <tr>
+          <%= render "shared/footer" %>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>

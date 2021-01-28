@@ -1,0 +1,49 @@
+<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page centered install-app-page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content install-app-page-content vertical-align-middle animation-slide-top animation-duration-1">
+    <div class="panel install-app-panel">
+      <div class="container centered">
+        <div class="panel-body install-app-page-body">
+
+          <div class="brand">
+            <h2 class="install-header"> INSTALL MXED APP ON SHOPIFY! </h2>
+            <!--<h2 class="brand-text font-size-18">Remark</h2>-->
+          </div>
+          <br>
+          <p>Enter your shop name in the box below, click the button below and confirm installation in Shopify. Your must have a Shopify user account with required permissions.</p>
+
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "shopify", :action => "install"},  :html => {class: "form-inline"}, method: :get ) do |f| %>
+              <div class="row with-large-top-bottom-margin">
+                <div class="form-group col-md-12">
+                  <span style="display: inline">https:// </span>
+                  <%= text_field_tag :shop, nil, class:"form-control full-inline", autocomplete: "off", :placeholder => "Enter Your Store Name" %><span> .myshopify.com
+              </span>
+                </div>
+              </div>
+              <div class="row with-large-top-bottom-margin">
+                <div class="form-group col-md-12" style="margin-top: 2.1em;">
+                  <%= submit_tag "Install App", class: "btn btn-primary install-app-btn" %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+
+<!-- Page -->
+<!--<script src="../assets/js/Site.js.erb"></script>-->
+<!--<script src="../../global/js/Plugin/asscrollable.js"></script>-->
+<!--<script src="../../global/js/Plugin/slidepanel.js"></script>-->
+<!--<script src="../../global/js/Plugin/switchery.js"></script>-->
+<!--<script src="../../global/js/Plugin/jquery-placeholder.js"></script>-->
+<!--<script src="../../global/js/Plugin/animate-list.js"></script>-->
+
+</body>

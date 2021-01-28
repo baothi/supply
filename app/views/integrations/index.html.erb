@@ -1,0 +1,44 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::INTEGRATIONS %>
+<% content_for :inner_menu, Hingeto::Section::OVERVIEW %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "integrations/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Overview</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+
+
+        <div class="panel-body">
+          <p>We currently provide integrations with</p>
+          <ul>
+            <li>Shopify</li>
+          </ul>
+          <p>Integrations coming soon include</p>
+          <ul>
+            <li>Magento</li>
+            <li>WooCommerce</li>
+            <li>EDI</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

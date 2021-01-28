@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="Expand your assortment without inventory risk">
+  <meta name="author" content="">
+  <title>TeamUp | <%= yield(:title) %></title>
+  <%= favicon_link_tag asset_path('teamup-square-24px.png') %>
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
+
+
+  <!-- Stylesheets -->
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <!-- Fonts -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+
+  <style>
+    .search-highlight em {
+      font-style: normal;
+      background-color: #FFE0B2;
+      color: #E65100;
+      border-bottom: 1px solid #E65100;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.min.js"></script>
+
+  <%= csrf_meta_tag %>
+
+  <%= yield :stripe_tags %>
+
+  <%= render 'layouts/shared/segment' %>
+</head>
+
+<%= yield %>
+
+<%= javascript_include_tag 'application' %>
+<%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
+<%= render 'layouts/shared/breakpoint' %>
+
+<script>
+  (function(document, window, $) {
+    'use strict';
+    var Site = window.Site;
+    $(document).ready(function() {
+      Site.run();
+    });
+  })(document, window, jQuery);
+</script>
+
+<script>
+  Config.set('assets', '/assets');
+  <% if defined? live_shopify_products_identifiers # Done to protect supplier screens %>
+  window.live_shopify_products_identifiers = <%= live_shopify_products_identifiers.inspect.html_safe %>;
+  <% end %>
+  <% if defined? current_retailer %>
+  window.us_store = <%= current_retailer.us_retailer? %>;
+  window.canadian_store = <%= current_retailer.canadian_retailer? %>;
+  window.rest_of_world_store = <%= current_retailer.rest_of_world_retailer? %>;
+  window.retailer_black_listed_products = <%= raw current_retailer.all_blocked_product_ids %>
+  window.retailer_black_listed_suppliers = <%= raw current_retailer.all_blocked_supplier_ids %>
+  <% if current_retailer.rest_of_world_retailer? || current_retailer.canadian_retailer? %>
+    $(document).ready(function () {
+      $("#excludeIneligibleProducts").prop('checked', true);
+      $("#excludeIneligibleProducts").prop('disabled', true);
+    });
+  <% end %>
+  <% if current_retailer.international_retailer? %>
+    window.defaultSearchFilters = 'eligible_for_international_sale:true AND submission_state:approved';
+  <% else %>
+    window.defaultSearchFilters = 'submission_state:approved';
+  <% end %>
+  window.retailer_black_listed_products = <%= raw current_retailer.all_blocked_product_ids %>
+  window.retailer_black_listed_suppliers = <%= raw current_retailer.all_blocked_supplier_ids %>
+  <% end %>
+</script>
+<%= yield(:custom_footer_javascript)%>
+</html>

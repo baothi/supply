@@ -1,0 +1,65 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::MANUAL_ORDER_IMPORT %>
+<% content_for :inner_menu, Hingeto::Section::MANUAL_ORDER_IMPORT %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/orders/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">  
+    </div>
+    <div class="page-content">
+      <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+        <div class="panel-heading">
+          <h3 class="panel-title">Replace Line Items</h3>
+        </div>
+        <div class="panel-body">
+          <%= render :partial=>"shared/alerts" %>
+
+            <% if @order.present? %>
+              <h5>Select Variants</h5>
+              <%= form_tag(retailer_replace_order_line_items_path, method: :post) do %>        
+              <%= hidden_field_tag :order_id, @order.internal_identifier %>
+                <% @order.line_items.each do |item| %>
+                  <div class="row" style="margin-bottom: 2em">
+                    <div class="col-md-6">
+                      <%= item.variant.full_presentation %>
+                    </div>
+                    <% variant_options = item.variant.return_possible_counterparts %>
+                     <div class="col-md-6">
+                          <%= select_tag item.id, options_for_select(variant_options.collect{ |v| ["#{v.full_presentation}", v.internal_identifier] }), { id: item.id, class: 'form-control manual-import-variant-id', :prompt => 'Select Variant'} %>
+                          <% if variant_options.empty? %>
+                        <h6 id="ppp">Could not auto-detect variant, 
+                        
+                      <a href="#" class="open-variant-pairing-modal" data-target="#manualVariantFinder" data-toggle="modal" data-line-item-name="<%= item.name %>" data-line-item-id="<%= item.id %>" > Select Manually?</a></h6>
+                      <% end %>
+                    </div>
+                 <!--    <div class="col-md-2">
+                      
+                    </div> -->
+                  </div>
+                <% end %>
+                <%= button_tag(type: "submit", class: "btn btn-default btn-outline", :name => nil) do %>
+                       Replace Line Items
+                    <% end %>
+              <% end %>
+            <% else %>
+              <h5> Shopify order was not found </h5>
+            <% end %>    
+          </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="manual_variant-finder-div">
+  <%= render partial: 'retailer/orders/shared/modal/manual_variant_finder' %>
+</div>

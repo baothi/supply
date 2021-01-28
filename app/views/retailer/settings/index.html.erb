@@ -1,0 +1,74 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::BASIC_INFO %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">General</h3>
+        </div>
+        <div class="panel-body">
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "settings", :action => "index"}) do |f| %>
+
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Brand Name</label>
+                  <%#= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "Store Name", :readonly => true %>
+                  <%= f.text_field :name, class:"form-control", autocomplete: "off", :placeholder => "Brand Name" %>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Brand URL (e.g. http://www.brandname.com) </label>
+                  <%= f.text_field :slug, class:"form-control", autocomplete: "off", :placeholder => "Brand URL" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Customer Service Contact</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Enter full name" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Customer Service Email</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Enter email" %>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <label class="control-label" for="inputBasicFirstName">Customer Service Phone Number</label>
+                  <%= f.text_field :phone_number, class:"form-control", autocomplete: "off",
+                                   :placeholder => "Enter your stores phone number",:id=>"inputPhone",
+                                   "data-plugin"=>"formatter", "data-pattern"=>"([[999]]) [[999]]-[[9999]]" %>
+                </div>
+
+
+              </div>
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update General Information</button>
+              </div>
+          <% end %>
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

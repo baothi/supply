@@ -1,0 +1,25 @@
+<div class="col-xl-3 col-md-3 col-xs-6 info-panel">
+
+  <% confirmed_user = current_spree_user.confirmed? %>
+
+  <%= render 'retailer/onboarding/completed_ribbon' if confirmed_user  %>
+
+
+  <div class="card card-shadow">
+
+    <div class="card-block bg-white p-20">
+      <!--<span class="m-l-15 font-weight-400">ORDERS</span>-->
+      <div class="content-text text-xs-center m-b-0">
+        <span class="font-size-60 font-weight-100"><i class="fa fa-envelope"></i></span>
+        <p class="blue-grey-400 font-weight-100 m-0">Verify Email Address</p>
+        <div style="margin-top:20px">
+          <% disabled = "disabled" if confirmed_user %>
+          <%= link_to('Resend Email',
+                      resend_email_confirmation_instructions_path, method: :post, class: "btn btn-block btn-primary #{disabled}") %>
+
+        </div>
+        <p class="blue-grey-400 font-weight-100 m-0 small"><br/><br/><br/></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <div style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+        <p>Hi Admins,</p>
+        <p>Someone from Retailer: <%= link_to @retailer.shopify_url, admin_spree_retailer_url(@retailer.slug) %> reported an order, <%= link_to @report.order.try(:retailer_shopify_name), admin_spree_order_url(@report.order.try(:number)) %> for having issues. Their complaint was:</p>
+        <p><blockquote><em><%= @report.description %></em></blockquote></p>
+
+        <p>More information, including any image attachments can be found within the administration portal. Please login and handle this asap!</p>
+
+      </div>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#e4bf70; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= admin_order_issue_report_url(@report.id) %>" style="color: #fff;text-decoration: none;font-weight: 600;display: block;">VIEW ISSUE REPORT</a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

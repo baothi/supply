@@ -1,0 +1,85 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::PRODUCTS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-license-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+    <%= render "retailer/products/shared/credit_card_alert" %>
+    </div>
+    <%#= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Featured collections</h3>
+        </div>
+        <div class="panel-body">
+          <%#= render "retailer/products/shared/search_bar", action: retailer_products_list_path %>
+
+          <!--<h5>Featured collections</h5>-->
+
+          <div class="row margin-bottom">
+            <div class="col-md-12">
+              <%= render 'retailer/products/shared/featured_carousel', featured_banners: @featured_banners %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div style="margin-top:0px;">
+                <div class="owl-carousel owl-carousel-centered license-grouping-carousel" data-plugin="owlCarousel" data-dots="false" data-margin="10">
+                  <% Spree::Taxon.is_license.has_outer_banner.sample(12).each do |license| %>
+                    <%= link_to retailer_list_products_by_license_path(license.name) do %>
+                      <div class="item">
+                          <%= image_tag(license.outer_banner, class: 'product-icon', alt: "#{license.name}") %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row with-large-top-bottom-margin">
+            <% top_seller = Spree::Taxon.find_by(name: 'top-sellers') %>
+            <%= link_to taxon_list_smart_link(top_seller) do %>
+              <div class="col-md-6">
+                <%= image_tag((top_seller && top_seller.outer_banner.exists? ? top_seller.outer_banner(:square) : image_placeholder), class: 'standard-width') %>
+              </div>
+            <% end %>
+
+            <% foundmi = Spree::Taxon.find_by(name: 'foundmi') %>
+            <%= link_to taxon_list_smart_link(foundmi) do %>
+              <div class="col-md-6">
+                <%= image_tag((foundmi && foundmi.outer_banner.exists? ? foundmi.outer_banner(:square) : image_placeholder), class: 'standard-width') %>
+              </div>
+            <% end %>
+          </div>
+          <!--
+          <div class="row with-large-top-bottom-margin">
+            <% Spree::Taxon.is_category.has_outer_banner.sample(3).each do |category| %>
+              <%= link_to retailer_list_products_by_category_path(category.name) do %>
+                <div class="col-md-4">
+                  <%= image_tag(category.outer_banner(:square), class: 'standard-width') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+           -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

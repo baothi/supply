@@ -1,0 +1,102 @@
+<div class="card">
+  <div class="card-block">
+
+    <%= link_to retailer_reset_remittance_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-primary btn-danger btn-dark" style="width:100%">
+          <span><i class="icon " aria-hidden="true"></i>Reset Order Remittance</span>
+        </button>
+
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Use if Order is stuck in remittance process</small>
+    <br>
+    <br>
+
+    <% if @order.shopify_order? %>
+      <%= link_to retailer_remit_to_shopify_path(order_id: @order.internal_identifier) do %>
+          <button type="button" class="btn btn-primary btn-danger btn-dark" style="width:100%">
+            <span><i class="icon fa-upload" aria-hidden="true"></i> Remit to Shopify</span>
+          </button>
+      <% end %>
+      <small align="center" style="margin: 0 auto;">Requires payment to have succeeded first before usage.</small>
+      <% elsif @order.dsco_order? %>
+      <%= link_to retailer_remit_to_dsco_path(order_id: @order.internal_identifier) do %>
+          <button type="button" class="btn btn-primary btn-danger btn-dark" style="width:100%">
+            <span><i class="icon fa-upload" aria-hidden="true"></i> Remit to DSCO </span>
+          </button>
+      <% end %>
+      <small align="center" style="margin: 0 auto;">Requires payment to have succeeded first before usage.</small>
+
+    <% end %>
+
+    <br>
+    <br>
+
+    <%= link_to retailer_replace_discontinued_line_items_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-primary btn-dark" style="width:100%">
+          <span><i class="icon fa-recycle" aria-hidden="true"></i> Auto Replace Discontinued Line Items</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Can only be used if order has not been sent.</small>
+
+    <br>
+    <br>
+
+     <%= link_to retailer_edit_order_line_items_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-primary" style="width:100%">
+          <span><i class="icon wb-arrow-expand" aria-hidden="true"></i> Manually Replace Line Items</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Can only be used if order isn't yet paid for or transmitted.</small>
+
+    <br>
+    <br>
+
+    <%= link_to retailer_delete_order_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-danger" style="width:100%">
+          <span><i class="icon fa-trash" aria-hidden="true"></i> Delete Order</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Can only be used if order isn't yet paid for or transmitted.</small>
+
+    <br>
+    <br>
+
+
+    <%= link_to retailer_set_free_shipping_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-success" style="width:100%">
+          <span><i class="icon fa-ship" aria-hidden="true"></i> Set Free Shipping</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Can only be used if order isn't yet paid for.</small>
+
+    <br>
+    <br>
+
+
+    <%= link_to retailer_update_order_risks_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-primary" style="width:100%">
+          <span><i class="icon fa-exclamation-triangle"></i> Update Order Risks</span>
+        </button>
+    <% end %>
+    <!-- <small align="center" style="margin: 0 auto;">Can only be used if order isn't yet paid for.</small> -->
+
+    <br>
+    <br>
+    <%= link_to retailer_issue_full_refund_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-danger" style="width:100%" onclick="return confirm('Are you sure you want to issue a full refund?')">
+          <span><i class="icon fa-recycle"></i> Issue Full Refund</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">Issue 100% of this customer's funds back. This wil also send them an email.</small>
+
+    <br>
+    <br>
+    <%= link_to retailer_cancel_order_path(order_id: @order.internal_identifier) do %>
+        <button type="button" class="btn btn-danger" style="width:100%" onclick="return confirm('Are you sure you want to fully cancel?')">
+          <span><i class="icon fa-recycle"></i>Cancel Full Order</span>
+        </button>
+    <% end %>
+    <small align="center" style="margin: 0 auto;">This will cancel the entire order. It will not issue refund. This has to be done manually.</small>
+
+  </div>
+</div>

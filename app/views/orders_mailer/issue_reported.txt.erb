@@ -1,0 +1,10 @@
+Hi Admins,
+
+Retailer, <%= @retailer.shopify_url %> reported an order, <%= @report.order.try(:number) %> for having issues. Their complaint was:
+
+<%= @report.description %>
+
+More information, including any image attachments can be found within the administration portal. Please login and handle this asap!
+
+
+VIEW ISSUE REPORT: <%= admin_order_issue_report_url(@report.id) %>

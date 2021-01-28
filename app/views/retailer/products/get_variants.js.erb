@@ -1,0 +1,16 @@
+$(".show-variants").html("<%= escape_javascript render(:partial => 'retailer/orders/display_variants', :locals => { variants: @variants }) %>");
+$(".manual-variant-finder-aloglia-search-box .ais-search-box--input").on("keyup", function(e){
+  $(".manual-variant-finder-algolia-hits").show();
+})
+
+$(".manual-variant-display-list").on("click", function(){
+  $('.show-variants').html("<div class='spinner'></div>")
+  var variant_id = $(this).attr("id");
+  var line_item_id = $("#line_item_identifier").val();
+  $.ajax({
+    type: "get",
+    url: "/retailer/orders/manual_variant_finder",
+    data: { variant_id:  variant_id, line_item_id: line_item_id },
+  })
+})
+

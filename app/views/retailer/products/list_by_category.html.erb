@@ -1,0 +1,84 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_CATEGORY %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    <div class='ajax-alert'>
+      <%= render :partial=>"shared/alerts" %>
+
+    </div>
+    <br/>
+    </div>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+          <div class="row category-info">
+            <div class='col-md-4 col-sm-6'>
+              <% if @category.inner_banner.exists? %>
+                  <div class="category-banner">
+                    <%= image_tag((@category.inner_banner.exists? ? @category.inner_banner(:square) : image_placeholder), class: 'standard-width', alt: "#{@category.name}") %>
+                  </div>
+              <% end %>
+            </div>
+            <div class='col-md-1'>
+              &nbsp;
+            </div>
+            <div class=col-md-5>
+              <div class="row">
+                <div class=col-md-12>
+                  <div class=""><strong><%= @category.name %></strong></div>
+                  <div><%=  @category.description %></div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1em;">
+                <div class="col-md-6">
+                    <%#= button_to (current_retailer.following?(@category) ? "UNFOLLOW" : "FOLLOW"), follow_unfollow_retailer_taxon_path(@category.id), id: "follow-taxon-bottom", class: "btn btn-raised btn-block #{current_retailer.following?(@category) ? 'btn-default' : 'btn-primary'}", remote: true %>
+                </div>
+
+                <div class="col-md-6">
+                  <% if current_spree_user.present? && current_spree_user.hingeto_user? %>
+                    <%= button_to 'Add All Products to Shopify', add_products_to_shopify_retailer_taxon_path(@category.id),
+                      id: "add-all-taxon-products-to-shopify", class: "btn btn-raised", remote: true %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class=col-md-3 id='inner-taxon-listing'>
+              <div><strong>
+                <%= link_to "All Products", retailer_list_products_by_category_path(@category.slug) %>
+              </strong></div>
+              <div class="with-margin-top" id="product-licenses"></div>
+            </div>
+            <div class=col-md-9>
+
+              <%= render "retailer/products/shared/list" %>
+              <%= paginate @products , theme: 'twitter-bootstrap-4' %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<%= render "shared/platform/footer" %>
+</body>

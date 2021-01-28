@@ -1,0 +1,81 @@
+<% content_for :title, "Retailer Onboarding" %>
+<% content_for :main_menu, Hingeto::Section::ONBOARDING %>
+
+<body class="animsition ecommerce_dashboard">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%#= render "retailer/onboarding/side_menu" %>
+
+<!-- Page -->
+<div class="page">
+  <div class="page-header">
+    <h1 class="page-title font-size-26 font-weight-100"><strong>Welcome!</strong></h1>
+  </div>
+
+  <div class="page-content container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <%= render :partial=>"shared/alerts" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card card-inverse bg-warning">
+        <div class="card-block">
+          <h4 class="card-title">Let's get you setup!</h4>
+          <p class="card-text">You are moments away from obtaining the superpower to sell any product in the world. Please complete the following steps.</p>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="progress progress-xs">-->
+      <!--<div class="progress-bar gold-progress" style="width: 75%;" role="progressbar">-->
+        <!--<span class="sr-only">75% Complete</span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+      <% if ENV['ONBOARDING_FLOW'] == 'with_specialist' %>
+      <%= render 'retailer/onboarding/blocks/install_app', locals: {current_spree_user: current_spree_user} %>
+      <%= render 'retailer/onboarding/blocks/verify_email' %>
+      <%= render 'retailer/onboarding/blocks/appointment', locals: {current_spree_user: current_spree_user} %>
+      <%= render 'retailer/onboarding/blocks/await_specialist', locals: {current_spree_user: current_spree_user} %>
+      <% elsif ENV['ONBOARDING_FLOW'] == 'without_specialist'  %>
+        <%= render 'retailer/onboarding/blocks/verify_email' %>
+        <%= render 'retailer/onboarding/blocks/install_app', locals: {current_spree_user: current_spree_user} %>
+        <%= render 'retailer/onboarding/blocks/download_guide', locals: {current_spree_user: current_spree_user} %>
+        <%= render 'retailer/onboarding/blocks/self_onboard', locals: {current_spree_user: current_spree_user} %>
+       <% end %>
+
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+
+<% content_for :custom_footer_javascript do %>
+<script>
+  function isCalendlyEvent(e) {
+    return e.data.event &&
+        e.data.event.indexOf('calendly') === 0;
+  };
+
+  window.addEventListener(
+      'message',
+      function(e) {
+        if (isCalendlyEvent(e)) {
+          if (e.data.event == 'calendly.event_scheduled') {
+            $.ajax({
+              type: "post",
+              url: '<%= mark_appointment_as_scheduled_path %>'
+            });
+            // Add mini delay
+            setTimeout(function(){ window.location.reload(false); }, 2000);
+          }
+
+
+        }
+      }
+  );
+</script>
+<% end %>
+</body>

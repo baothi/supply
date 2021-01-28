@@ -1,0 +1,21 @@
+<% if resource.dsco_identifier.present? %>
+  <%= form_tag batch_import_dsco_products_admin_spree_supplier_path, method: :post, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import Products" %>
+  <% end %>
+
+<% else %>
+   <%= form_tag download_products_admin_spree_supplier_path, method: :get do %>
+    <table style="width: 30%">
+     <tbody>
+   <tr>
+     <td><%= submit_tag "Sync" %></td>
+      <td> <%= check_box_tag :download_images %></td>
+     <td><%= label_tag :include_images %><br/></td>
+
+    </tr>
+     </tbody>
+    </table>
+
+  <% end %>
+<% end %>

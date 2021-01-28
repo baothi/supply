@@ -1,0 +1,6 @@
+$('.new-payment-methods-div').empty().append("<%= escape_javascript render(:partial => 'retailer/orders/shared/payment_methods') %>");
+$("#paymentInformation").modal('show');
+$(".back-to-payment").on('click', function(){
+  $('#payWith').modal('show');
+  $('#paymentInformation, #newPaymentMethod').modal('hide');
+})

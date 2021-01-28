@@ -1,0 +1,28 @@
+<div class="modal fade in" id="inventory-<%= order.internal_identifier %>" aria-hidden="false" aria-labelledby="<%= order.internal_identifier %>Label" role="dialog" tabindex="-1">
+  <div class="modal-dialog order-import-form">
+    <div class='modal-content'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="exampleFormModalLabel">Order <%= order.retailer_shopify_order_number %></h4>
+      </div>
+      <div class="modal-body">
+        <p>This order contains discontinued items or items with no inventory available at this time:</p>
+        <ul>
+          <% order.line_items.each do |line_item| %>
+              <% if !line_item.variant.available_quantity.positive? %>
+                  <li><%= line_item.name %> (0)</li>
+              <% elsif line_item.product.discontinue_on.present? %>
+                  <li><%= line_item.name %> (Discontinued on <%= line_item.product.discontinue_on %>)</li>
+              <% end %>
+          <% end %>
+        </ul>
+
+        <p>Please try again in a few hours or contact support to find out the next time this product will be made available. </p>
+        <p>In the meantime, you may want to refund your customer.</p>
+        <p>Best,<br>MXED<br>support@mxedapp.com</p>
+      </div>
+    </div>
+  </div>
+</div>

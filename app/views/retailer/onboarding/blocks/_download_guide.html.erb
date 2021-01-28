@@ -1,0 +1,18 @@
+<div class="col-xl-3 col-md-3 col-xs-6 info-panel">
+  <% downloaded_guide = @retailer.setting_downloaded_guide %>
+  <%= render 'retailer/onboarding/completed_ribbon' if downloaded_guide %>
+
+  <div class="card card-shadow">
+    <div class="card-block bg-white p-20">
+      <!--<span class="m-l-15 font-weight-400">ORDERS</span>-->
+      <div class="content-text text-xs-center m-b-0">
+        <span class="font-size-60 font-weight-100"><i class="fa fa-book"></i></span>
+        <p class="blue-grey-400 font-weight-100 m-0">View User Guide.</p>
+        <div style="margin-top:20px">
+          <%= link_to "View Guide", retailer_help_download_guide_path, target: "_blank", class: "btn btn-block btn-primary" %>
+        </div>
+        <p class="blue-grey-400 font-weight-100 m-0 small"><br/>Please save the guide. To save, click on File > Download > <br/> PDF Document on the Google Presentation above.</p>
+      </div>
+    </div>
+  </div>
+</div>

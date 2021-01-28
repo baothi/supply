@@ -1,0 +1,27 @@
+<div class="panel">
+  <div class="panel-heading">
+    <h4 class="panel-title ">Order Refunds</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-hover" data-plugin="" data-role="content">
+          <thead class="bg-blue-grey-100">
+            <tr>
+              <th class="orders-header">Date</th>
+              <th class="orders-header">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.refunds.each do |refund| %>
+              <tr>
+                <td class=""><%= refund.created_at.strftime('%F') %></td>
+                <td class=""><%= number_to_currency refund.amount %></td>
+              </tr>
+            <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

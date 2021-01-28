@@ -1,0 +1,79 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::FOLLOWINGS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-license-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+      <%#= render :partial=>"shared/alerts" %>
+      <h3 class="page-title">Followings</h3>
+    </div>
+
+    <div class="page-content">
+      <div class="panel" id="followed-licenses-panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Followed Licenses</h3>
+        </div>
+        <div class="panel-body">
+          <% if @licenses.any? %>
+            <div class="row with-large-top-bottom-margin">
+              <% @licenses.each do |license| %>
+                  <% next unless license.outer_banner.exists? %>
+                <%= link_to retailer_list_products_by_license_path(license.name) do %>
+                  <div class="col-md-4 margin-bottom">
+                    <% if license.outer_banner.exists? %>
+                    <%= image_tag(license.outer_banner.url, class: 'standard-width ') %>
+                    <% end %>
+                    <div class="centered with-margin-top margin-bottom"></div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="alert alert-info">You're not following any license</div>
+          <% end %>
+        </div>
+      </div>
+
+      <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+      <div class="panel" id="followed-licenses-panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Followed Categories</h3>
+        </div>
+        <div class="panel-body">
+          <% if @categories.any? %>
+            <div class="row with-large-top-bottom-margin">
+              <% @categories.each do |category| %>
+                  <% next unless category.outer_banner.exists? %>
+                <%# next unless category.outer_banner.exists? %>
+                <%= link_to retailer_list_products_by_category_path(category.name) do %>
+                  <div class="col-md-4 margin-bottom">
+                    <div class="category-banner">
+                      <%= image_tag((category.outer_banner.exists? ? category.outer_banner(:square) : ''), class: 'standard-width', alt: "#{category.name}") %>
+                    </div>
+                    <div class="centered with-margin-top margin-bottom"><%= category.name %></div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="alert alert-info">You're not following any product category</div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

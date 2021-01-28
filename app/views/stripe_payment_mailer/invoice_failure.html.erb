@@ -1,0 +1,37 @@
+
+<tr>
+  <td bgcolor="#ffffff" align="center" style="padding: 15px;">
+    <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+      <tr>
+        <td>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <!-- COPY -->
+              <td align="left" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 10px;" class="padding-copy">Hello <%= @strippable.name %>,</td>
+            </tr>
+            <tr>
+              <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">
+                <p>
+                  After the <%= @invoice.attempt_count.ordinalize %> attempt, we're unable to charge your charge your card. It's likely that your card has expired or has been blocked by your bank. Please update your card details or add another card from the "Billing Information" page.
+                </p>
+                <% if @invoice.next_payment_attempt %>
+                  <p>
+                    We'll attempt to charge you again on <strong><%= Hingeto::Dropshipper.format_date(@invoice.next_payment_attempt) %></strong> for the <%= (@invoice.attempt_count + 1).ordinalize %> time
+                  </p>
+                <% end %>
+                <p>
+                  Do send us a mail if you need assistance.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+  </td>
+</tr>

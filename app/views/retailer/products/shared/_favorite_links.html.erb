@@ -1,0 +1,11 @@
+
+<% if product.retailer_favorite?(current_retailer) %>
+  <%= link_to retailer_remove_favorite_path(product.internal_identifier), remote: true do %>
+    <button type="button" class="btn btn-inverse product-button">Remove From Favorites</button>
+  <% end %>
+<% else %>
+  <%= link_to retailer_add_to_favorites_path(product.internal_identifier), remote: true do %>
+   <button type="button" class="btn btn-inverse product-button">Add To Favorites</button>
+  <% end %>
+<% end %>
+

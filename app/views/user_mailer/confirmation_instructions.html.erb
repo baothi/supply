@@ -1,0 +1,47 @@
+<%= content_for :banner do %>
+  <%= image_tag "email/banner.jpg", class: '100p', style: 'display:block;', alt: '', border: '0', usemap: '#Map' %>
+<% end %>
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <p style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+        Hello, <br><br>
+        Please click on the following link to confirm your account.
+        <br><br>
+        <%= link_to @confirmation_instructions_url, @confirmation_instructions_url %>
+        <br><br>
+        If the above URL does not work try copying and pasting it into your browser.
+        <br><br>
+        If you did not make this request, simply ignore this email. You can also click on the button below
+      </p>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style=" background-color:#0d0dd6; text-align:center;border-radius: 3px; color:#000; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px; ">
+      <a href="<%= @confirmation_instructions_url %>" target="_blank" style="color: #000;text-decoration: none;font-weight: 600;display: block;">CONFIRM ACCOUNT </a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody>
+</table>

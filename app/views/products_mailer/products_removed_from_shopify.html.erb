@@ -1,0 +1,18 @@
+
+<div  style=" background-color: #ffffff; padding: 2em; font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;">
+   <p>Hello,</p>
+    <p>We removed the following products from your store because we detected that the export process did not complete properly, which can result in missing images, invalid pricing & other issues with the product.
+    </p>
+
+   <table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+    <% @products.each do |product| %>
+      <tr>
+        <td style="width: 65%; height: 5em;"><%= product.name %></td>
+        <td><a href="<%=  retailer_add_to_shopify_url(product.internal_identifier) %>" target= "blank"  style="color: #252f39;text-decoration: none;border: 1px solid #252f39;padding: 10px 25px; border-radius: 2px;">ADD TO SHOPIFY</a></td>
+      </tr>
+    <% end %>
+   </table>
+  <p>Please re-add these products to your store or you may contact us to help you do so.</p>
+
+  <p>We sincerely apologize for the inconvenience this has caused.</p>
+</div>

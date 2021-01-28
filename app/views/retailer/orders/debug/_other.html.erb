@@ -1,0 +1,35 @@
+<div class="panel">
+  <div class="panel-heading">
+    <!--<h3 class="panel-title">&nbsp;</h3>-->
+    <h4 class="panel-title ">
+      Other Information
+    </h4>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6 col-xs-6">
+        <h5>Payment Reminder Count</h5>
+        <%= text_field_tag 'payment_reminder_count',
+                         @order.payment_reminder_count,
+                         class: "form-control", disabled: true %>
+      </div>
+      <div class="col-sm-6 col-xs-6">
+        <h5>Spree Order Number</h5>
+        <%= text_field_tag 'number',
+                           @order.number,
+                           class: "form-control", disabled: true %>
+      </div>
+      <div class="col-sm-6 col-xs-6">
+        <h5>Shipment State</h5>
+        <%= text_field_tag 'number',
+                           @order.shipment_state,
+                           class: "form-control", disabled: true %>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>

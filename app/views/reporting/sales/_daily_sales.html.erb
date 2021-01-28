@@ -1,0 +1,35 @@
+<div class="table-responsive">
+  <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+    <thead class="bg-blue-grey-100">
+    <tr>
+      <th>Date</th>
+      <th>Channel</th>
+      <th>Subtotal (Retail)</th>
+      <th>Subtotal (Vendor Commission)</th>
+      <th>Total Shipping</th>
+      <th>Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% starting_date = Faker::Date.forward(0) %>
+    <% (1..10).each do |i| %>
+        <%
+          total = Faker::Number.between(from: 50, to: 120)
+          discount_price = (Faker::Number.between(from: 0, to: 100) / 100.to_f)*total
+          quantity = Faker::Number.between(from: 1, to: 10)
+          vendor_commission = Faker::Number.between(from: 1, to: 10)
+          balance = Faker::Number.between(from: 1, to: 10)
+          shipping = Faker::Number.between(from: 1, to: 10)
+        %>
+        <tr>
+          <td><span><%= starting_date + i.day %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+          <td>Marketplace</td>
+          <td><span><%= number_to_currency total %></span></td>
+          <td><span><%= number_to_currency discount_price %></span></td>
+          <td><span><%= number_to_currency shipping %></span></td>
+          <td><span><%= number_to_currency shipping %></span></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

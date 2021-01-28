@@ -1,0 +1,14 @@
+<% if @selected_card.present? %>
+  $('.pay-with-div').empty().append("<%= escape_javascript render(:partial => 'retailer/orders/shared/current_payment_method') %>");
+  $('#payWith').modal('show');
+  $('#newPaymentMethod').modal('hide');
+  $('#stripe-form').find("input").val("");
+  $('#payment-form-source-id').val('<%= @selected_card.internal_identifier %>');
+  $('.pay-now-btn').prop("disabled", false)
+  $('.no-card-div').css('display', 'none')
+  $('.main-payment-div').css('display', 'block')
+<% else %>
+  $('.stripe-error').text('<%= @error %>');
+  $('.stripe-error').css("display", "block");
+<% end %>
+

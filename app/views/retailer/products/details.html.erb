@@ -1,0 +1,301 @@
+<% content_for :title, "Products | #{@product.name}" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+        <div class='ajax-alert'>
+      <%= render :partial=>"shared/alerts" %>
+          <%  unless @product.can_be_added_to_store? %>
+              <div class="alert alert-danger alert-dismissible dark col-sm-12">
+                This product is currently discontinued or out of stock.
+              </div>
+          <% end %>
+
+    </div>
+    <br/>
+        <h1 class="page-title">Product Details - Live Products</h1>
+    </div>
+    <div class="page-content">
+      <% if @product.live?(current_retailer.id) %>
+      <div class="row margin-bottom">
+        <div class="col-md-3">
+          <%= link_to shopify_url(@product), target: :blank do %>
+            <button type="button" class="btn btn-block btn-default">Open In Shopify</button>
+          <% end %>
+        </div>
+        <div class="col-md-3">
+          <%= link_to retailer_delete_from_shopify_path(@product.retailer_listing(current_retailer.id).internal_identifier) do %>
+            <button type="button" class="btn btn-block btn-danger waves-effect">Delete From Shopify</button>
+          <% end %>
+        </div>
+      </div>
+      <% else %>
+        <div class="row margin-bottom">
+          <div class="col-md-3">
+            <% if @product.can_be_added_to_store? %>
+              <% if @product.export_in_progress?(current_retailer) %>
+                    <% export_process = @product.locate_export_in_progress(current_retailer) %>
+                    <% if export_process.present? && export_process.in_progress? %>
+                        <% if export_process.updated_less_than_15_minutes_ago? %>
+                            <button type="button" class="btn btn-block btn-default btn-disabled" style="color: #76838f" disabled>Export In Progress</button>
+                        <% else %>
+                            <%= link_to retailer_cancel_export_path(@product.internal_identifier) do %>
+                                <button type="button" class="btn btn-block btn-danger btn-disabled">Cancel Export</button>
+                            <% end %>
+                        <% end %>
+                      <% end %>
+
+
+              <% else %>
+                <%= link_to retailer_add_to_shopify_path(@product.internal_identifier) do %>
+                  <button type="button" class="btn btn-block btn-default">Add To Shopify</button>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+              <div class="row product-details margin-bottom">
+                <div class="col-md-12">
+                  <div>
+                    <div class="row with-margin-top">
+                      <div class="col-md-6">
+<!-- start of carousel markup -->
+ <%= carousel_for(@product.image_attachment_urls) %>
+<!-- end of carousel markup -->
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row product-info">
+                          <div class="col-md-12 margin-bottom"><strong><%= @product.name %></strong></div>
+
+                          <% if current_retailer.can_view_brand_name? %>
+                          <div class="col-md-6">Brand</div>
+                          <div class="col-md-6 no-padding"><%= @product.brand_name_to_export %></div>
+                          <% end %>
+
+                          <div class="col-md-6">ID</div>
+                          <div class="col-md-6 no-padding"><%= @product.internal_identifier.last(6) %></div>
+                          <% variant = @product.variants.first %>
+                          <% unless variant.nil? %>
+                          <div class="col-md-6">MSRP</div>
+                          <div class="col-md-6 no-padding"><%= number_to_currency variant.msrp_price.to_f %></div>
+
+                          <div class="col-md-6">Your Cost</div>
+                          <div class="col-md-6 no-padding"><%= number_to_currency variant.price_based_on_retailer(current_retailer) %></div>
+
+                          <div class="col-md-6">Your Commission</div>
+                          <div class="col-md-6 no-padding"><%= number_to_currency variant.commission_from_dropshipping %></div>
+
+                          <% end %>
+
+                          <div class="col-md-6" style="line-height: 30px;">Amount in Stock</div>
+
+                          <div class="col-md-6 no-padding">
+                            <% if @product.variants.size == 1 %>
+                            <span><%= "#{@product.available_quantity}" %></span>
+
+                            <% else %>
+                                <span><%= "#{@product.available_quantity} for #{@product.variants.not_discontinued.count} variants" %></span>
+                                <div style="margin-left: 1em; display: inline-block;">
+                                  <span aria-hidden="true" class="fa fa-caret-right show-details details-toggle" style="vertical-align: middle; font-size: 20px;"></span>
+                                  <span aria-hidden="true" class="fa fa-caret-down hide-details details-toggle" style="vertical-align: middle; font-size: 20px;"></span>
+                                </div>
+                            <% end %>
+
+                            <div class="margin-bottom"></div>
+                            <div class="inventory-breakdown">
+                            <% if @product.variants.size == 1 %>
+                                  <% variant = @product.variants.first %>
+                                  <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-3">
+                                     Default
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-3">
+                                      <%= variant.available_quantity %>
+                                    </div>
+                                  </div>
+                            <% else %>
+                                  <% @product.variants.not_discontinued.each do |variant| %>
+                                      <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-3">
+                                          <%= variant.option_values.map(&:presentation).join(", ") %>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-3">
+                                          <%= variant.available_quantity %>
+                                        </div>
+                                      </div>
+                                  <% end %>
+                            <% end %>
+
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="row with-margin-top">
+                          <% unless @shipping_zones.blank? || @shipping_zones.empty? %>
+                          <div class="col-md-12">
+                            <p>This product is eligible to be shipped to the following regions</p>
+                            <ul>
+                            <% @shipping_zones.each do |zone| %>
+                              <li><%= zone.name %></li>
+                            <% end %>
+                            </ul>
+                            <a href="#" data-toggle="modal" data-target="#shippingRates">View Shipping Rates</a>
+                          </div>
+                        <% end %>
+                        </div>
+                        <div class="row with-margin-top">
+                          <% if @product.discontinued? %>
+                          <div class="col-md-12">
+                            <p style="color: red;">Product is currently deactivated.</p>
+                          </div>
+                          <% end %>
+                        </div>
+                        <div class="row with-margin-top">
+                          <!--<div class="col-md-6">-->
+                            <!--<a href="#">Shipping Prices</a>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-6">-->
+                            <!--<a href="#">Returns</a>-->
+                          <!--</div>-->
+                        </div>
+                        <!-- Color Options -->
+                        <!--<div class="with-margin-top margin-bottom">-->
+                          <!--<h5>Color</h5>-->
+                          <!--<div class="product-color blue"></div>-->
+                          <!--<div class="product-color purple"></div>-->
+                          <!--<div class="product-color wine"></div>-->
+                        <!--</div>-->
+                        <!--<div class="clearfix"></div>-->
+                        <!-- Size Options -->
+                        <!--<div class="with-margin-top">-->
+                          <!--<h5>Size</h5>-->
+                          <!--<div class="size-card">-->
+                            <!--<div class="header">-->
+                              <!--<h5>L</h5>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="size-card">-->
+                            <!--<div class="header">-->
+                              <!--<h5>XL</h5>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="size-card">-->
+                            <!--<div class="header">-->
+                              <!--<h5>M</h5>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="panel panel-bordered bordered">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Description</h3>
+                  </div>
+                  <div class="panel-body">
+                    <p><%= raw @product.description %></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Hingeto Diagnosis -->
+              <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+              <div class="row">
+
+                <div class="panel panel-bordered bordered">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Product Diagnosis</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table style="width:100%;">
+                      <tr>
+                        <th style="width:10%;">id</th>
+                        <th>Options</th>
+                        <th>Count</th>
+                        <th>Discontinued?</th>
+                        <th>Created At?</th>
+                        <th>Supplier Color</th>
+                        <th>Supplier Size</th>
+                        <th>Platform Color</th>
+                        <th>Platform Size</th>
+                        <th>Num Listings</th>
+                      </tr>
+                      <% @product.variants.not_discontinued.each do |variant| %>
+                      <tr>
+                        <td><%= variant.id %></td>
+                        <td><%= variant.option_values.map(&:presentation).join(", ") %></td>
+                        <td><%= variant.available_quantity %></td>
+                        <td><%= variant.discontinue_on %></td>
+                        <td><%= variant.created_at %></td>
+                        <td><%= variant.supplier_color_value %></td>
+                        <td><%= variant.supplier_size_value %></td>
+                        <td><%= variant.platform_color_option&.name %></td>
+                        <td><%= variant.platform_size_option&.name%></td>
+                        <td><%= variant.variant_listings.count %></td>
+                      </tr>
+                      <% end %>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-block">
+              <%# if @product.supplier.allow_free_shipping_for_sample_products? %>
+                <%#= render "retailer/products/shared/buy_sample_product" %>
+              <%# end %>
+              <%= render partial: 'retailer/products/shared/favorite_links_details', locals: {product: @product} %>
+              <%= render partial: 'retailer/products/shared/sync_images', locals: {product: @product} %>
+            </div>
+          </div>
+          <%# if admin_user? %>
+          <div class="card">
+            <div class="card-block">
+              <%= render partial: 'retailer/products/shared/actions', locals: {product: @product} %>
+            </div>
+          </div>
+          <%# end %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<%= render "retailer/products/shared/shipping_modal" %>
+
+<div class='order-payments-modals'>
+    <%= render "retailer/orders/shared/pay_with" %>
+
+  <div class="new-payment-methods-div">
+    <%= render "retailer/orders/shared/payment_methods" %>
+  </div>
+  <%= render "retailer/orders/shared/new_payment_method" %>
+  <%= render "shared/platform/footer" %>
+</div>
+</body>
+<%= render "layouts/shared/stripe_tags" %>

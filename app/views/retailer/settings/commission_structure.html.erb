@@ -1,0 +1,60 @@
+<% content_for :title, "Accounting" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::COMMISSION_STRUCTURE %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Commission Structure</h3>
+        </div>
+        <div class="panel-body">
+          <% @brand = OpenStruct.new %>
+          <%= form_for("brand", :url => {:controller => "settings", :action => "index"}) do |f| %>
+
+              <div class="row">
+
+                <!--<p>Your vendor account is currently set to the following</p>-->
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Deal Type</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "Revenue Share", :readonly => true %>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label class="control-label" for="inputBasicFirstName">Deal Terms</label>
+                  <%= f.text_field :customer_service_email, class:"form-control", autocomplete: "off", :placeholder => "60% (Brand) / 40% (Retailer)", :readonly => true %>
+                </div>
+
+
+                <div class="form-group col-sm-12">
+                  <p>This deal may be overwritten by the retailer for specific products.</p>
+                </div>
+
+
+              </div>
+
+
+
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

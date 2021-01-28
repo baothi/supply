@@ -1,0 +1,121 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::ORDERS %>
+<% content_for :inner_menu, Hingeto::Section::ORDERS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/orders/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Bulk Order Payment</h1>
+    </div>
+
+
+    <div class="page-content">
+
+      <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+        <div class="panel-body">
+
+          <%#= render :partial=>"shared/non_us" %>
+          <%= render :partial=>"shared/alerts" %>
+
+
+          <!-- Filters -->
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="form-group">
+              
+              </div>
+            </div>
+            <!--<div class="col-md-2 pull-right">-->
+              <!--<span style="line-height: 50px;">Advanced Search</span>-->
+            <!--</div>-->
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="exampleTopHome" role="tabpanel" aria-expanded="true">
+                <div class="table-responsive">
+                  <table class="table table-hover orders-table" data-plugin="selectable" data-role="content" data-row-selectable="true">
+                    <thead class="bg-blue-grey-100">
+                      <tr>
+                        <th> No </th>
+                        <th class="orders-header">Order #</th>
+                        <th class="orders-header">Order Date</th>
+                        <th class="orders-header">Customer</th>
+                        <th class="orders-header">Payment Status</th>
+                        <th class="orders-header">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% if @orders.empty? %>
+                      <td colspan="8">
+                        No valid orders to pay for
+                      </td>
+                    <% else %>
+                      <% @orders.each_with_index do |order, index| %>
+                          <tr class="order-select-tr">
+                            <td> <%= index + 1 %> </td>
+                            <td><%= link_to retailer_order_details_path(id: order.internal_identifier) do %><%= order.retailer_shopify_name || order.number %><% end %></td>
+                            <td><span><%= order.completed_at %></span> <i aria-hidden="true" class="icon wb-time m-l-10"></i></td>
+                            <td><%= order.name  %></td>
+
+                            <td>
+                              <div class="radio-custom radio-primary">
+                                <% payment_state_display = order.payment_state_display %>
+                                <%= order.payment_state_display.humanize unless  payment_state_display.nil? %>
+                              </div>
+                            </td>
+                            <td><%= number_to_currency order.grand_total %></td>
+                          </tr>
+                      <% end %>
+                      <tr >
+                        <td colspan='5'>
+                          Total
+                        </td>
+                        <td>
+                        <%= number_to_currency @total %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                           <a href="#" data-toggle="modal" data-target="#payWith" class="open-order-payment-modal"  data-amount= "<%= @total %>" data-order="Paying for <%= @orders.count %> orders" data-identifier="<%=  @orders.pluck(:internal_identifier).join(',') %>">
+                                    <button type="button" class="btn btn-info btn-sm waves-effect" >Make Bulk Payment</button>
+                            </a>
+                                
+                        </td>
+                                
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='order-payments-modals'>
+    <%= render "retailer/orders/shared/pay_with" %>
+
+  <div class="new-payment-methods-div">
+    <%= render "retailer/orders/shared/payment_methods" %>
+  </div>
+  <%= render "retailer/orders/shared/new_payment_method" %>
+  <%= render "shared/platform/footer" %>
+</div>
+
+
+
+</body>
+<%= render "layouts/shared/stripe_tags" %>
+

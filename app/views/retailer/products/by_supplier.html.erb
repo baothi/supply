@@ -1,0 +1,53 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_SUPPLIER %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-category-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    </div>
+    <%#= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Products by Suppliers</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row with-large-top-bottom-margin">
+            <% if @suppliers.present? %>
+              <% @suppliers.order(:logo_content_type).each do |supplier| %>
+                <% next unless current_retailer.can_access_supplier?(supplier) %>
+                <%# next unless category.outer_banner.exists? %>
+                <div class="col-md-3 margin-bottom">
+                  <%= link_to retailer_list_products_by_supplier_path(supplier.slug) do %>
+                    <div class="media-item">
+                      <div class="image-wrap text-center" style="height: 130px;">
+                        <%= image_tag((supplier.logo.exists? ? supplier.logo(:original) : 'noimage/large.png'),  size: '125x125', alt:'...', class: "img-responsive img-thumbnail") %>
+                      </div>
+                      <div class="info-wrap text-center">
+                        <div class="title listing-title"><%= supplier.display_name  %></div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

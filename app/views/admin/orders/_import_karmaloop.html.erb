@@ -1,0 +1,18 @@
+<!--<p>Use this to upload tracking information. </p>-->
+<% job = Spree::LongRunningJob.new %>
+<% retailer_name = Spree::Retailer.find(ENV['INTERNAL_RETAILER_ID'].to_i).shopify_url %>
+<%= semantic_form_for job, :url => process_karmaloop_orders_admin_spree_orders_path do |f| %>
+    <%= f.inputs  "Upload Orders", :id => "export_by" do %>
+        <%= f.input :retailer_name, :input_html => { :disabled => true, :value => retailer_name, :placeholder => 'Enter retailer id' } %>
+        <%= f.input :file, :as => :file,
+                    :hint => "Required Header: Invoice ID	First Name	Last Name	Address1	Address2	Address3	City	State	Zip	Country	Phone	Part Number	Title	Color	Size	Quantity	External Sku	Price	Email	OrderDate	Order Approval Date	Sold Site".html_safe %>
+    <% end %>
+    <%= f.actions do %>
+        <%= f.action :submit, :label => "Begin Import" %>
+    <% end %>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    });
+</script>

@@ -1,0 +1,55 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::INTEGRATIONS %>
+<% content_for :inner_menu, Hingeto::Section::EDI %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "supplier/integrations/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">DSCO Settings</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-body">
+          <p>Please contact us at teamup-support@dicentral.com if you are interested in integrating via DSCO.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+<%= render "shared/platform/footer" %>
+</body>

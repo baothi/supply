@@ -1,0 +1,84 @@
+<% content_for :title, "Settings" %>
+<% content_for :main_menu, Hingeto::Section::INTEGRATIONS %>
+<% content_for :inner_menu, Hingeto::Section::SHOPIFY %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "supplier/integrations/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Shopify Settings</h1>
+    </div>
+    <div class="page-content">
+    <%= render :partial=>"shared/alerts" %>
+    </div>
+    <div class="page-content">
+
+    <% if @supplier.shopify_credential.present? %>
+      <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+          <!--<span aria-hidden="true">×</span>-->
+        <!--</button>-->
+        <i class="icon fa-gear" aria-hidden="true"></i> You are currently connected to Shopify.
+        <p class="m-t-15">
+          <%= link_to supplier_sync_shopify_products_path do %>
+            <button class="btn btn-danger btn-inverse" type="button">Sync All Products</button>&nbsp;&nbsp;
+          <% end %>
+          <%= link_to supplier_import_collection_products_modal_path, remote: true do %>
+            <button class="btn btn-inverse" data-target="#collection-products-import-modal" data-toggle="modal" type="button">Import From Collection</button>
+          <% end %>
+          <%= link_to supplier_disconnect_shopify_path, method: :delete do %>
+            <button class="btn btn-danger" type="button">Disconnect from Shopify</button>
+          <% end %>
+        </p>
+      </div>
+    <% else %>
+      <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+          <!--<span aria-hidden="true">×</span>-->
+        <!--</button>-->
+        <i class="icon fa-gear" aria-hidden="true"></i> You are not currently connected to Shopify. Install the TeamUp app on your shopify store or enter credentials below to connect
+      </div>
+    <% end %>
+
+      <%= render "install_app" %>
+      <%= render "import_from_collection" %>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+<%= render "shared/platform/footer" %>
+</body>

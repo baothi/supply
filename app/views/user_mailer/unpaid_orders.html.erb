@@ -1,0 +1,62 @@
+<%= content_for :banner do %>
+  <%= image_tag "email/5.png", class: '100p', style: 'display:block;', alt: '', border: '0', usemap: '#Map' %>
+<% end %>
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td colspan="7" height="30">
+      </td>
+    </tr>
+    <tr>
+      <td width="6%">
+      </td>
+      <td>
+        <div style=" font-family:Arial, Helvetica, sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+          <h4>Hello there,</h4>
+          <p>This is a friendly reminder that you have <strong><em><%= @orders.size %> unpaid order(s)</em></strong> on TeamUp.</p>
+          <p>Please login and pay for these order(s) so that we may process and ship them. You may also archived them if you would like not to receive future reminders about these orders..</p>
+          <table border="1" cellspacing="0" align="center">
+            <thead>
+              <tr>
+                <td>Order #</td>
+                <td>Total <em>(w/ shipping)</em></td>
+                <td>Completed At</td>
+                <td>Customer</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.number %></td>
+                  <td><%= order.total_cost_price_with_shipping %></td>
+                  <td><%= order.completed_at.strftime('%F') if order.completed_at.present? %></td>
+                  <td><%= order.user.present? ? order.user.full_name : order.customer_email %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </td>
+      <td width="6%">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" height="30">
+      </td>
+    </tr>
+    <tr>
+      <td width="6%">
+      </td>
+      <td style="background-color:#e4bf70; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+       <a href="<%= retailer_orders_url(status: 'unpaid') %>" style="color: #fff;text-decoration: none;font-weight: 600;display: block;">VIEW UNPAID ORDERS</a>
+     </td>
+     <td width="6%">
+     </td>
+   </tr>
+   <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+</tbody >
+</table>

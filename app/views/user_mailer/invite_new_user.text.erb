@@ -1,0 +1,11 @@
+Hey <%= @user.first_name %>!
+
+You have been added as a team member to the <%= @team.name %> on TeamUp platform.
+
+Please log on to <%= new_spree_user_session_url %> with the following credentials
+
+URL: <%= @user.shopify_url %>
+Email: <%= @user.email %>
+Password: <%= @password %>
+
+Please be sure to change this default password once you login in the "Settings Page"

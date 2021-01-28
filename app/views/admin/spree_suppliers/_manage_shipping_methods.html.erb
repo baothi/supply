@@ -1,0 +1,14 @@
+<br/>
+<br/>
+
+<%= link_to download_shipping_methods_admin_spree_supplier_path do %>
+  <button class="btn">Download Shipping Methods</button>
+<% end %>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= form_tag upload_shipping_methods_admin_spree_supplier_path, method: :post, multipart: true do %>
+  <%= submit_tag "Upload Shipping Methods" %>
+  <%= file_field_tag :file %>
+<% end %>

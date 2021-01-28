@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="form-group">
+      <div id="search-box" class="input-search">
+      </div>
+
+      <div id="product-filters">
+        <label>
+          <input type="checkbox" id="excludeShopifyProducts"> Exclude items from my store
+        </label>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <!--<label>-->
+          <!--<input type="checkbox" id="excludeZeroInventoryProducts"> Exclude zero inventory items-->
+        <!--</label>-->
+        <!--&nbsp;-->
+        <!--&nbsp;-->
+        <!--&nbsp;-->
+        <label>
+          <input type="checkbox" id="excludeIneligibleProducts"> Exclude products ineligible for international sale/stores
+        </label>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3" style="text-align: left">
+    <div id="algolia-sort"></div>
+  </div>
+</div>
+
+<!-- Start of Algolia list template -->
+<div class="media-list is-grid p-b-50" data-plugin="animateList" data-animate="fade" data-child="li">
+  <div id="hits"></div>
+</div>
+
+<script type="text/template" id="hits_template">
+  <div style="margin-top: 3em;" class="product-display" id="product-display-{{internal_identifier}}">
+    <input type="hidden", value="{{internal_identifier}}" name="product_id"/>
+    <figure class="overlay overlay-hover animation-hover">
+      <div class="media-item" data-toggle="slidePanel" data-url="panel.tpl">
+        <div class="image-wrap">
+          <div class="grid-listing-img" style="background-image:url({{listing_image}})"></div>
+        </div>
+        <div class="info-wrap">
+          <div class="title product-title"><span class="search-highlight">{{{_highlightResult.propercase_name.value}}}</span></div>
+        </div>
+      </div>
+      <figcaption class="overlay-panel overlay-background overlay-fade text-center">
+        <div class="spinner" style="display: none" id="spinner-{{internal_identifier}}"></div>
+      </figcaption>
+    </figure>
+  </div>
+</script>
+
+
+<!-- End of Algolia list template-->
+<div class="row">
+  <div class="col-lg-12 col-md-4 col-sm-2">
+    <br />
+  </div>
+</div>
+<div class="row">
+  <nav id="pagination-container"></nav>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    window.isMobileDevice = function () {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    }
+
+    function fetchButtons(event) {
+      const product_id = $(this).find("input[name='product_id']").val();
+      if (product_id) {
+        $.ajax({
+          type: "GET",
+          url: "/retailer/products/hydrate",
+          data: {product_id: product_id},
+          beforeSend: function () {
+            $("#spinner-" + product_id).show();
+          },
+          success: function (response) {
+            $("#product-display-" + product_id).html(response.html_data);
+          },
+          error: function (err) {
+            console.log('Something is wrong', err);
+          },
+          complete: function (data) {
+            $("#spinner-" + product_id).hide();
+            if (isMobileDevice()) { $(".product-button").addClass("btn-sm white-space") }
+          }
+        })
+      }
+    }
+
+  $("#hits").on("mouseenter", ".product-display", fetchButtons);
+  $("#hits").on("touchstart", "figcaption", fetchButtons);
+  </script>

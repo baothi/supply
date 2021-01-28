@@ -1,0 +1,236 @@
+<% content_for :title, "Orders" %>
+<% content_for :main_menu, Hingeto::Section::ORDERS %>
+<% content_for :inner_menu, current_page?(retailer_orders_archived_path) ? Hingeto::Section::ARCHIVED_ORDERS : Hingeto::Section::ORDERS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/orders/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header order-upper-body">
+      <div>
+        <h1 class="page-title"><%= current_page?(retailer_orders_archived_path) ? 'Archived Orders' : 'Orders' %></h1>
+        <button type="button" class="btn btn-info" data-target="#orderImportForm"  data-toggle="modal"><i class="icon wb-download" aria-hidden="true"></i> Import Orders</button>
+      </div>
+      <div>
+        <% if current_retailer.order_auto_payment %>
+          <span class="tag tag-success"><%= link_to "Auto order payment is ON", retailer_settings_orders_path, class: 'white-text-link' %></span>
+        <% end %>
+      </div>
+
+    </div>
+
+
+    <div class="page-content">
+
+
+      <!-- Warnings -->
+      <!--<div class="row">-->
+
+        <!--<div class="col-xl-12 col-md-12 col-xs-12 info-panel">-->
+          <!--<div role="alert" class="alert dark alert-danger alert-dismissible">-->
+            <!--<button aria-label="Close" data-dismiss="alert" class="close" type="button">-->
+            <!--</button>-->
+            <!--<p>You have a checkout setting to "Automatically fulfill the order items"</p>-->
+            <!--<p class="margin-top-15">-->
+              <!--<button class="btn btn-default" type="button" style="line-height: 1em;">Turn off auto shipments</button>-->
+            <!--</p>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!-- End warnings -->
+
+      <div class="panel nav-tabs-horizontal" data-plugin="tabs">
+       <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+         <% if admin_user? %>
+             <% statuses = Spree::Order::ADMIN_STATUS_FILTERS%>
+         <% else %>
+             <% statuses = Spree::Order::RETAILER_STATUS_FILTERS %>
+         <% end %>
+          <% statuses.each_with_index do |status, i| %>
+              <li class="nav-item">
+                <a class="nav-link <%= params[:status].to_s == status.to_s ? 'active': '' %>"  href="?status=<%= status.to_s %>" aria-controls="<%= status.to_s %>" role="tab" aria-expanded="false"><i class="icon wb-file" aria-hidden="true"></i><%= product_status_from_symbol(status) %></a>
+              </li>
+          <% end %>
+        </ul>
+        <!--<div class="panel-heading">-->
+          <!--<h3 class="panel-title">Tabs In The Panel</h3>-->
+        <!--</div>-->
+        <!-- <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#exampleTopHome" aria-controls="exampleTopHome" role="tab" aria-expanded="false"><i class="icon wb-tag" aria-hidden="true"></i>Pending</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopComponents" aria-controls="exampleTopComponents" role="tab" aria-expanded="true"><i class="icon wb-tag" aria-hidden="true"></i>Delivered</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopCss" aria-controls="exampleTopCss" role="tab" aria-expanded="false"><i class="icon wb-tag" aria-hidden="true"></i>Cancelled</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#exampleTopJavascript" aria-controls="exampleTopJavascript" role="tab" aria-expanded="false"><i class="icon wb-tag" aria-hidden="true"></i>All</a></li>
+          <li class="dropdown nav-item" style="display: none;">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Dropdown </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" data-toggle="tab" href="#exampleTopHome" aria-controls="exampleTopHome" role="tab"><i class="icon wb-tag" aria-hidden="true"></i>Pending</a>
+              <a class="dropdown-item" data-toggle="tab" href="#exampleTopComponents" aria-controls="exampleTopComponents" role="tab"><i class="icon wb-tag" aria-hidden="true"></i>Delivered</a>
+              <a class="dropdown-item" data-toggle="tab" href="#exampleTopCss" aria-controls="exampleTopCss" role="tab"><i class="icon wb-tag" aria-hidden="true"></i>Cancelled</a>
+              <a class="dropdown-item" data-toggle="tab" href="#exampleTopJavascript" aria-controls="exampleTopJavascript" role="tab"><i class="icon wb-tag" aria-hidden="true"></i>All</a>
+            </div>
+          </li>
+        </ul> -->
+        <div class="panel-body">
+          <% if current_retailer.disable_payments %>
+            <div role="alert" class="alert dark alert-danger alert-icon">
+              <i class="icon wb-warning" aria-hidden="true"></i>
+              <p>You are currently not allowed to pay for orders due to an issue with your account. Please contact us.</p>
+            </div>
+          <% end %>
+
+          <%#= render :partial=>"shared/non_us" %>
+          <%= render :partial=>"shared/alerts" %>
+
+
+          <!-- Filters -->
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="form-group">
+              <%= form_tag(current_page?(retailer_orders_archived_path) ? retailer_orders_archived_path : retailer_orders_path, method: :get) do %>
+                <div class="input-group">
+                  <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Enter Keyword" %>
+                   <%= hidden_field_tag :status, params[:status], class: "form-control with-shadow" %>
+                  <div class="input-group-btn">
+                    <%= button_tag(type: "submit", class: "btn btn-default btn-outline", :name => nil) do %>
+                      <i class="icon wb-search" aria-hidden="true"></i>Search
+                    <% end %>
+                    <!--<button type="button" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown" aria-expanded="false" tabindex="-1">-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu pull-xs-right" role="menu">-->
+                      <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem">Action</a>-->
+                      <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem">Another action</a>-->
+                      <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem">Something else here</a>-->
+                      <!--<div class="dropdown-divider"></div>-->
+                      <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem">Separated link</a>-->
+                    <!--</div>-->
+                  </div>
+                </div>
+              <% end %>
+              </div>
+            </div>
+            <!--<div class="col-md-2 pull-right">-->
+              <!--<span style="line-height: 50px;">Advanced Search</span>-->
+            <!--</div>-->
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="exampleTopHome" role="tabpanel" aria-expanded="true">
+              <%= render "retailer/orders/shared/table" %>
+            </div>
+
+           <div class="row">
+              <div class="col-lg-8 col-sm-8 col-md-8">
+                <nav>
+                  <%= paginate @orders , theme: 'twitter-bootstrap-4' %>
+                </nav>
+              </div>
+              <div class="col-lg-4 col-sm-4 col-md-4">
+                <nav class="pull-right text-right m-15">
+                 <%= render partial: "retailer/orders/shared/per_page", locals: {form_path: current_page?(retailer_orders_archived_path) ? retailer_orders_archived_path : retailer_orders_path} %>
+                <nav>
+              </div>
+            </div>
+            <% if !current_page?(retailer_orders_archived_path) %>
+              <div class="pull-right">
+                <h6> Looking for archived orders? <%= link_to 'click here', retailer_orders_archived_path %> </h6></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade in" id="orderImportForm" aria-hidden="false" aria-labelledby="exampleFormModalLabel" role="dialog" tabindex="-1">
+  <div class="modal-dialog order-import-form">
+    <div class='modal-content'>
+      <%= form_tag(retailer_orders_import_path, method: 'post') do %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="exampleFormModalLabel">Import Shopify Orders</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6">
+            <%= label_tag :from_date, 'From' %>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="icon wb-calendar" aria-hidden="true"></i>
+                </span>
+                <%= date_field_tag :from_date, "", class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <%= label_tag :to_date, 'To' %>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="icon wb-calendar" aria-hidden="true"></i>
+                </span>
+                <%= date_field_tag :to_date, "", class: 'form-control' %>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-12 form-group">
+              <div class="example-wrap order-import-options">
+
+                <div class="radio-custom radio-primary">
+                  <%= radio_button_tag :default_duration, 'all_time' %>
+                  <label for="inputRadiosUnchecked">All Time</label>
+                </div>
+                <div class="radio-custom radio-primary">
+                  <%= radio_button_tag :default_duration, 'this_month' %>
+                  <label for="inputRadiosChecked">This Month</label>
+                </div>
+                <div class="radio-custom radio-primary">
+                  <%= radio_button_tag :default_duration, 'this_week' %>
+                  <label for="inputRadiosDisabled">This Week</label>
+                </div>
+                <div class="radio-custom radio-primary">
+                  <%= radio_button_tag :default_duration, 'today' %>
+                  <label for="inputRadiosDisabledChecked">Today</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8">
+              <% if current_retailer.order_auto_payment %>
+                <div class="checkbox-custom checkbox-primar">
+                  <%= check_box_tag :attempt_auto_pay, true, nil, id: 'auto-pay-checkbox' %>
+                  <label for="auto-pay-checkbox">Automatically pay for these orders after import</label>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-sm-4 pull-right">
+              <%= submit_tag 'Import', class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class='order-payments-modals'>
+    <%= render "retailer/orders/shared/pay_with" %>
+
+  <div class="new-payment-methods-div">
+    <%= render "retailer/orders/shared/payment_methods" %>
+  </div>
+  <%= render "retailer/orders/shared/new_payment_method" %>
+  <%= render "shared/platform/footer" %>
+</div>
+
+
+
+</body>
+<%= render "layouts/shared/stripe_tags" %>

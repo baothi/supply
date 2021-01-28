@@ -1,0 +1,8 @@
+<%= content_for :stripe_tags do %>
+<script src="https://js.stripe.com/v3/"></script>
+<%= tag :meta, :name => "stripe-public-key", :content => ENV['STRIPE_PUBLIC_KEY'] %>
+<% end %>
+<% # Include stripe.js - our version - in the footer %>
+<%= content_for :custom_footer_javascript do %>
+<%= javascript_include_tag 'stripe' unless Rails.env.test? %>
+<% end %>

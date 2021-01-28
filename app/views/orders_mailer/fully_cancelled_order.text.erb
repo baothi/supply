@@ -1,0 +1,13 @@
+Hello,
+
+Unfortunately, the following order was canceled by the supplier. Please refund your customers.
+
+If you paid via credit card, please expect a follow up email with refund details shortly after this email.
+
+Order Number | Order Items
+
+<% @orders.each do |order| %>
+<%= order.retailer_shopify_name %> | <%= order.variants.map(&:name).join(', ') %>
+<% end %>
+
+<%= retailer_orders_url %>

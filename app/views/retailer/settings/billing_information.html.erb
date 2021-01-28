@@ -1,0 +1,76 @@
+<% content_for :title, "BIlling" %>
+<% content_for :main_menu, Hingeto::Section::SETTINGS %>
+<% content_for :inner_menu, Hingeto::Section::BILLING %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%#= render "retailer/settings/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Settings</h1>
+    </div>
+    <div class="page-content">
+    <%= render :partial=>"shared/alerts" %>
+    </div>
+
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Billing Information</h3>
+        </div>
+        <div class="panel-body">
+          <% if current_retailer.stripe_customer.try(:stripe_cards).present? %>
+            <% current_retailer.stripe_customer.stripe_cards.each do |stripe_card| %>
+              <div class="row credit-card-information" style="margin-bottom: 1.5em;">
+                <!--<div class='col-sm-3 mid-position-text'>Card ending with:</div>-->
+                <div class='col-sm-4 mid-position-text'>
+                  <i class="icon <%= stripe_card.icon_css_class %>" aria-hidden="true"></i>
+                  <%= stripe_card.last_four %>
+                </div>
+                <div class='col-sm-1 mid-position-text'>Expires:</div>
+                <div class='col-sm-1 mid-position-text'><%= stripe_card.exp_date %></div>
+                <div class='col-sm-3'>
+                  <% if stripe_card.default? %>
+                    <span class="mid-position-text">Default</span>
+                  <% else %>
+                    <%= link_to "Set As Default", mark_card_as_default_retailer_payments_path(id: stripe_card.internal_identifier), authenticity_token: true, method: :patch, class: "btn btn-success btn-xs" %>
+                  <% end %>
+                  <%= link_to 'Delete', remove_billing_card_retailer_payments_path(id: stripe_card.internal_identifier), class: "btn btn-danger btn-xs", :data => {:confirm => 'Are you sure you want to delete this credit card?'}, method: :delete %>
+                </div>
+              </div>
+            <% end %>
+            <div class="row">
+              <!-- <div class='col-sm-12 change-card-details active'>Click here to add a new card</div> -->
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible dark col-sm-12" >
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              You currently do not have any credit cards on file.
+            </div>
+            <div style="margin-bottom: 2em;">&nbsp;
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+
+      <div class="panel" id="update-billing-information">
+        <div class="panel-heading">
+          <div class="panel-title">New Credit Card</div>
+        </div>
+        <div class="panel-body">
+          <%= render "billing_information_form" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<%= render "shared/platform/footer" %>
+</body>

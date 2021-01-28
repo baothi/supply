@@ -1,0 +1,13 @@
+<% if @export_process.present? && @export_process.in_progress? %>
+  <% if @export_process.updated_less_than_15_minutes_ago? %>
+    
+    $("#add-to-shopify-<%= @product.internal_identifier %>").text('Export In Progress')
+    toastr.success('Adding Product to Shopify. This can take up to 30 seconds.')
+    $("#add-to-shopify-<%= @product.internal_identifier %>").prop("disabled",true);
+
+  <% else %>
+  $("#add-to-shopify-<%= @product.internal_identifier %>").text('Cancel Export')
+  <% end %>
+<% end %>
+
+$("#spinner-" + product).hide();

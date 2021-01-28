@@ -1,0 +1,54 @@
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+  <tr>
+    <td colspan="7" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td>
+      <p>Hello,</p>
+      <p>The following order was partially refunded. You can expect this to be reflected at your bank in 5-10 business days at most. <br/><br/>Typically, it shows up in no more than 3 business days.</p>
+
+      <table border="1" cellspacing="0" cellpadding="5" width="100%">
+        <thead>
+          <tr>
+            <th>Order Number</th>
+            <th>Total Refunded</th>
+            <th>Item Refunded</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= link_to @order.retailer_shopify_name, retailer_order_details_url(id: @order.internal_identifier) %></td>
+              <td><%= number_to_currency(@line_item.line_item_cost_with_shipping) %></td>
+              <td><%= @line_item.variant.name %></td>
+            </tr>
+        </tbody>
+      </table>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  <tr>
+    <td width="6%">
+    </td>
+    <td style="background-color:#4f4dfc; text-align:center;border-radius: 3px; color:#fff; font-family: 'Montserrat', sans-serif; font-size:16px; padding: 20px 0px;">
+      <a href="<%= retailer_orders_url %>" target="_blank" style="color: #fff; text-decoration: none; font-weight: 600; display: block;">VIEW ORDERS</a>
+    </td>
+    <td width="6%">
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+  </tbody >
+</table>

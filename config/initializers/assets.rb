@@ -12,3 +12,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/
+# These are assets that we don't want loaded everywhere
+Rails.application.config.assets.precompile +=
+  %w(home.css home/lory.min.js home/main.js stripe home.js channels/job_notifications.js cable.js)
+# Rails.application.config.assets.precompile += %w(ckeditor/*)

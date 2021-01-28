@@ -1,0 +1,15 @@
+<% if @success %>
+  $('#addCreditCard').modal('hide');
+  $('input').val('');
+  $('.field').val('');
+  $('.payment-cards').html('<%= j render partial: "cards", locals: {payment_cards:  @payment_cards} %>')
+<% end %>
+$('.alert-div').html('<%= j render partial: "shared/alerts" %>')
+
+
+  $(".remove-card-icon").on('click',function() {
+    id = $(this).data("identifier");
+    old_url = $(".confirm-remove-card").attr("href");
+    new_url = old_url + '?id=' + id;
+    $(".confirm-remove-card").attr("href", new_url)
+  })

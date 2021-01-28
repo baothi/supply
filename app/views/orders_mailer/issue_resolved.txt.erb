@@ -1,0 +1,24 @@
+Hello,
+
+<% if @report.declined? %>
+After looking into the issue, we're not able to offer you a credit for order <%= @order.retailer_shopify_name %>.
+
+<% if @report.decline_reason.present? %>
+Provided Reason:
+    <%= @report.decline_reason %>
+<% end %>
+
+We regret any inconveniences this decision may cause and we hope to serve you better moving forward.
+
+Please contact us if you disagree with this decision.
+<% elsif @report.resolved_supplier? || @report.resolved_hingeto %>
+We apologize for the issue with Order <%= @order.retailer_shopify_name %>. We have refunded <%= number_to_currency@report.amount_credited) %> into your credit balance. You can apply your credit to future order purchases.
+
+Your total credit as the time of this email is <%= number_to_currency@retailer.total_available_credit) %>.
+
+<% end %>
+
+Thank you,
+The TeamUp Team
+
+<%= retailer_orders_reported_url %>

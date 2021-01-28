@@ -1,0 +1,77 @@
+<div class="site-menubar">
+  <div class="site-menubar-body">
+    <div>
+      <div>
+        <ul class="site-menu" data-plugin="menu">
+          <li class="site-menu-category">Referral</li>
+          <li class="site-menu-item <%= controller.action_name == 'new' ? 'active' : '' %>">
+            <a class="animsition-link" href="add_referral">
+              <i class="site-menu-icon wb-share" aria-hidden="true"></i>
+              <span class="site-menu-title">New Referral</span>
+            </a>
+          </li>
+          <li class="site-menu-item <%= controller.action_name == 'index' ? 'active' : '' %>">
+            <a class="animsition-link" href="referrals">
+              <i class="site-menu-icon wb-list" aria-hidden="true"></i>
+              <span class="site-menu-title">My Referrals</span>
+            </a>
+          </li>
+          <li class="site-menu-category">General</li>
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::PRODUCTS) %>">
+            <a class="animsition-link" href="#">
+              <i class="site-menu-icon wb-tag" aria-hidden="true"></i>
+              <span class="site-menu-title">Products</span>
+              <div class="site-menu-badge">
+                <i class="site-menu-icon wb-lock" aria-hidden="true"></i>
+              </div>
+            </a>
+          </li>
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::ORDERS) %>">
+            <a class="animsition-link" href="javascript:void(0);">
+              <i class="site-menu-icon  wb-order" aria-hidden="true"></i>
+              <span class="site-menu-title">Orders</span>
+              <div class="site-menu-badge">
+                <i class="site-menu-icon wb-lock" aria-hidden="true"></i>
+              </div>
+            </a>
+          </li>
+
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::INTEGRATIONS) %>">
+            <%= link_to 'javascript:void(0);', id:'side-menu-integrations', class:'animsition-link' do %>
+                <i class="site-menu-icon wb-hammer" aria-hidden="true"></i>
+                <span class="site-menu-title">Integrations</span>
+                <div class="site-menu-badge">
+                  <i class="site-menu-icon wb-lock" aria-hidden="true"></i>
+                </div>
+            <% end %>
+          </li>
+
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::SETTINGS) %>">
+            <a class="animsition-link" href="javascript:void(0);">
+              <i class="site-menu-icon wb-settings" aria-hidden="true"></i>
+              <span class="site-menu-title">Settings</span>
+              <div class="site-menu-badge">
+                <i class="site-menu-icon wb-lock" aria-hidden="true"></i>
+              </div>
+            </a>
+          </li>
+          <li class="site-menu-item <%= check_if_active_css(yield(:main_menu), Hingeto::Section::INVOICES) %>">
+            <a class="animsition-link" href="javascript:void(0);">
+              <i class="site-menu-icon fa-files-o" aria-hidden="true"></i>
+              <span class="site-menu-title">Invoices</span>
+              <div class="site-menu-badge">
+                <i class="site-menu-icon wb-lock" aria-hidden="true"></i>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="site-menubar-footer">
+<!--    <a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip"-->
+<!--       data-original-title="Settings">-->
+<!--      <span class="icon wb-settings" aria-hidden="true"></span>-->
+<!--    </a>-->
+  </div>
+</div>

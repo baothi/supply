@@ -1,0 +1,24 @@
+{
+  "original_hash": {
+    "data": {
+      "productCreate": {
+        "product": {
+          "id": "gid://shopify/Product/12345678999",
+          "title": "A XMAS Story Black T-Shirt",
+          "vendor": "mxed",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/22222999",
+                  "sku": "TSY00-XCUXW"
+                }
+              }
+            ]
+          },
+          "totalVariants": 1
+        }
+      }
+    }
+  }
+}

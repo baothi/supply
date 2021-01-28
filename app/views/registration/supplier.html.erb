@@ -1,0 +1,92 @@
+<body class="animsition page-register-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content">
+
+    <div class="page-brand-info">
+      <div class="logo-main">
+        <%= image_tag 'dicentral-square-24px-blue.png', class:'img-responsive', style: "margin-bottom: 6px;" %>
+        <p style="display: inline; font-size: 28px; opacity: 1">TeamUp</p>
+      </div>
+
+      <%= image_tag 'circuit-board.png', class: 'img-responsive' %>
+    </div>
+    <div class="page-register-main animation-slide-left animation-duration-1">
+      <div class="brand hidden-md-up">
+        <%= image_tag "home/logo-black.png", class: "header__logo header__logo--black brand-img img-responsive", alt: "mxed" %>
+        <h3 class="brand-text font-size-40"></h3>
+      </div>
+      <h3 class="font-size-24">Register</h3>
+      <p>Create an account to become a supplier with Hingeto</p>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger alert-dismissible dark col-sm-12" style="margin-top: 2em">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class="alert alert-success alert-dismissible dark col-sm-12" style="margin-top: 2em">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <%= form_for @supplier, as: :supplier, url: '', role: 'form' do |f| %>
+        <div class="form-group">
+          <%= f.label :business_name, 'Supplier Business Name' %>
+          <%= f.text_field :business_name, class: 'form-control', required: true, placeholder: 'Your Brand Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, 'Email' %>
+          <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'Your email address' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :first_name, 'First Name' %>
+          <%= f.text_field :first_name, class: 'form-control', required: true, placeholder: 'Your First Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :last_name, 'Last Name' %>
+          <%= f.text_field :last_name, class: 'form-control', required: true, placeholder: 'Your Last Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, 'Password' %>
+          <%= f.password_field :password, class: 'form-control', required: true, placeholder: 'Password' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'Confirm Password' %>
+          <%= f.password_field :password_confirmation, class: 'form-control', required: true, placeholder: 'Confirm Password' %>
+        </div>
+        <div class="form-group clearfix">
+          <div class="checkbox-custom checkbox-inline checkbox-primary pull-xs-left">
+            <input type="checkbox" id="inputCheckbox" name="term" required="required">
+            <label for="inputCheckbox"></label>
+          </div>
+          <p class="m-l-40">Agree to our <a href="#">Terms and conditions</a>.</p>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+      <% end %>
+
+      <p>Already signed up? <%= link_to "Sign In Now", new_spree_user_session_path %></p>
+      <footer class="page-copyright">
+        <p>powered by DiCentral <%= image_tag "dicentral-square-24px-blue.png", class: "img-responsive" %></p>
+        <!--<p>© 2017. All RIGHT RESERVED.</p>-->
+        <!-- <div class="social">
+          <a class="btn btn-icon btn-round social-twitter" href="javascript:void(0)">
+            <i class="icon bd-twitter" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-facebook" href="javascript:void(0)">
+            <i class="icon bd-facebook" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-icon btn-round social-google-plus" href="javascript:void(0)">
+            <i class="icon bd-google-plus" aria-hidden="true"></i>
+          </a>
+        </div> -->
+      </footer>
+    </div>
+  </div>
+</div>
+<!-- End Page -->
+</body>

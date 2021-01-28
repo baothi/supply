@@ -1,0 +1,46 @@
+<%
+
+  # menu = [
+  #     {
+  #         section: Hingeto::Section::PRODUCTS,
+  #         title: 'All Products',
+  #         link: supplier_products_path,
+  #         secret: false
+  #     },
+  #     {
+  #         section: Hingeto::Section::INVENTORY,
+  #         title: 'Categories',
+  #         link: supplier_orders_reported_path,
+  #         secret: true
+  #     },
+  #     {
+  #         section: Hingeto::Section::INVENTORY,
+  #         title: 'Shipping Costs',
+  #         link: supplier_orders_reported_path,
+  #         secret: true
+  #     }
+  # ]
+
+menu = [
+    {
+      section: Hingeto::Section::PRODUCTS,
+      title: 'All Products',
+      link: supplier_products_path,
+      secret: false
+    }
+]
+%>
+
+<ul class="site-menu-sub">
+  <% menu.each do |menu| %>
+      <%= inner_menu_html(
+              inner_menu: yield(:inner_menu),
+              link: menu[:link],
+              section: menu[:section],
+              title: menu[:title],
+              secret: menu[:secret],
+              true_user: true_spree_user
+          )
+      %>
+<% end %>
+</ul>

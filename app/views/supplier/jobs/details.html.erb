@@ -1,0 +1,121 @@
+<% content_for :title, "Job Details" %>
+<% content_for :main_menu, Hingeto::Section::JOBS %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "supplier/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Job <%= @job.internal_identifier %></h1>
+    </div>
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Overview</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-hover" data-plugin="selectable" data-role="content" data-row-selectable="true">
+              <thead class="bg-blue-grey-100">
+              <tr>
+                <!--<th><span class="checkbox-custom checkbox-primary"><input class="selectable-all" type="checkbox"> <label></label></span></th>-->
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+              </thead>
+              <tbody>
+
+
+              <tr>
+                <td>Action</td>
+                <td><%= @job.action_type.titleize %></td>
+              </tr>
+
+
+              <tr>
+                <td>Type</td>
+                <td><%= @job.job_type.titleize %></td>
+              </tr>
+
+              <tr>
+                <td>Status</td>
+                <td><%= job_status(@job.status) %></td>
+              </tr>
+
+              <tr>
+                <td>Progress</td>
+                <td>
+                  <% progress = @job.progress %>
+                  <div class="progress progress-lg" style="margin-bottom:0px;">
+                    <div class="progress-bar" style="width: <%= progress %>%;" role="progressbar"><%= progress %>%</div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Completion Time</td>
+                <td>
+                 <%= @job.completion_time %> Seconds
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>Num of Records Processed</td>
+                <td>
+                  <%= @job.num_of_records_processed %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Num of Errors</td>
+                <td>
+                  <%= @job.num_of_errors %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>File</td>
+                <td>
+                  <i class="icon fa-file-excel-o" aria-hidden="true"></i>
+                  <%= link_to "Download", supplier_download_csv_path(@job.internal_identifier), target: 'blank' %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Log</td>
+                <td>
+                  <textarea class="form-control" id="textareaDefault" rows="3" readonly><%= @job.log %></textarea>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Error</td>
+                <td>
+                  <textarea class="form-control" id="textareaDefault" rows="3" readonly><%= @job.error_log %></textarea>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

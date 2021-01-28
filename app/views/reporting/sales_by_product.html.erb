@@ -1,0 +1,132 @@
+<% content_for :title, "Report - Sales by Product" %>
+<% content_for :main_menu, Hingeto::Section::REPORTING %>
+<% content_for :inner_menu, Hingeto::Section::SALES_BY_PRODUCT %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+<div class="page">
+  <%= render "reporting/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <h1 class="page-title">Shopify Settings</h1>
+    </div>
+
+    <%= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <%= render "shared/time_period" %>
+      <div class="panel">
+        <div class="panel-body">
+          <!--<h4>Top 10 Products</h4>-->
+          <!--<canvas id="productPieChart" height="100" width="100"></canvas>-->
+
+          <h4>Top 10 Product Sales</h4>
+          <canvas id="salesByDayPeriod" height="100" width="450"></canvas>
+
+          <h4>Table</h4>
+          <%= render partial: "reporting/sales/product_sales" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="shopifyInstructions" aria-hidden="true" aria-labelledby="shopifyInstructions"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Shopify Instructions</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Video instructions to go here.
+        </p>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<% content_for :custom_footer_javascript do %>
+
+    <script>
+      (function() {
+        var barChartData = {
+          labels: ["Stone Wash Jeans", "Yellow Shoes", "Green Belt", "Black Hat", "Red Shirt", "Orange Slides", "White Tee"],
+          datasets: [{
+            label: "Sales ($)",
+            backgroundColor: "rgba(204, 213, 219, .2)",
+            borderColor: Config.colors("blue-grey", 300),
+            hoverBackgroundColor: "rgba(204, 213, 219, .3)",
+            borderWidth: 2,
+            data: [65, 45, 5, 50, 60, 45, 55]
+          }]
+        };
+
+        var myBar = new Chart(document.getElementById("salesByDayPeriod").getContext("2d"), {
+          type: 'bar',
+          data: barChartData,
+          options: {
+            responsive: true,
+            scales: {
+              xAxes: [{
+                display: true
+              }],
+              yAxes: [{
+                display: true
+              }]
+            }
+          }
+        });
+      })();
+
+        // Pie Chart
+      (function() {
+        var pieData = {
+          labels: ["Stone Wash Jeans", "Yellow Shoes", "Green Belt", "Black Hat", "Red Shirt", "Orange Slides", "White Tee"],
+          datasets: [{
+            data: [10,10,20,30,40,50,10],
+            backgroundColor: [
+              Config.colors("red", 400),
+              Config.colors("green", 400),
+              Config.colors("yellow", 400),
+              Config.colors("blue", 400),
+              Config.colors("purple", 400),
+              Config.colors("orange", 400)
+            ],
+            hoverBackgroundColor: [
+              Config.colors("red", 600),
+              Config.colors("green", 600),
+              Config.colors("yellow", 600)
+            ]
+          }]
+        };
+
+//        var myPie = new Chart(document.getElementById("productPieChart").getContext("2d"), {
+//          type: 'pie',
+//          data: pieData,
+//          options: {
+//            responsive: true
+//          }
+//        });
+      })();
+    </script>
+
+<% end %>
+
+<%= render "shared/platform/footer" %>
+</body>

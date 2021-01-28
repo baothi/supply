@@ -1,0 +1,5 @@
+$('#report-modal-base').
+  empty().
+  append("<%= j render(partial: 'retailer/orders/shared/modal/report_order', locals: { order: @order }) %>")
+
+$('#report-order-modal').modal();

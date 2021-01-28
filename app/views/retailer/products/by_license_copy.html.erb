@@ -1,0 +1,82 @@
+<% content_for :title, "Products" %>
+<% content_for :main_menu, Hingeto::Section::PRODUCTS %>
+<% content_for :inner_menu, Hingeto::Section::BY_LICENSE %>
+<body class="animsition page-aside-static page-aside-left">
+<%= render "shared/outdated_browser" %>
+<%= render "shared/nav_bar" %>
+<%= render "retailer/shared/side_menu" %>
+<%= render "shared/grid_menu" %>
+
+
+<div class="page by-license-page">
+  <%#= render "retailer/products/shared/menu" %>
+  <div class="page-main">
+    <div class="page-header">
+      <%= render "retailer/products/shared/credit_card_alert" %>
+    </div>
+    <%#= render :partial=>"shared/alerts" %>
+
+    <div class="page-content">
+      <div class="panel">
+        <% unless @featured_banners.nil? || @featured_banners.count.zero? %>
+        <div class="license-top-banner">
+          <%= render 'retailer/products/shared/featured_carousel', featured_banners: @featured_banners %>
+        </div>
+        <% end %>
+        <div class="panel-body">
+
+          <% @license_grouping.each do |grouping| %>
+            <% next if grouping.taxons.empty? %>
+            <div class="example-title">
+              <span style="float:left"><%= grouping.name %></span>
+                <span style="float:right">
+                  <%= link_to "View All", retailer_list_license_by_group_path(slug: grouping.slug) %>
+                </span>
+            </div>
+            <div style="clear:both"></div>
+            <div class="owl-carousel owl-carousel-centered license-grouping-carousel" data-plugin="owlCarousel" data-dots="false" data-margin="10">
+              <% grouping.taxons.has_outer_banner.each do |license| %>
+                <%# next unless license.outer_banner.exists? %>
+                <%= link_to retailer_list_products_by_license_path(license.name) do %>
+                  <div class="item">
+                      <%= image_tag(license.outer_banner, class: 'standard-width ', alt: "#{license.name}", width: '140px', height: '55px') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
+
+          <% if true_spree_user.present? && true_spree_user.hingeto_user? %>
+          <% if (other_licenses = Spree::Taxon.other_licenses_not_in_group).present? %>
+            <div class="with-large-top-bottom-margin">
+              <div class="example-title">
+                <span style="float:left">Others</span>
+                <span style="float:right">
+                  <%= link_to "View All", retailer_list_license_by_group_path(slug: 'others') %>
+                </span>
+              </div>
+              <div style="clear:both"></div>
+              <div class="owl-carousel owl-carousel-centered license-grouping-carousel" data-plugin="owlCarousel" data-dots="false" data-margin="10">
+                <% other_licenses.has_outer_banner.each do |license| %>
+                  <%# next unless license.outer_banner.exists? %>
+                  <%= link_to retailer_list_products_by_license_path(license.name) do %>
+                    <div class="item">
+                      <%= image_tag(license.outer_banner, class: 'standard-width ', alt: "#{license.name}", width: '140px', height: '55px') %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<%= render "shared/platform/footer" %>
+</body>

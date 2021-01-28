@@ -1,0 +1,35 @@
+<%= content_for :banner do %>
+  <%= image_tag "email/4.png", class: '100p', style: 'display:block;', alt: '', border: '0', usemap: '#Map' %>
+<% end %>
+
+<table width="100%" bgcolor="#ffffff" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td colspan="7" height="30">
+      </td>
+    </tr>
+    <tr>
+      <td width="6%">
+      </td>
+      <td>
+        <p style=" font-family: 'Montserrat', sans-serif; text-align:left; font-size:15px;color:#505050;line-height:22px;font-weight:400;margin:0px;padding:0px;">
+          Hello, <br><br>
+          There was an error trying to upload variant prices for <%= @supplier.name %>. The error log is:
+        </p>
+        <p><%= @error_msg %></p>
+        <p></p>
+      </td>
+      <td width="6%">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" height="30">
+      </td>
+    </tr>
+    
+   <tr>
+    <td colspan="2" height="30">
+    </td>
+  </tr>
+</tbody >
+</table>

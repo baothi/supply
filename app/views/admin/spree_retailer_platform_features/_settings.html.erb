@@ -1,0 +1,29 @@
+
+<%= form_for(resource, url: update_preferences_admin_spree_retailer_platform_feature_path, method: :post) do |f| %>
+    <table style="width: 30%">
+      <%= f.fields_for :settings do |p| %>
+          <tbody>
+          <% resource.settings.each do |key, value| %>
+              <tr>
+                <td><%= p.label key %></td>
+                <% setting_type = resource.setting_type("#{key}")%>
+                <% if setting_type == :integer || setting_type == :text || setting_type == :string %>
+                    <td><%= p.text_field key, value: value %>
+                    </td>
+                <% else %>
+                    <td><%= p.check_box key, checked: value %>
+                      <% if key == 'shopify_title_updates' || key == 'shopify_properties_updates' %>
+                          <span style="color:red">Currently not in use</span>
+                      <% end %>
+                    </td>
+                <% end %>
+
+              </tr>
+          <% end %>
+          <tr>
+            <td><%= f.submit "Update Settings" %></td>
+          </tr>
+          </tbody>
+      <% end %>
+    </table>
+<% end %>
