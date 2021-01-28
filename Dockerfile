@@ -35,6 +35,7 @@ COPY yarn.lock yarn.lock
 RUN gem install bundler
 RUN bundle install
 RUN yarn install
+RUN yarn install --check-files
 RUN yarn check --integrity
 
 # Copy the Rails application into place
