@@ -118,3 +118,4 @@ volumes:
 # docker-compose run --rm web bundle install
 # sudo chmod -R 777 tmp/db/pg_stat_tmp/
 # sudo chmod -R 777 tmp/db/pg_logical/replorigin_checkpoint
+# docker exec -i supply_db_1 pg_restore -Fc -v -U postgres --dbname hingeto_supply_app_development < hingeto_supply_app_development_11_11
