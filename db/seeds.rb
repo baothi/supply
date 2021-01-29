@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Dir[File.dirname(__FILE__) + '/seeds/*.rb'].sort.each do |file|
+  puts "Seeds #{file} ..."
+  require file
+end
