@@ -12,7 +12,7 @@ module Spree
     # After Commit
     include CommitWrap
 
-    after_save :update_shopify_metafields, on: :update, if: proc { preferences_changed? }
+    after_save_commit :update_shopify_metafields, on: :update, if: proc { preferences_changed? }
 
     def self.description
       # Human readable description of the calculator

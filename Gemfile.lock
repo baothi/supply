@@ -7,6 +7,18 @@ GIT
       i18n (>= 1.6, < 2)
 
 GIT
+  remote: https://github.com/heartcombo/devise.git
+  revision: 1d138dd40cdc291a427b89027d16a869818a5c19
+  branch: ca-omniauth-2
+  specs:
+    devise (4.7.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
+
+GIT
   remote: https://github.com/hingeto/shopify-api-throttle
   revision: 0bd3fe4e83c96f1c170aaa4825e7ff877c757e8a
   specs:
@@ -1245,12 +1257,6 @@ GEM
     css_parser (1.8.0)
       addressable
     dante (0.2.0)
-    devise (4.7.3)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
-      responders
-      warden (~> 1.2.3)
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
     domain_name (0.5.20190701)
@@ -1746,6 +1752,7 @@ DEPENDENCIES
   cloudinary
   colorize
   country_select
+  devise!
   dotenv-rails
   ean
   faker!
