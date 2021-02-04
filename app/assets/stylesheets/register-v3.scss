@@ -1,0 +1,48 @@
+.page-register-v3 {
+  background-image: asset-url("bioworld.png");
+}
+
+.page-register-v3 .panel {
+  width: 400px;
+  margin-bottom: 45px;
+  background: #fff;
+  border-radius: .286rem;
+}
+
+.page-register-v3 .panel .panel-body {
+  padding: 50px 40px 40px;
+}
+
+.page-register-v3 .panel .brand-text {
+  margin-top: 8px;
+}
+
+.page-register-v3 form {
+  margin: 45px 0 30px;
+}
+
+.page-register-v3 form a {
+  margin-left: 20px;
+}
+
+.page-register-v3 form .form-material.floating + .page-register-v3 form .form-material.floating {
+  margin-top: 30px;
+}
+
+.page-register-v3 form .form-material label {
+  color: #a3afb7;
+  font-weight: 400;
+}
+
+@media (max-width: 479px) {
+  .page-register-v3 .page-content {
+    padding: 30px 20px;
+  }
+  .page-register-v3 .panel {
+    width: auto;
+    padding: 10px;
+  }
+  .page-register-v3 .panel .panel-body {
+    padding: 35px 25px 35px;
+  }
+}

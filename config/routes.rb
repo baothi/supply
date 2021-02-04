@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   mount Spree::Core::Engine, at: '/storefront'
   Spree::Core::Engine.add_routes do
-    root to: redirect('/')
+    root to: redirect('/'), as: :authenticated_root
   end
   get '/storefront/admin' => 'spree/admin/products#index'
 

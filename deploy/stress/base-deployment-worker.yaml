@@ -1,0 +1,23 @@
+# Do not deploy this as-is. It is meant to be combined with the env file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base-worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: worker
+  template:
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+      - name: base-worker
+        # Figure out how to parametrize
+        image: us.gcr.io/supply-stress-test/hingeto/supply-web-stress-test:latest
+        command: []
+        ports:
+        - containerPort: 3000
+        env:

@@ -1,10 +1,10 @@
 class Spree::SellingAuthority < ApplicationRecord
   attr_accessor :permittable_string
 
-  belongs_to :retailer, class_name: Spree::Retailer
+  belongs_to :retailer, class_name: 'Spree::Retailer'
   belongs_to :permittable, polymorphic: true
 
-  enum permission: { permit: 'permit', reject: 'reject' }
+  enum permission: { permit: 'permit', rejected: 'reject' }
 
   before_validation :set_permittable
 

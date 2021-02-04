@@ -26,10 +26,10 @@ RUN mkdir /app
 WORKDIR /app
 
 # Gems
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-COPY package.json package.json
-COPY yarn.lock yarn.lock
+COPY Gemfile ./
+COPY Gemfile.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 # Install and run bundle to get the app ready
 RUN gem install bundler
@@ -39,4 +39,4 @@ RUN yarn install --check-files
 RUN yarn check --integrity
 
 # Copy the Rails application into place
-COPY . /app
+COPY . .

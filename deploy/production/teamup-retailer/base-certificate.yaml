@@ -1,0 +1,18 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: teamup-app-dicentral-com-tls
+spec:
+  secretName: teamup-app-dicentral-com
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: teamup-app.dicentral.com
+  dnsNames:
+    - teamup-app.dicentral.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - teamup-app.dicentral.com

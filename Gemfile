@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Fontawsome
 gem 'font-awesome-sass', '~> 5.12.0'
-gem 'simple_form'
+# gem 'simple_form'
 gem 'sprockets', '~> 3.7'
 
 gem 'paper_trail'
@@ -77,7 +77,7 @@ gem 'spree_gateway', '~> 3.7'
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 
 # Browser Detection
-gem 'browser'
+gem "browser", require: "browser/browser"
 # File attachments
 gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 gem 'paperclip', '~> 6.1'
@@ -97,8 +97,8 @@ gem 'acts_as_follower',
 gem 'roo', '~> 2.8', '>= 2.8.3'
 
 # Excel generation
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
-gem 'axlsx_rails'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 # Depedency by the above two.
 gem 'rubyzip', '~> 2.3'
 
@@ -152,17 +152,41 @@ gem 'wicked'
 gem 'activerecord-nulldb-adapter'
 
 gem 'dotenv-rails'
-
-
+gem 'aasm'
+gem 'rack-mini-profiler', require: ['enable_rails_patches']
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'parallel_tests'
+  gem 'pry-nav'
+  gem 'pry-rails'
+  gem 'rb-readline'
+
+  # Insght into performance
+  gem 'meta_request'
+  # Letter Opener
+  gem 'letter_opener_web'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+
+  # gem 'coveralls', require: false
+  gem 'database_cleaner'
+
+  gem 'poltergeist'
+
+  # gem 'shoulda-callback-matchers'
+  # gem 'shoulda-matchers'
+  gem 'railroady'
+  gem 'rails-erd'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
+  gem 'rack-webconsole-pry', :require => 'rack-webconsole'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

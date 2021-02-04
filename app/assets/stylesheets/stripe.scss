@@ -1,0 +1,116 @@
+.new-card {
+  * {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 15px;
+  font-variant: normal;
+  padding: 0;
+  margin: 0;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    background: #F6F9FC;
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+  }
+
+  form {
+    width: 480px;
+    margin: 0 auto !important;
+  }
+
+  label {
+    position: relative;
+    color: #6A7C94;
+    font-weight: 400;
+    height: 48px;
+    line-height: 48px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  label > span {
+    float: left;
+  }
+
+  .field {
+    background: white;
+    box-sizing: border-box;
+    font-weight: 400;
+    border: 1px solid #CFD7DF;
+    border-radius: 5px;
+    color: #32315E;
+    outline: none;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 20px;
+    cursor: text;
+    width: 76%;
+    float: right;
+  }
+
+  .field::-webkit-input-placeholder { color: #CFD7DF; }
+  .field::-moz-placeholder { color: #CFD7DF; }
+  .field:-ms-input-placeholder { color: #CFD7DF; }
+
+  .field:focus,
+  .field.StripeElement--focus {
+    border-color: #F99A52;
+  }
+
+  button {
+    float: left;
+    display: block;
+    color: white;
+    border: 0;
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 500;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    outline: none;
+  }
+
+  // button:focus {
+  //   background: #EF8C41;
+  // }
+
+  // button:active {
+  //   background: #E17422;
+  // }
+
+  .outcome {
+    float: left;
+    width: 100%;
+    padding-top: 8px;
+    min-height: 20px;
+    text-align: center;
+  }
+
+  .success, .error {
+    display: none;
+    font-size: 13px;
+  }
+
+  .success.visible, .error.visible {
+    display: inline;
+  }
+
+  .error {
+    color: #E4584C;
+  }
+
+  .success {
+    color: #F8B563;
+  }
+
+  .success .token {
+    font-weight: 500;
+    font-size: 13px;
+  }
+}

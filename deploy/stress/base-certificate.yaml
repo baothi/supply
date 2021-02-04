@@ -1,0 +1,18 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: stress-test-hingeto-com-tls
+spec:
+  secretName: stress-test-hingeto-com
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: stress-test.hingeto.com
+  dnsNames:
+    - stress-test.hingeto.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - stress-test.hingeto.com

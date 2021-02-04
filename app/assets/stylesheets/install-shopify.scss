@@ -1,0 +1,52 @@
+.install-app-page-content {
+  color: #333;
+  font-size: 16px;
+  padding-right: 0px !important;
+
+}
+
+.install-app-page-body {
+  padding: 100px 90px 100px !important;
+}
+
+.install-header {
+  font-family: 'Raleway',sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.full-inline {
+  width: 70% !important;
+}
+
+.install-app-panel{
+  margin: auto;
+  width: 60%;
+}
+
+.install-app-btn {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 2.5em;
+  width: 40%;
+}
+
+.install-app-successful {
+  padding: 60px 50px 60px !important;
+}
+
+@media (max-width: 767px) {
+  .install-app-panel{
+    width: 90%;
+    margin: auto;
+  }
+
+  .full-inline {
+    width: 100% !important;
+  }
+
+  .install-app-page-body, .install-app-successful {
+    padding: 0px !important;
+  }
+}

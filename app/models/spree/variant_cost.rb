@@ -22,7 +22,7 @@ class Spree::VariantCost < ApplicationRecord
   before_validation :strip_sku
   before_validation :upcase_sku
   after_commit :syndicate_cost_changes_to_variants!
-  after_save :update_shopify_metafields, on: :update, if: proc { cost_changed? }
+  after_update :update_shopify_metafields,  if: proc { cost_changed? }
 
   MASTER_SHEET = 'master_sheet'.freeze
   SHOPIFY = 'shopify'.freeze

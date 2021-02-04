@@ -1,0 +1,136 @@
+@import "variables";
+
+@media (min-width: 768px){
+  .site-menubar-fold .site-navbar .navbar-container {
+    margin-left: 90px;
+  }
+}
+
+.dark-blue-bg{
+  background-color: $blue;
+}
+
+.navbar{
+  background-color:$light-blue !important;
+}
+
+.blue-progress{
+  background-color:$blue !important;
+}
+
+.ribbon{
+  z-index:90;
+}
+
+.ribbon-success .ribbon-inner{
+  background-color:$blue !important;
+}
+
+.site-menubar-unfold .site-navbar .navbar-container{
+  background-color:$light-blue !important;
+}
+
+.site-menubar {
+  background-color: $white;
+}
+
+.site-menu-item a {
+  color: $dark-grey;
+}
+
+
+.site-menubar-unfold .site-menu-icon{
+  color: #000;
+}
+
+.site-menubar-unfold .site-menu>.site-menu-item>a .site-menu-title{
+  color: #000;
+}
+
+.site-menu>.site-menu-item.hover>a,
+.site-menu.site-menu-item:hover>a {
+  background-color: $light-blue;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  color: $black;
+}
+
+.site-menu .site-menu-sub .site-menu-item>a{
+  color: #000 !important;
+}
+.site-menu>.site-menu-item.active {
+  background: $light-blue;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.site-menu>.site-menu-item.active>a{
+  color: #000;
+}
+
+.site-menu .site-menu-sub .site-menu-item.active{
+  color: #000 !important;
+}
+
+.site-menu .site-menu-sub .site-menu-item > a{
+  color: #000;
+}
+
+.site-menu .site-menu-sub .site-menu-item.hover>a, .site-menu .site-menu-sub .site-menu-item:hover>a{
+  color: #000;
+  background-color: $light-blue-bg;
+
+}
+
+.site-menu>.site-menu-item.open{
+  background: $light-blue;
+}
+
+.site-menubar-fold .site-menu>.site-menu-item.active {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.site-menu>.site-menu-item.active{
+  border:0;
+}
+
+.site-menubar-fold .site-menu>.site-menu-item.hover>a,
+.site-menubar-fold .site-menu.site-menu-item:hover>a {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.nav-tabs-solid {
+    border-bottom-color: #f3f7f9;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #e4eaec;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 11px;
+}
+
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+
+.scrollable-dropdown {
+  max-height: 650px;
+  overflow-y: auto;
+}

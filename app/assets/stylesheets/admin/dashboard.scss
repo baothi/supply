@@ -1,0 +1,27 @@
+.dashboard-title-left {
+  float: left;
+  width: 30%;
+}
+
+.dashboard-title-right {
+  float: right;
+  font-size: 24px;
+  text-align: right;
+  width: 70%;
+
+  .period-selection-div {
+    float: left;
+    width: 45%;
+  }
+}
+
+#date-range-selection {
+  float: left;
+  width: 55%;
+
+  input {
+    font-size: 13px;
+    padding: 5px;
+    width: 90%;
+  }
+}

@@ -1,0 +1,6 @@
+**/*{.,-}min.js
+**/*{.,-}es.js
+app/assets/javascripts/core/
+app/assets/javascripts/example/*
+app/assets/javascripts/global/*
+app/assets/stylesheets

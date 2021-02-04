@@ -90,5 +90,6 @@ module Dropshipper
       app.config.spree.calculators.shipping_methods <<
         Spree::Calculator::Shipping::CategoryCalculator
     end
+    config.autoloader = :classic
   end
 end

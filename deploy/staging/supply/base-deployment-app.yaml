@@ -1,0 +1,23 @@
+# Do not deploy this as-is. It is meant to be combined with the env file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+      - name: supply
+        # Figure out how to parametrize
+        image: us.gcr.io/supply-staging-250020/hingeto/supply-web-staging:latest
+        command: ["rails", "server", "-p", "3000"]
+        ports:
+        - containerPort: 3000
+        env:

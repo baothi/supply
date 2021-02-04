@@ -1,0 +1,28 @@
+.btn-primary{
+    background-color:#000 !important;
+    border-color:#000 !important;
+}
+
+.site-navbar{
+    background-color:#fff !important;
+}
+
+.navbar-toggler .icon{
+    color: #526069;
+}
+
+.site-navbar .navbar-header .navbar-toggler{
+    color: #526069;
+}
+
+.site-navbar .navbar-header .hamburger .hamburger-bar, .site-navbar .navbar-header .hamburger::after, .site-navbar .navbar-header .hamburger::before{
+    background-color: #526069;
+}
+
+.loader-overlay{
+    background-color: #000000;
+}
+
+#time-period{
+    margin-bottom:20px;
+}

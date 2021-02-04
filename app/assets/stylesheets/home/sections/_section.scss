@@ -1,0 +1,204 @@
+.section {
+  align-items: center;
+  border-bottom: 1px solid #E0E0E0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+
+    &--large {
+      width: 120px;
+      height: 120px;
+      margin-top: 25px; 
+    }
+  }
+
+  &__image {
+    margin-top: 30px;
+    height: 250px;
+
+    &--large {
+      display: none;
+    }
+  }
+
+  &__row {
+    display: flex;
+    margin-top: 25px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    .section__subtitle {
+      margin: 5px 0;
+    }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    font-weight: 700;   
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.section-offer {
+  .section__text {
+    padding: 0 50px;
+  }
+} 
+
+.section-benefits {
+  padding: 40px 25px;
+
+  .section__title {
+    padding: 0 40px;
+  }
+  
+  .section__text {
+    margin-top: 25px;
+  }
+} 
+
+
+.section__title + .section__text {
+  padding: 0 15px;
+  margin: 15px 0;
+}
+
+
+.section-testimonials {
+  padding-left: 15px;
+}
+
+.section-pricing {
+  .section__text {
+    margin-top: 30px;
+    opacity: 0.4;
+  }
+}
+
+.section-information {
+  background-color: $background-dark;
+  padding: 40px 25px;
+}
+
+.footer {
+  border-bottom: none;
+  position: relative;
+
+  &__image {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+@media #{$screen-sm} {
+  .section-offer {
+    .section__text {
+      padding: 0 30px;
+    }
+  }
+
+  .section__title--margin {
+    margin-bottom: 30px;
+  }
+
+
+  .section__image {
+    display: none;
+
+    &--large {
+      display: block;
+      height: 680px;
+      position: relative;
+      right: -43px;
+      margin-bottom: -150px;
+      margin-top: 50px;
+    }
+  }
+
+  .row {
+    display: flex;
+    max-width: 1148px;
+  }
+
+  .section__row {
+    width: 321px;
+  }
+
+  .section__title + .section__text {
+    padding: 0 140px;
+  }
+}
+
+@media #{$screen-lg} {
+  .section {
+    position: relative;
+
+    &__image--large {
+      display: block;
+      height: 720px;
+      position: absolute;
+      right: 0;
+      top: 140px;
+    }
+
+    &__row {
+      width: 435px;
+    }
+  }
+  .section__title {
+    font-size: 32px;
+  }
+
+  .section-offer {
+    .section__text {
+      padding: 0 65px;
+    }
+  }
+
+  .section-information {
+    .row {
+      flex-direction: column;
+      margin-left: -300px;
+      width: 45%;
+
+      &:first-of-type {
+        margin-top: 20px;
+      }
+
+      &:last-of-type {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .footer {
+    height: 460px;
+
+    &__image {
+      bottom: -100px;
+    }
+  }
+}

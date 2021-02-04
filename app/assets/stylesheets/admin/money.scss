@@ -1,0 +1,11 @@
+$moneycolor: #3b923b;
+
+.money {
+	&::before {
+		content: "$";
+	}
+}
+.money-total {
+	color: $moneycolor;
+  font-weight: bold;
+}

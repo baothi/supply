@@ -25,8 +25,10 @@ class ApplicationController < ActionController::Base
 
   def check_is_modern_browser
     return if Rails.env.test?
+    use Browser::Middleware do
 
-    redirect_to browser_not_supported_path unless browser.modern?
+      redirect_to browser_not_supported_path unless browser.modern_browser?
+    end
   end
 
   def after_sign_in_path_for(_resource)

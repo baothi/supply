@@ -9,7 +9,7 @@ module Spree::Orders::SearchScopes
     # scope :unpaid, -> { complete.where(payment_state: ['balance_due', 'credit_owned', 'failed']) }
     # scope :unpaid, -> { complete.where(payment_state: ['balance_due', 'credit_owned', 'failed']) }
 
-    scope :filter, ->(team, status, q) do
+    scope :filter_key, ->(team, status, q) do
       team.orders.filter_by_status(status).filter_by_attributes(q)
     end
 

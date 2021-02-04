@@ -1,0 +1,10 @@
+@media (min-width: 1280px){
+
+  .page-aside {
+    width: 210px;
+  }
+
+  .page-aside-left .page-aside+.page-main{
+    margin-left: 210px;
+  }
+}

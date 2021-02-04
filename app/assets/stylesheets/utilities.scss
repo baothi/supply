@@ -1,0 +1,44 @@
+.with-margin-top{
+  margin-top: 1em
+}
+
+.margin-bottom {
+  margin-bottom: 1em
+}
+
+.with-margin {
+  margin: 1em;
+}
+
+.with-large-top-bottom-margin {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.bordered {
+  border: 1px solid rgba(0,0,0,.15);
+}
+
+.pull-right {
+  text-align: right;
+}
+
+.pull-left {
+  text-align: left;
+}
+
+.bordered {
+  border: 1px solid #cccccc;
+}
+
+.standard-width {
+  width: 100%;
+}
+
+.centered {
+  text-align: center;
+}
+
+.white-space {
+  white-space: normal !important;
+}

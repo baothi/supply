@@ -1,0 +1,102 @@
+@import "variables";
+
+.wb-plus:before {
+  border:none !important;
+}
+.referral-panel {
+  color: black;
+}
+
+.referral-description p {
+  margin: 0;
+}
+
+.referral-form {
+  //margin-top: 40px;
+}
+
+.referral-form .form-group label {
+  font-size: 20px;
+  display: block;
+}
+
+.referral-form .form-control {
+  border-color: $blue;
+  border-radius: 0.5em;
+  border-width: 2px;
+  display: inline;
+}
+
+//.referral-form button {
+//  background-color: $fawn !important;
+//  border-radius: 0.5em;
+//  border-style: none;
+//  color: $black !important;
+//  display: inline;
+//  max-width: 8%;
+//}
+
+.referral-form .form-button {
+  background-color: $blue !important;
+  border-style: none;
+  color: #000 !important;
+  width: 50%;
+}
+
+.referral-banner {
+  background-color: white;
+  border-color: #cdd4cd;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0.5em;
+}
+
+.referral-banner div {
+  margin: 40px;
+}
+
+.referral-partner-logos {
+  margin-top: 15px;
+}
+
+.referral-partner-logos .partner-logo {
+  display: inline;
+  margin: 14px;
+}
+
+.referral-form .checkbox-primary input[type=radio]:checked+label::before,
+.checkbox-primary input[type=checkbox]:checked+label::before {
+  background-color: $blue;
+  border-color: $blue;
+}
+
+.referral-list {
+  padding: 0;
+}
+
+.referral-list-item {
+  background-color: $white;
+  list-style: none;
+  margin-bottom: 2px;
+  padding: 10px 25px;
+}
+
+.referral-list-item p {
+  display: inline;
+}
+
+.referral-list-item .referral-list-item-form {
+  float: right;
+}
+
+.referral-tip {
+  background-color: white;
+  border: solid 2px black;
+  float: right;
+  max-width: 40%;
+  padding: 10px;
+}
+
+.brand-logos {
+  width: 100%;
+}

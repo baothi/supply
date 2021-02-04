@@ -1,0 +1,67 @@
+// Fonts
+/** Regular */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+/** Medium */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 500;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+}
+
+/** Semi Bold */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 300;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-light-webfont.woff");
+}
+
+/** Bold */
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 700;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+$base-font-family: 'San Francisco', sans-serif;
+$base-font-weight: 500;
+$base-font-size: 14px;
+
+// Colors
+
+$background: #fff;
+$black: #000;
+$background-dark: #fafafa;
+$text: #282828;
+$hero: #ffc800;
+$accent: #4f4dfc;
+
+// Media queries
+
+$xs: 480px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+
+$grid-gutter: 30px;
+$grid-columns: 12;
+
+$container-sm: 720px;
+$container-md: 940px;
+$container-lg: 1140px;
+
+$screen-xs: 'only screen and (min-width: 1px)';
+$screen-sm: 'only screen and (min-width: #{$sm})';
+$screen-md: 'only screen and (min-width: #{$md})';
+$screen-lg: 'only screen and (min-width: #{$lg})';
+
+$screen-only-xs: 'only screen and (max-width: #{$xs - 1})';
+$screen-only-sm: 'only screen and (min-width: #{$sm}) and (max-width: #{$md - 1})';
+$screen-only-md: 'only screen and (min-width: #{$md}) and (max-width: #{$lg - 1})';
+$screen-only-lg: 'only screen and (min-width: #{$lg})';
+
+$screen-only-sm-and-md: 'only screen and (min-width: #{$sm}) and (max-width: #{$lg - 1})';

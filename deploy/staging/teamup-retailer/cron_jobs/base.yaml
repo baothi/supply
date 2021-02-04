@@ -1,0 +1,18 @@
+# cronjob.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: base-cron-job
+spec:
+  schedule: "*/0 * * * *"
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: base-cron
+            image: us.gcr.io/teamup-staging/teamup-web-staging:latest
+            args: []
+            env:
+          restartPolicy: OnFailure

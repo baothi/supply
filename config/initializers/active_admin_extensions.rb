@@ -1,1 +1,1 @@
-ActiveAdmin::BaseController.send(:include, ActiveAdmin::AdminProfiling)
+#ActiveAdmin::BaseController.send(:include, ActiveAdmin::AdminProfiling)

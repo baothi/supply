@@ -1,0 +1,18 @@
+# This differs from the other ingress in that, it's not setup for https. It should
+# not be used until HTTPS/Lets Encrypt has been all setup.
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /?(.*)
+          # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: app-cluster-ip-service
+              servicePort: 3000

@@ -5,7 +5,7 @@ module Spree::Products::SearchScope
   included do
     SEARCH_ATTRS = %w(Any SKU Name Description).freeze
 
-    scope :filter, ->(filter_key) do
+    scope :filter_key, ->(filter_key) do
       next if filter_key == 'all'
 
       send(filter_key) if filter_key.present? && respond_to?(filter_key)

@@ -30,7 +30,7 @@ module Spree
       where('teamable_type = :klass and teamable_id = :id', klass: obj.class.name, id: obj.id)
     }
 
-    scope :filter, ->(param) {
+    scope :filter_key, ->(param) {
       return unless param.present?
 
       send(param)
